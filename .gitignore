@@ -1,0 +1,54 @@
+# by default ignore top-level pdf
+/*.pdf
+
+# some typical editor bak files
+*~
+*.bak
+*.orig
+
+# ignore a whole lot of latex specific tempfiles
+*-blx.bib
+*.acn
+*.acr
+*.alg
+*.aux
+*.backup
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.glo
+*.gls
+*.glg
+*.ist
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lol
+*.lot
+*.out
+*.run.xml
+*.slg
+*.syg
+*.syi
+*.snm
+*.synctex.gz
+*.synctex.gz(busy)
+*.tdo
+*.toc
+
+# dev-specific stuff
+*.bat
+*.tps
+
+desktop.ini
+*-blx.bib
+*.run.xml
+*.fdb_latexmk
+*.fls
+*.bcf
+*.bib.bak
+*.bib.sav

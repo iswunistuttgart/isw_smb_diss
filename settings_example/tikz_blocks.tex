@@ -1,0 +1,275 @@
+
+%% Generelle Blöcke, Beispiel:
+% \node[block](a);
+% \node[sum, left= of block](b);
+% \draw[<->](a)--(b);
+%
+\tikzstyle{block} = [draw=black, fill=white, rectangle, align=center, minimum height=1cm, minimum width=2em]
+\tikzstyle{sum} = [draw, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+
+%% Mechanik-Visualisierung
+\tikzstyle{spring}=[thick,decorate,decoration={zigzag,pre length=0.2cm,post length=0.2cm,segment length=6}]
+\tikzstyle{rotspring}=[thick,decoration={aspect=0.2, segment length=1.5mm, pre length=0.2cm,post length=0.3cm, amplitude=3mm,coil},decorate]
+\tikzstyle{damper}=[thick,decoration={markings,  
+	mark connection node=dmp,
+	mark=at position 0.5 with 
+	{
+		\node (dmp) [thick,inner sep=0pt,transform shape,rotate=-90,minimum width=15pt,minimum height=3pt,draw=none] {};
+		\draw [thick] ($(dmp.north east)+(2pt,0)$) -- (dmp.south east) -- (dmp.south west) -- ($(dmp.north west)+(2pt,0)$);
+		\draw [thick] ($(dmp.north)+(0,-5pt)$) -- ($(dmp.north)+(0,5pt)$);
+	}
+}, decorate]
+\tikzstyle{ground}=[fill,pattern=north east lines,draw=none,minimum width=0.75cm,minimum height=0.3cm]
+
+%% Ball-screw
+% New decoration for screws
+\tikzset{/pgf/decoration/.cd,
+	end width/.initial=0.2cm,
+	end length/.initial=0.5cm,
+	bar width/.initial=0.3cm,
+	thread separation/.initial=0.1cm,
+	ball radius/.initial=0.05cm,
+	screw advancement per rev/.initial=0.1cm,
+}
+
+\pgfdeclaredecoration{ballscrew}{begin}{
+	\def\b{\pgfkeysvalueof{/pgf/decoration/thread separation}}
+	\def\w{\pgfkeysvalueof{/pgf/decoration/bar width}}
+	\def\r{\pgfkeysvalueof{/pgf/decoration/ball radius}}
+	\def\h{\pgfkeysvalueof{/pgf/decoration/screw advancement per rev}/2}
+	\pgfmathsetmacro{\nl}{floor((\h-\b)/(\b+2*\r))}
+	\pgfmathsetmacro{\nr}{floor(\h/(\b+2*\r)-1)}
+	\pgfmathsetmacro{\ls}{\b + 2*\r}
+	\pgfmathsetmacro{\lo}{0}
+	\pgfmathsetmacro{\y}{\w/2+\r}
+	\def\wbprod{\w/\h}
+	\def\endl{\pgfkeysvalueof{/pgf/decoration/end length}}
+	\def\endw{\pgfkeysvalueof{/pgf/decoration/end width}}
+	\def\barw{\pgfkeysvalueof{/pgf/decoration/bar width}}
+	%	
+	\state{begin}[width={\endl+\h}, next state=thread]{
+		\pgfpathlineto{\pgfpoint{0pt}{\endw/2}}
+		\pgfpathlineto{\pgfpoint{\endl}{\endw/2}}
+		\pgfpathmoveto{\pgfpoint{0.0pt}{0.0pt}}
+		\pgfpathlineto{\pgfpoint{0pt}{-\endw/2}}
+		\pgfpathlineto{\pgfpoint{\endl}{-\endw/2}}
+		\pgfpathmoveto{\pgfpoint{\endl}{-\y}}
+		\pgfpathlineto{\pgfpoint{\endl}{\y}}
+		\pgfpathlineto{\pgfpoint{\endl+\h}{\y}}		
+	}
+	\state{thread}[width=\ls]{
+		\pgfsetcornersarced{\pgfpoint{0.1mm}{0.1mm}}	
+		\pgfpathmoveto{\pgfpoint{\lo}{\y}}
+		\pgfpathlineto{\pgfpoint{\lo + \b}{\y}}
+		\pgfpatharc{-180}{0}{\r}
+		\pgfpathlineto{\pgfpoint{\lo-\h+\ls}{-\y}}
+		\pgfpatharc{0}{180}{\r}
+		\pgfpathlineto{\pgfpoint{\lo+\b}{\y}}
+		\pgfpathmoveto{\pgfpoint{\lo-\h}{-\y}}
+		\pgfpathlineto{\pgfpoint{\lo-\h+\b}{-\y}}
+	}
+	\state{final}[width=\pgfkeysvalueof{/pgf/decoration/end width}]{
+		\pgfpathmoveto{\pgfpoint{\lo-\h}{-\y}}
+		\pgfpathlineto{\pgfpoint{\lo+\b}{-\y}}
+		\pgfpathlineto{\pgfpoint{\lo+\b}{\y}}
+		\pgfpathlineto{\pgfpoint{\lo}{\y}}
+		\pgfpathmoveto{\pgfpoint{\lo+\b}{\endw/2}}
+		\pgfpathlineto{\pgfpoint{\lo+\b+\endl}{\endw/2}}
+		\pgfpathlineto{\pgfpoint{\lo+\b+\endl}{-\endw/2}}
+		\pgfpathlineto{\pgfpoint{\lo+\b}{-\endw/2}}
+	}
+}
+
+
+
+
+%%---------------------
+% Blockdefinitionen basierend auf https://tex.stackexchange.com/a/311358
+% Z.B. einbinden als \input{tikz_blocks}
+%
+% Verwendingsbeispiel:
+% \node [Integ block = {$T_i$}, minimum size=1cm, right = 5cm of sumofinputerror, yshift=-1.5cm] (ki) {};
+%
+%% --------------------
+\tikzstyle{block} = [draw=black, fill=white, rectangle, align=center, minimum height=2em, minimum width=2em]
+\tikzstyle{sum} = [draw, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+
+% Saturation block:
+%        ____
+%      |/
+%  ----/---
+%  ___/|
+\tikzset{%
+	saturation/.style={%
+		draw,
+		minimum size=1cm,
+		path picture={
+			% Get the width and height of the path picture node
+			\pgfpointdiff{\pgfpointanchor{path picture bounding box}{south west}}%
+			{\pgfpointanchor{path picture bounding box}{north east}}
+			\pgfgetlastxy\x\y
+			% Scale the x and y vectors so that the range
+			% -1 to 1 is slightly shorter than the size of the node
+			\tikzset{x=\x*.4, y=\y*.4}
+			%
+			% Draw annotation
+			\draw [very thin] (-1,0) -- (1,0) (0,-1) -- (0,1); 
+			\draw [very thick] (-1,-.7) -- (-.7,-.7) -- (.7,.7) -- (1,.7);
+		},
+		append after command={\pgfextra{\let\mainnode=\tikzlastnode}
+			node[above] at (\mainnode.north) {#1}%
+		}   
+	}
+}
+
+% PT1-Glied
+\tikzset{%
+	PT1/.style = {%
+		draw, 
+		minimum size=1cm,
+		path picture={
+			% Get the width and height of the path picture node
+			\pgfpointdiff{\pgfpointanchor{path picture bounding box}{south west}}%
+			{\pgfpointanchor{path picture bounding box}{north east}}
+			\pgfgetlastxy\x\y
+			% Scale the x and y vectors so that the range
+			% -1 to 1 is slightly shorter than the size of the node
+			\tikzset{x=\x*.4, y=\y*.4}
+			%
+			% Draw annotation
+			\draw [very thin] (-1,-1) -- (-1,1) (-1,-1) -- (1,-1); 
+			\draw [very thick] (-1.0, -1) arc  [x radius =1.9, y radius = 1.4, start angle = 180,  end angle = 90] ;
+		},
+		append after command={\pgfextra{\let\mainnode=\tikzlastnode}
+			node[above] at (\mainnode.north) {#1}%
+		}
+	}   
+}
+
+% PT2-Glied
+\tikzset{%
+	PT2/.style = {%
+		draw, 
+		minimum size=1cm,
+		path picture={
+			% Get the width and height of the path picture node
+			\pgfpointdiff{\pgfpointanchor{path picture bounding box}{south west}}%
+			{\pgfpointanchor{path picture bounding box}{north east}}
+			\pgfgetlastxy\x\y
+			% Scale the x and y vectors so that the range
+			% -1 to 1 is slightly shorter than the size of the node
+			\tikzset{x=\x*.4, y=\y*.4}
+			%
+			% Draw annotation
+			\draw [very thin] (-1,-1) -- (-1,1) (-1,-1) -- (1,-1); 
+			\draw [very thick] plot [smooth] coordinates { (-1.0, -1) (-0.3,1) (0.0, 0.3) (0.4, 0.9) (0.7, 0.5) (0.85, 0.65) (1, 0.7)};
+		},
+		append after command={\pgfextra{\let\mainnode=\tikzlastnode}
+			node[above] at (\mainnode.north) {#1}%
+		}
+	}   
+}
+
+
+% Gain, P-Regler
+\tikzset{%
+	Pctrl/.style={%
+		draw, 
+		minimum size=1cm,
+		path picture={
+			% Get the width and height of the path picture node
+			\pgfpointdiff{\pgfpointanchor{path picture bounding box}{south west}}%
+			{\pgfpointanchor{path picture bounding box}{north east}}
+			\pgfgetlastxy\x\y
+			% Scale the x and y vectors so that the range
+			% -1 to 1 is slightly shorter than the size of the node
+			\tikzset{x=\x*.4, y=\y*.4}
+			%
+			% Draw annotation
+			\draw [very thin] (-1,-1) -- (-1,1) (-1,-1) -- (1,-1); 
+			\draw [very thick] (-1,.4) -- (1,.4);
+		},
+		append after command={\pgfextra{\let\mainnode=\tikzlastnode}
+			node[above] at (\mainnode.north) {#1}%
+		}   
+	}
+}
+
+% PI-Regler
+\tikzset{%
+	PIctrl/.style={%
+		draw, 
+		minimum size=1cm,
+		path picture={
+			% Get the width and height of the path picture node
+			\pgfpointdiff{\pgfpointanchor{path picture bounding box}{south west}}%
+			{\pgfpointanchor{path picture bounding box}{north east}}
+			\pgfgetlastxy\x\y
+			% Scale the x and y vectors so that the range
+			% -1 to 1 is slightly shorter than the size of the node
+			\tikzset{x=\x*.4, y=\y*.4}
+			%
+			% Draw annotation
+			\draw [very thin] (-1,-1) -- (-1,1) (-1,-1) -- (1,-1); 
+			\draw [very thick]   (-0.9,-1) -- (-0.9, -0.2) -- (0.9,.4);
+		},
+		append after command={\pgfextra{\let\mainnode=\tikzlastnode}
+			node[above] at (\mainnode.north) {#1}%
+		}   
+	}
+}
+
+% Integrator
+\tikzset{%
+	int/.style={%
+		draw, 
+		minimum size=1cm,
+		path picture={
+			% Get the width and height of the path picture node
+			\pgfpointdiff{\pgfpointanchor{path picture bounding box}{south west}}%
+			{\pgfpointanchor{path picture bounding box}{north east}}
+			\pgfgetlastxy\x\y
+			% Scale the x and y vectors so that the range
+			% -1 to 1 is slightly shorter than the size of the node
+			\tikzset{x=\x*.4, y=\y*.4}
+			%
+			% Draw annotation
+			\draw [very thin] (-1,-1) -- (-1,1) (-1,-1) -- (1,-1);  
+			\draw [very thick] (-1,-1) -- (1, 1);
+		},
+		append after command={\pgfextra{\let\mainnode=\tikzlastnode}
+			node[above] at (\mainnode.north) {#1}%
+		}               
+	}
+}
+
+% Differenzierer
+\tikzset{%
+	diff/.style={%
+		draw, 
+		minimum size=1cm,
+		path picture={
+			% Get the width and height of the path picture node
+			\pgfpointdiff{\pgfpointanchor{path picture bounding box}{south west}}%
+			{\pgfpointanchor{path picture bounding box}{north east}}
+			\pgfgetlastxy\x\y
+			% Scale the x and y vectors so that the range
+			% -1 to 1 is slightly shorter than the size of the node
+			\tikzset{x=\x*.4, y=\y*.4}
+			%
+			% Draw annotation
+			\draw [very thin] (-1,-1) -- (-1,1) (-1,-1) -- (1,-1); 
+			\draw [very thick] (-0.9,-1) -- (-0.9, 0.6);
+		},
+		append after command={\pgfextra{\let\mainnode=\tikzlastnode}
+			node[above] at (\mainnode.north) {#1}%
+		}               
+	}
+}
+%%---------------------
+% Ende Blöcke
+%% --------------------

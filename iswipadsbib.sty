@@ -1,0 +1,170 @@
+
+\usepackage{xpatch}
+
+\RequirePackage[style=iswipads/ipa-authoryear,%style=ext-authoryear,
+  %citestyle=authoryear,
+  %sorting=nyt,
+  maxcitenames=1,
+  maxbibnames=99,
+  introcite=label,
+  uniquename=false,
+  giveninits=true,
+  uniquelist=false,
+  backend=biber,
+  dashed=false,
+  articlein=false,
+  innamebeforetitle=true,
+  natbib=true]{biblatex}
+%doi=false,isbn=false,url=false
+
+%
+%\DeclareNameAlias{sortname}{family-given}
+%\newcommand{\citationneeded}{[\textit{\textcolor{blue}{citation needed}}]}
+%
+%% space between entries in bibliography
+%\setlength{\bibitemsep}{0.5\baselineskip plus 0.5\baselineskip}
+%\setlength{\introcitewidth}{12.5em}
+%
+%% remove ISSN but not ISBN
+%\AtEveryBibitem{\clearfield{issn}}
+%\AtEveryCitekey{\clearfield{issn}}
+%
+%% use et al instead of u.a.
+%\DefineBibliographyStrings{ngerman}{andothers={et\addabbrvspace al\adddot}} 
+%
+%% make label bold
+%\DeclareFieldFormat{bbx@introcite}{\mkbibbold{#1}}
+%
+%% no parantheses around year
+%\DeclareFieldFormat{biblabeldate}{#1}
+%
+%% remove parantheses around year and add comma before it in bibliography (but not in label)
+%% [see https://tex.stackexchange.com/questions/12254/biblatex-how-to-remove-the-parentheses-around-the-year-in-authoryear-style/40710#40710] 
+%\xpatchbibmacro{date+extradate}{%
+%  \printtext[parens]%
+%}{%
+%  \setunit*{\addcomma\space}%
+%  \printtext%
+%}{\typeout{Patching parentheses in date+extradate: Success}}{\typeout{Patching parentheses in date+extradate: Failure}}
+%
+%% remove letter in bibliography but not in label [see https://tex.stackexchange.com/questions/504423/autoryear-ext-with-introcite-label-remove-extradate-letter-from-bibliography-en/504438#504438]
+%\xpatchbibmacro{date+extradate}{%
+%  \printdateextra%
+%}{%
+%  \printdate%
+%}{\typeout{Patching extradate in date+extradate: Success}}{\typeout{Patching extradate in date+extradate: Failure}}
+%
+%% print 'editor' after names
+%\renewbibmacro*{byeditor+others}{%
+%  \ifnameundef{editor}
+%    {}
+%    {\newunit%
+%     \printnames[byeditor]{editor}%
+%     \clearname{editor}%
+%     \setunit{\addspace}\usebibmacro{editor+othersstrg}%
+%   }%
+%  \usebibmacro{byeditorx}%
+%  \usebibmacro{bytranslator+others}}
+%
+%% add parentheses around editor
+%\xpatchbibmacro{editor+othersstrg}{%
+%  \printtext[editortype]%
+%}{%
+%  \printtext[parens]%
+%}
+%{\typeout{Success}}{\typeout{Failure}}
+%
+%% remove 'In:' from proceedings (from https://tex.stackexchange.com/a/10686/122794)
+%%\renewbibmacro{in:}{%
+%%  \ifboolexpr{%
+%%     test {\ifentrytype{article}}%
+%%     or
+%%     test {\ifentrytype{inproceedings}}%
+%%  }{}{\printtext{\bibstring{in}\intitlepunct}}%
+%%}
+%
+%% remove some unneeded newblocks and change delimiter between publisher and location
+%\renewbibmacro*{inbook:parent}{%
+%  \usebibmacro{bybookauthor}%
+%  \setunit{\printdelim{innametitledelim}}
+%  \usebibmacro{byeditor+others}%
+%  \setunit*{\addcolon\space}\newblock
+%  \usebibmacro{maintitle+booktitle}%
+%  \newunit\newblock
+%  \usebibmacro{edition}%
+%  \newunit
+%  \usebibmacro{barevolume+volumes}%
+%  \newunit%\newblock
+%  \usebibmacro{series+number}%
+%  \newunit%\newblock
+%  \usebibmacro{note}%
+%  \newunit%\newblock
+%  \usebibmacro{publisher+location+date}}
+%
+%% remove newblock after in for proceedings
+%\xpatchbibmacro{inproceedings:parent}{%
+%     \setunit{\printdelim{innametitledelim}}\newblock%
+%}{%
+%     \setunit{\printdelim{innametitledelim}}%
+%}
+%{\typeout{Success}}{\typeout{Failure}}
+%
+%% remove parentheses around event
+%\renewbibmacro*{event+venue+date}{%
+%  \printfield{eventtitle}%
+%  \newunit
+%  \printfield{eventtitleaddon}%
+%  \newunit
+%  \printfield{venue}%
+%  \setunit*{\addcomma\space}%
+%  \printeventdate
+%  \newunit}
+%
+%% change order in thesis
+%\xpatchbibdriver{thesis}
+%{\printfield{type}%
+%  \newunit
+%  \usebibmacro{institution+location+date}%
+%}
+%{\usebibmacro{institution+location+date}%
+%  \setunit*{\addcomma\space}%
+%  \printfield{type}%
+%  \setunit*{\addcomma\space}%
+%  \printfield{year}
+%}
+%{\typeout{Success}}{\typeout{Failure}}
+%
+%% different to a everything else, a thesis separates location and publisher by a comma
+%% note: different to the more generic macros comming with biblatex, we assume publisher to be present
+%\renewbibmacro*{institution+location+date}{%
+%  \printlist{location}%
+%  \setunit*{\addcomma\space}
+%  \printlist{institution}%
+%  \setunit*{\pubdatedelim}%
+%  \usebibmacro{date}%
+%  \newunit}
+%
+%% add support for URN
+%\DeclareFieldFormat{eprint:urn}{%
+%URN\addcolon\space
+%\ifhyperref
+%{\href{http://www.nbn-resolving.org/#1}{\nolinkurl{#1}}}
+%{\nolinkurl{#1}}}
+%
+%% remove appended letter from year in bibliography entry
+%%\DeclareFieldFormat*[inbook]{extradate}{}
+%
+%% miscellanous formatting
+%\DeclareFieldFormat[article]{volume}{\textbf{#1}}
+%\DeclareFieldFormat[article]{number}{(#1)}
+%\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1\isdot}		% instead of {\mkbibquote{#1\isdot}} as IPA does not want quotation marks around titles
+%%\renewcommand*{\newblockpunct}{\adddot\newline\bibsentence}
+%\renewcommand*{\intitlepunct}{\addcolon\space}
+%\DeclareDelimFormat[bib]{nameyeardelim}{\addcomma\space}
+%\DeclareDelimFormat{volnumdelim}{\addspace}
+%%\DeclareDelimFormat{locpubdelim}{\addcomma\space}
+%\renewcommand*{\multinamedelim}{\addsemicolon\space}
+%\renewcommand*{\finalnamedelim}{\addsemicolon\space}
+%
+%% No final point
+%%\renewcommand*{\finentrypunct}{\addspace}

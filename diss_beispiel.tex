@@ -1,0 +1,176 @@
+% !TeX document-id = {2e27ddd9-8725-4684-b0b8-a4328d10ae60}
+% !TeX program = txs:///lualatex/[--shell-escape]
+% !TEX spellcheck = de-DE
+% !BIB program = biblatex
+%% Die Magic comments oben werden von manchen Editoren (besonders TexStudio) genutzt, um die Richtige Engine zum kompilieren auszuwählen, etc.
+
+\documentclass[%accepted % anderes Deckblatt, wenn akzeptiert
+english, ngerman,% Sprache, die letzte ist die Hauptsprache
+]{iswipads/iswipads} % Pfad zur Klasse (relativ). Erwartet die Klase im Ordner mit Ordnernamen iswipads
+
+% Bibliography
+\usepackage{./iswipads/iswipadsbib} % using biber and biblatex (style as required, also provides citationsneeded)
+
+% Für Glossar (Formel, Begriffsverzeichnis, Abkürzungsverzeichnis)
+% Wird nur das Abkürzungsverzeichnis verwendet, ist das packet "acronym" einfacher.
+%\usepackage{./iswipads/iswipadsgloss}
+
+
+%% Empfohlene Pakete
+\usepackage{csquotes} % für bib und gloss
+
+
+\usepackage{amsmath, amssymb, bm} % Mathe-Befehle
+
+\RequirePackage{graphicx}
+%\RequirePackage[smaller, printonlyused]{acronym} % glossaries already define this
+
+% Beautiful tables (https://nhigham.com/2019/11/19/better-latex-tables-with-booktabs/latex subfig)
+\usepackage{booktabs}
+
+% si-units: auto-rounding numbers, set same format for numbers globally, add and correclty typeset units for numbers
+\usepackage{siunitx}
+\sisetup{round-mode = places, 
+	round-precision = 3, % Runden auf Nachkommastellen
+	table-number-alignment = center, 
+	table-omit-exponent=true, % keine exp-Darstellung in Tabellen
+	exponent-product=\cdot,
+	output-decimal-marker={,}, % , statt . als Dezimaltrenner
+	%exponent-mode = fixed, fixed-exponent = 0, %schält mit LaTeX3e die exponentendarstelung aus
+	}
+
+
+% Optionale Einstellungen von hze
+%\input{iswipads/settings_example/definitions} % Eigene Kommandos , die ein bisschen Tippen ersparen
+%\input{iswipads/settings_example/tikz} % Generelle Einstellungen für TikZ
+%\input{iswipads/settings_example/tikz_blocks} % Blockdiagramme, Regler, Tiefpassfilter, etc. mit TikZ 
+
+% TODO: hier bibliographie bereitstellen: 
+%\addbibresource{path/to/bibliography.bib}
+
+% standardmäßig wird in img/ nach Bildern gesucht, \includegraphics{img/...} => \includegraphics{...}
+\graphicspath{{img/}}
+
+
+\title{Titel der Diss\\gerne auch mit Zeilenumbruch\\zur besseren Formatierung}
+\author{Vorname Nachname,~M.Sc.}
+\birthplace{Geburtsort}
+\examiner{Univ.-Prof.~Dr.-Ing.~Dr.~h.c.~mult.~Alexander~Verl}
+%\examiner{Univ.-Prof.~Dr.-Ing.~Oliver~Riedel}
+\coexaminer{Univ.-Prof.~Dr.-Ing.~Mit~Berichter}
+\dateoforalexamination{42. September 2222}
+\yearofpublication{2222}
+
+
+% Akronyme (benötigt \usepackage{iswipads/iswipadsgloss}, siehe settings_general.tex)
+% Benutzung im Text: \ac{kgt} bzw. Kurzform \acs{kgt}
+%\newacronym{ISW}{ISW}{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+%Eine Abkürzung mit Glossareintrag
+%\newacronym{AD}{AD}{Active Directory\protect\glsadd{glos:AD}}
+
+% Formelzeichen, auch hier wird \usepackage{iswipads/iswipadsgloss} benötigt
+% Lateinische Formelzeichen
+% \newglossaryentry{latinbigletters}{
+% 	name={Lateinische Großbuchstaben},
+% 	sort=1,
+% 	description={\nopostdesc}}
+
+% \newglossaryentry{symb:e}{
+% 	type=symbolslist,
+% 	parent=latinbigletters,
+% 	name={\ensuremath{e}},
+% 	sort=e,
+% 	unit={\si{m}},
+% 	description={Schleppfehler}}
+%% Griechische Formelzeichen
+%\newglossaryentry{greekletters}{
+%	name={Griechische Buchstaben},
+%	sort=3,
+%	description={\nopostdesc}}
+%
+%\newglossaryentry{symb:tau_G}{
+%	type=symbolslist,
+%	parent=latinbigletters,
+%	name={\ensuremath{\tau_G}},
+%	sort=tauG,
+%	unit={\ensuremath{\unit{Nm}}},
+%	description={Drehmoment auf der Getriebeabtriebseite}}
+%
+
+\begin{document}
+
+\frontmatter
+\maketitle
+\onehalfspacing % 1,5 facher Zeilenabstand
+
+\addchap{Vorwort}
+% Formel-Beispiel
+\(a_x + b_y \sum_i^N dx + \int\) 
+
+% Beispiel SI-Unit-Paket
+\SI{3.14159265e1}{kg.m/s^2}
+
+
+% Beispiel für referenzieren eines Glossar.Eintrags
+%\gls{symb:e}~\gls{symb:F_0}
+
+% Beispiel für referenzieren eines Akronyms
+%\ac{ISW}
+
+\addchap{Kurzfassung/Abstract}
+
+
+\cleardoublepage
+\ifpdf
+    \phantomsection
+    \pdfbookmark[0]{Inhaltsverzeichnis}{toc}
+\fi
+\tableofcontents
+
+% % Abkürzungs/Symbolverzeichnis, wenn nötig und oben definiert
+% \cleardoublepage
+% \printglossary[type=\acronymtype,style=alttree ]
+% \cleardoublepage
+% \printglossary[type=symbolslist, style = symbunitlong, title=Symbolverzeichnis]
+
+
+\cleardoublepage
+\listoffigures
+
+\cleardoublepage
+\listoftables
+
+\mainmatter % Hauptteil, let's go!
+            % - Kapitel in .tex-Datei packen und per \input{...} einbinden
+            % - Ein Satz pro Zeile erleichtert die Versionierung mit Git!
+
+\chapter{Einleitung}
+
+\section{Forschungsfrage und Problembeschreibung}
+\section{Beitrag dieser Arbeit}
+\section{Notationskonventionen}
+
+
+\chapter{Stand der Forschung und Technik}
+\section{Zusammenfassende Bewertung des Stands der Technik}
+
+\chapter{Ziel der Arbeit und Vorgehensweise}
+
+% Eigene Kapitel: weitere Problemanalyse, Lösung, Validierung
+
+
+\chapter{Zusammenfassung}
+\section{Diskussion}
+\section{Ausblick}
+
+% Literatur
+%\setlength{\emergencystretch}{.5em}
+%\printbibliography[title={Literatur},heading=bibintoc]
+
+% Anhang, wenn benötigt:
+%\renewcommand{\thesection}{\Alph{section}}
+%\appendix
+%\addchap{Anhang}
+
+
+\end{document}

@@ -1,0 +1,57 @@
+%% command definitions 
+
+% Anzeige, dass noch eine Zitation fehlt: \citationneeded
+\newcommand{\citationneeded}{\textcolor[rgb]{1,0,0}{\small [citation needed]}}
+
+% Markiere offene TODOs im text: \todo{Hier noch mehr.}.
+% Hierfür gibt es auch Pakete
+\newcommand{\todo}[1]{\textcolor[rgb]{1,0,0}{\small TODO: #1}}
+
+% Abkürzungen im Text
+\newcommand{\zB}{z.\,B. }
+\newcommand{\uU}{u.\,U. }
+
+% Bildquelle in Hellgrau, rechts: \imgssource{Getty Images}
+\newcommand{\imgsource}[1]{\begin{flushright}
+		\textcolor{black!40}{\tiny Source:~#1}	
+\end{flushright}}
+
+% Transponiert-Zeichen, z.B.: \( \bm p^\T \)
+\newcommand{\T}{\mathrm{T}}
+
+% matrix schnell setzen mit \bmat{a & b  \\ c & d}
+\newcommand{\bmat}[1]{ \ensuremath{\begin{bmatrix} #1 \end{bmatrix}} }
+
+%% mathe-Abkürzungen
+\newcommand{\gdw}{\ensuremath{\Leftrightarrow}}
+\newcommand{\folgt}{\Rightarrow}
+\newcommand{\mustbe}{\ensuremath{\stackrel{!}{=}}}
+\newcommand{\grad}{\ensuremath{\nabla}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\partfrac}[2]{ \ensuremath{\frac{\partial #1}{\partial #2}} }
+\newcommand{\ddiff}{\ensuremath{\mathrm{d}}}
+\newcommand{\ddt}{\ensuremath{\frac{\ddiff}{\ddiff t}}}
+\newcommand{\equates}{\ensuremath{\widehat{=}}}
+\newcommand{\rme}{\ensuremath{\mathrm{e}}}
+\newcommand{\Lscript}{\ensuremath{\mathcal{L}}}
+
+% := (\eqdef) und =: (\defeq) für Definitionen
+\newcommand*{\defeq}{\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+			\hbox{\scriptsize.}\hbox{\scriptsize.}}} =}
+\newcommand*{\eqdef}{=\mathrel{\vcenter{\baselineskip0.5ex \lineskiplimit0pt
+			\hbox{\scriptsize.}\hbox{\scriptsize.}}}}
+\newcommand{\mi}{\mathrm{i}} % i für Imaginärzahlen
+
+%% \dddot{} für dreifache Zeitableitung [https://tex.stackexchange.com/questions/131587/mathtools-dddot-cause-the-term-to-rise]
+\newcommand\scaleddot{\scalebox{.89}{.}}
+\makeatletter
+\renewcommand{\dddot}[1]{%
+	{\mathop{\kern\z@#1}\limits^{\makebox[0pt][c]{\vbox to-2.2\ex@{\kern-\tw@\ex@
+					\hbox{\normalfont\scaleddot\kern-0.5pt\scaleddot\kern-0.5pt\scaleddot}\vss}}}}}
+\renewcommand{\ddddot}[1]{%
+	{\mathop{\kern\z@#1}\limits^{\makebox[0pt][c]{\vbox to-2.2\ex@{\kern-\tw@\ex@
+					\hbox{\normalfont\scaleddot\kern-0.5pt\scaleddot\kern-0.5pt\scaleddot\kern-0.5pt\scaleddot}\vss}}}}}
+\makeatother
+
+\newcommand{\LTIsysSub}[1]{\ensuremath{\Sigma_{#1}: \bm{\dot x}_{#1}  = \bm A_{#1} \bm x_{#1} + \bm b_{#1} \bm u_{#1}, \bm y_{#1} = \bm C_{#1} \bm x_{#1}, \bm x_{#1,0} = \bm x_{#1}(t=t_0)}}
+
