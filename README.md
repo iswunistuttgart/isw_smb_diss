@@ -1,6 +1,8 @@
 # iswipads
 
-LaTeX Style für Dissertationen am ISW
+LaTeX Style für Dissertationen am ISW.
+
+Basiert auf den Styles von Peter Zahn und Oliver Gerlach, der Style der Bibliographie ist übernommen von [Philipp Tempel](https://github.com/iswunistuttgart/latex-templates)
 
 
 ## Anleitung zum Aufsetzen meiner Dissertation 
@@ -64,6 +66,8 @@ LaTeX Style für Dissertationen am ISW
 - `iswipadsbib.sty` und `ipa_authoryear.{bbx,cbx}` ... Styling für die Bibliographie und Zitieren
 - `iswipadsgloss.sty` ... Styling für Glossar und Abkürzungsverzeichnis mit dem Paket `glossaries` (falls benötigt)
 - `diss_beispiel.tex` ... Beispielgerüst für die Diss. Eine Ordnerhierarchie nach oben kopieren
+- `settings_example/*.tex` ... Beispiele von Settings-Dateien für Command definitions und TikZ-Code
+- `.gitignore` ... Gitignore-Datei für LaTeX, kann gerne auch in den eigenen Diss-Ordner übernommen werden
 
 ### Spätere Ordnersturkur des Diss-Ordners
 
@@ -90,6 +94,6 @@ Diss/
 
 ### Wie melde ich einen Fehler?
 
-- Als [Issue aus Gitlab]()
-- Noch besser: direkt auf einem Branch beheben und ein [Merge request]() stellen
+- Als [Issue aus Gitlab](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/iswipads/-/issues/new)
+- Noch besser: direkt auf einem Branch beheben und ein [Merge request](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/iswipads/-/merge_requests/new) stellen
 - Größere Änderungen am besten vorher besprechen
