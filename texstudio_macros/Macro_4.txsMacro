@@ -1,0 +1,16 @@
+{
+    "abbrev": "",
+    "description": [
+        "Inserts a new frame"
+    ],
+    "formatVersion": 1,
+    "menu": "Beamer",
+    "name": "Frame",
+    "shortcut": "",
+    "tag": [
+        "\\begin{frame}{%<title%>}",
+        "%<contents%>",
+        "\\end{frame}"
+    ],
+    "trigger": "<<frame"
+}

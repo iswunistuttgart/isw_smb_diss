@@ -1,0 +1,23 @@
+{
+    "abbrev": "",
+    "description": [
+        "Inserts a figure environment with tizkfugure"
+    ],
+    "formatVersion": 1,
+    "menu": "Quick insert",
+    "name": "TikZ Figure",
+    "shortcut": "",
+    "tag": [
+        "\\begin{figure}[ht]",
+        "\\centering",
+        "\\begin{tikzpicture}",
+        "",
+        "%<tikz-content%>",
+        "",
+        "\\end{tikzpicture}",
+        "\\caption{%<caption%>}",
+        "\\label{fig:%<label%>}",
+        "\\end{figure}"
+    ],
+    "trigger": "<<tikz"
+}

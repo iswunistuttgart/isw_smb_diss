@@ -1,0 +1,26 @@
+{
+    "abbrev": "",
+    "description": [
+        "If no selection is made, the whole line is cut"
+    ],
+    "formatVersion": 1,
+    "menu": "Helper-Scripts",
+    "name": "Cut selection or line",
+    "shortcut": "Ctrl+X",
+    "tag": [
+        "%SCRIPT",
+        "var text=cursor.selectedText()",
+        "",
+        "if(text.length>0)",
+        "{",
+        "    //cut selected text",
+        "    app.clipboard = text",
+        "    cursor.removeSelectedText()",
+        "}else{",
+        "    //no text selected => cut whole line",
+        "    app.clipboard = editor.text(cursor.lineNumber())+\"\\n\"; ",
+        "    cursor.eraseLine()",
+        "}"
+    ],
+    "trigger": ""
+}

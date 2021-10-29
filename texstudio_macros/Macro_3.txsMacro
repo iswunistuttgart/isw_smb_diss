@@ -1,0 +1,22 @@
+{
+    "abbrev": "",
+    "description": [
+        "Paste selection or line"
+    ],
+    "formatVersion": 1,
+    "menu": "Helper-Scripts",
+    "name": "Paste line",
+    "shortcut": "Ctrl+V",
+    "tag": [
+        "%SCRIPT",
+        "var text = app.clipboard",
+        "",
+        "if(text.lastIndexOf(\"\\n\") == text.length-1){",
+        "    cursor.movePosition(1, cursorEnums.StartOfLine);",
+        "    editor.write(text)",
+        "}else{",
+        "    editor.write(text)",
+        "}"
+    ],
+    "trigger": ""
+}

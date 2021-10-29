@@ -1,0 +1,19 @@
+{
+    "abbrev": "",
+    "description": [
+        "Insert a figure environment"
+    ],
+    "formatVersion": 1,
+    "menu": "Quick insert",
+    "name": "Figure",
+    "shortcut": "",
+    "tag": [
+        "\\begin{figure}[ht]",
+        "\\centering",
+        "%<contents%>",
+        "\\caption{%<caption%>}",
+        "\\label{fig:%<label%>}",
+        "\\end{figure}"
+    ],
+    "trigger": "<<fig"
+}
