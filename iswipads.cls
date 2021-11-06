@@ -1,25 +1,25 @@
-% basiert auf der Vorlage von O. Gerlach (2015), erweitert von C. Hinze (2020)
+% basiert auf der Vorlage von O. Gerlach (2015), erweitert von C. Hinze (2020/2021)
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{iswipads/iswipads}[2021/10/01 v. 1.2 ISW-IPA Reihe für Dissertationen]
+\ProvidesClass{iswipads/iswipads}[2021/10/01 v. 1.3 ISW-IPA Reihe für Dissertationen]
 
 \ProcessOptions\relax
-\newcommand{\documentfontsize}{14pt}
+\newcommand{\documentfontsize}{10pt}
 \newcommand{\titlewidth}{1.0}
 \newcommand{\introstart}{Der Fakult\"at}
 \newcommand{\introstatus}{vorgelegte}
 \newcommand{\documentsourceintro}{von}
 \DeclareOption{accepted}{\renewcommand{\introstart}{Von der Fakult\"at}\renewcommand{\introstatus}{genehmigte}\renewcommand{\documentsourceintro}{Vorgelegt von}}
-\DeclareOption{smalltext}{\renewcommand{\documentfontsize}{12pt}\renewcommand{\titlewidth}{0.9}}
+%\DeclareOption{smalltext}{\renewcommand{\documentfontsize}{12pt}\renewcommand{\titlewidth}{0.9}}
 \ProcessOptions
 \LoadClass[fontsize=\documentfontsize,
-DIV=calc,
 twoside,
+a5paper,
 headings=normal,
 headsepline,
 listof=totoc,% add a tocentry for lists like LOF and LOT
-]{scrbook} % KOMA-Script scrreprt, DIN A4, 14pt with bibliography in TOC
-\usepackage[a4paper]{geometry}
-\geometry{tmargin=3.0cm,bmargin=3.0cm,lmargin=2.0cm,rmargin=2.0cm,headheight=1cm,headsep=1cm,footskip=1cm,head=45pt}
+]{scrbook} % KOMA-Script scrreprt, DIN A5, 14pt with bibliography in TOC
+\usepackage[a5paper]{geometry}
+\geometry{tmargin=2.1cm,bmargin=2.1cm,lmargin=1.4cm,rmargin=1.4cm,headheight=0.7cm,headsep=0.7cm,footskip=0.7cm,head=32pt}
 
 \RequirePackage{ifthen}
 \RequirePackage{ifpdf}
@@ -44,7 +44,7 @@ listof=totoc,% add a tocentry for lists like LOF and LOT
 	\RequirePackage{fontspec}%
 	\defaultfontfeatures{Ligatures=TeX}%
 	\setsansfont{texgyreheros}[
-	Scale=MatchLowercase,% or MatchUppercase
+	%Scale=MatchLowercase,% or MatchUppercase
 	Extension=.otf,
 	UprightFont=*-regular,
 	ItalicFont=*-italic,
@@ -53,7 +53,7 @@ listof=totoc,% add a tocentry for lists like LOF and LOT
 	]
 	
 	\setmainfont{texgyrepagella}[
-	Scale=MatchLowercase,% or MatchUppercase
+	%Scale=MatchLowercase,% or MatchUppercase
 	Extension=.otf,
 	UprightFont=*-regular,
 	ItalicFont=*-italic,
@@ -78,9 +78,11 @@ listof=totoc,% add a tocentry for lists like LOF and LOT
 	\RequirePackage{DejaVuSansMono}%
 	\RequirePackage{tgpagella}% bera monospace font
 	\RequirePackage{textcomp}% declare missing symbols
+
+	\PassOptionsToPackage{activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10}{microtype}
    }
 
-%\PassOptionsToPackage{activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10}{microtype}
+
 \RequirePackage{microtype}
 
 
@@ -157,7 +159,7 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \renewcommand*{\maketitle}{%
   \begin{titlepage}
 	{
-	  \fontsize{12pt}{15pt}\selectfont
+	  %\fontsize{12pt}{15pt}\selectfont
     \centering
 		\begin{minipage}{\titlewidth\textwidth}
 			\centering
@@ -181,7 +183,7 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
     \vfill
 		\begin{minipage}{0.8\textwidth}
 			\begin{tabbing}
-				Hauptberichter:\qquad\qquad\qquad\qquad \=\@examiner \\
+				Hauptberichter:\qquad\quad\qquad\qquad \=\@examiner \\
 				Mitberichter:\> \@coexaminer \\[\baselineskip]
 				Tag der m\"undlichen Pr\"ufung: \> \@dateoforalexamination \\
 			\end{tabbing}
