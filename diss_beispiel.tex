@@ -6,15 +6,7 @@
 
 \documentclass[%accepted % anderes Deckblatt, wenn akzeptiert
 english, ngerman,% Sprache, die letzte ist die Hauptsprache
-]{iswipads/iswipads} % Pfad zur Klasse (relativ). Erwartet die Klase im Ordner mit Ordnernamen iswipads
-
-% Bibliography
-\usepackage{./iswipads/iswipadsbib} % using biber and biblatex (style as required, also provides citationsneeded)
-
-% Für Glossar (Formel, Begriffsverzeichnis, Abkürzungsverzeichnis)
-% Wird nur das Abkürzungsverzeichnis verwendet, ist das packet "acronym" einfacher.
-%\usepackage{./iswipads/iswipadsgloss}
-
+]{isw_smb_diss} % Pfad zur Klasse (relativ). Erwartet die Klase im Ordner mit Ordnernamen isw_smb_diss
 
 %% Empfohlene Pakete
 \usepackage{csquotes} % für bib und gloss
@@ -22,10 +14,12 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 
 \usepackage{amsmath, amssymb, bm} % Mathe-Befehle
 
-\RequirePackage{graphicx}
-%\RequirePackage[smaller, printonlyused]{acronym} % glossaries already define this
+\usepackage{breakurl} %break links in bibliography
 
-% Beautiful tables (https://nhigham.com/2019/11/19/better-latex-tables-with-booktabs/latex subfig)
+\RequirePackage{graphicx}
+
+
+% Nice looking tables (https://nhigham.com/2019/11/19/better-latex-tables-with-booktabs/latex subfig)
 \usepackage{booktabs}
 
 % si-units: auto-rounding numbers, set same format for numbers globally, add and correclty typeset units for numbers
@@ -39,14 +33,16 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 	%exponent-mode = fixed, fixed-exponent = 0, %schält mit LaTeX3e die exponentendarstelung aus
 	}
 
+% Nur für Demonstrationszwecke von Fließtext in der Einleitung. Kann gerne entfernt werden.
+\usepackage{blindtext}
 
 % Optionale Einstellungen von hze
-%\input{iswipads/settings_example/definitions} % Eigene Kommandos , die ein bisschen Tippen ersparen
-%\input{iswipads/settings_example/tikz} % Generelle Einstellungen für TikZ
-%\input{iswipads/settings_example/tikz_blocks} % Blockdiagramme, Regler, Tiefpassfilter, etc. mit TikZ 
+%\input{isw_smb_diss/settings_example/definitions} % Eigene Kommandos , die ein bisschen Tippen ersparen
+%\input{isw_smb_diss/settings_example/tikz} % Generelle Einstellungen für TikZ
+%\input{isw_smb_diss/settings_example/tikz_blocks} % Blockdiagramme, Regler, Tiefpassfilter, etc. mit TikZ 
 
-% TODO: hier bibliographie bereitstellen: 
-%\addbibresource{path/to/bibliography.bib}
+% TODO: hier eigene bibliographie bereitstellen: 
+\addbibresource{bibliography.bib}
 
 % standardmäßig wird in img/ nach Bildern gesucht, \includegraphics{img/...} => \includegraphics{...}
 \graphicspath{{img/}}
@@ -58,22 +54,24 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 \examiner{Univ.-Prof.~Dr.-Ing.~Dr.~h.c.~mult.~Alexander~Verl}
 %\examiner{Univ.-Prof.~Dr.-Ing.~Oliver~Riedel}
 \coexaminer{Univ.-Prof.~Dr.-Ing.~Mit~Berichter}
+\institute{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
 \dateoforalexamination{42. September 2222}
 \yearofpublication{2222}
 
 
-% Akronyme (benötigt \usepackage{iswipads/iswipadsgloss}, siehe settings_general.tex)
+
+%%% Akronyme und Glossar:
+% Für Glossar (Formel, Begriffsverzeichnis, Abkürzungsverzeichnis)
+% Wird nur das Abkürzungsverzeichnis verwendet, ist das packet "acronym" einfacher.
+% \usepackage{isw_smb_glossisw_smb_gloss}
+
+% Akronyme (benötigt \usepackage{isw_smb_gloss/isw_smb_gloss}, siehe settings_general.tex)
 % Benutzung im Text: \ac{kgt} bzw. Kurzform \acs{kgt}
 %\newacronym{ISW}{ISW}{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
 %Eine Abkürzung mit Glossareintrag
 %\newacronym{AD}{AD}{Active Directory\protect\glsadd{glos:AD}}
 
-% Formelzeichen, auch hier wird \usepackage{iswipads/iswipadsgloss} benötigt
-% Lateinische Formelzeichen
-% \newglossaryentry{latinbigletters}{
-% 	name={Lateinische Großbuchstaben},
-% 	sort=1,
-% 	description={\nopostdesc}}
+% Formelzeichen, auch hier wird \usepackage{isw_smb_gloss} benötigt
 
 % \newglossaryentry{symb:e}{
 % 	type=symbolslist,
@@ -82,12 +80,6 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 % 	sort=e,
 % 	unit={\si{m}},
 % 	description={Schleppfehler}}
-%% Griechische Formelzeichen
-%\newglossaryentry{greekletters}{
-%	name={Griechische Buchstaben},
-%	sort=3,
-%	description={\nopostdesc}}
-%
 %\newglossaryentry{symb:tau_G}{
 %	type=symbolslist,
 %	parent=latinbigletters,
@@ -108,10 +100,10 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 \(a_x + b_y \sum_i^N dx + \int\) 
 
 % Beispiel SI-Unit-Paket
-\SI{3.14159265e1}{kg.m/s^2}
+\SI{3.14159265e1}{kg.m/s^2} \cite{colu92}
 
 
-% Beispiel für referenzieren eines Glossar.Eintrags
+% Beispiel für referenzieren eines Glossar-Eintrags
 %\gls{symb:e}~\gls{symb:F_0}
 
 % Beispiel für referenzieren eines Akronyms
@@ -127,28 +119,16 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 \fi
 \tableofcontents
 
-% % Abkürzungs/Symbolverzeichnis, wenn nötig und oben definiert
-% \cleardoublepage
-% \printglossary[type=\acronymtype]
-% \cleardoublepage
-% \printglossary[type=symbolslist, style = symbunitlong, title=Symbolverzeichnis]
-
-
-\cleardoublepage
-\listoffigures
-
-\cleardoublepage
-\listoftables
-
 \mainmatter % Hauptteil, let's go!
             % - Kapitel in .tex-Datei packen und per \input{...} einbinden
             % - Ein Satz pro Zeile erleichtert die Versionierung mit Git!
 
 \chapter{Einleitung}
 
+\Blindtext
+
 \section{Forschungsfrage und Problembeschreibung}
 \section{Beitrag dieser Arbeit}
-\section{Notationskonventionen}
 
 
 \chapter{Stand der Forschung und Technik}
@@ -163,9 +143,27 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 \section{Diskussion}
 \section{Ausblick}
 
+% TODO: nocite gibt alle Einträfer der Bibliographie aus. Dies dient nur zu Testzwecken und sollte entfernt werden
+\nocite{*}
+
 % Literatur
-%\setlength{\emergencystretch}{.5em}
-%\printbibliography[title={Literatur},heading=bibintoc]
+\setlength{\emergencystretch}{.5em}
+\printbibliography[title={Literatur},heading=bibintoc]
+
+
+% % Abkürzungs/Symbolverzeichnis, wenn nötig und oben definiert
+% \cleardoublepage
+% \printglossary[type=\acronymtype]
+% \cleardoublepage
+% \printglossary[type=symbolslist, style = symbunitlong, title=Symbolverzeichnis]
+
+
+\cleardoublepage
+\listoffigures
+
+\cleardoublepage
+\listoftables
+
 
 % Anhang, wenn benötigt:
 %\renewcommand{\thesection}{\Alph{section}}

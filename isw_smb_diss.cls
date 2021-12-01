@@ -1,6 +1,6 @@
 % basiert auf der Vorlage von O. Gerlach (2015), erweitert von C. Hinze (2020/2021)
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{iswipads/iswipads}[2021/10/01 v. 1.3 ISW-IPA Reihe für Dissertationen]
+\ProvidesClass{isw_smb_diss/isw_smb_diss}[2021/12/01 v. 1.4 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/isw_smb_diss]
 
 \ProcessOptions\relax
 \newcommand{\documentfontsize}{10pt}
@@ -85,8 +85,6 @@ listof=totoc,% add a tocentry for lists like LOF and LOT
 
 \RequirePackage{microtype}
 
-
-
 \RequirePackage[onehalfspacing]{setspace} 
 \RequirePackage[automark,%
 headsepline=0.20pt,%
@@ -96,6 +94,18 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \pagestyle{scrheadings}
 \RequirePackage[pdfusetitle]{hyperref}
 
+% Bibliography
+\RequirePackage{xpatch}
+
+\RequirePackage[style=ieee, %style=alphabetic
+giveninits=true,
+uniquelist=false,
+backend=biber,
+natbib=true,
+bibwarn=true,
+isbn=false]{biblatex}
+
+% Colors (for links, ...)
 \RequirePackage[dvipsnames]{xcolor}
 \definecolor{uniSblue}{RGB}{0,65,145}
 \definecolor{uniSlightblue}{RGB}{0,190,255}
@@ -110,19 +120,19 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \contentsmargin{2.5em}
 
 % Verhindern von Schusterjungen und Hurenkindern über Penalty
-\widowpenalty=10000
-\clubpenalty=10000 
-\displaywidowpenalty=10000
+% \widowpenalty=10000
+% \clubpenalty=10000 
+% \displaywidowpenalty=10000
 
 % Floats auf extra Float-Page oben platzieren
 \setlength{\@fptop}{0pt}% default is 0\p@ \@plus 1fil
 \setlength{\@fpsep}{\floatsep}% default is 8\p@ \@plus 2fil
 \setlength{\@fpbot}{0pt plus 1fil}% default is 0\p@ \@plus 1fil
 
-\renewcommand*{\chapterpagestyle}{scrheadings}	% IPA requires sepline and running title above chapters beginning from toc
+\renewcommand*{\chapterpagestyle}{scrheadings}	% sepline and running title above chapters beginning from toc
 \clearpairofpagestyles	% clear header and footer, IIRC
 \ohead[\headmark]{\headmark}
-\ofoot[\pagemark]{\pagemark}	% IPA requires page numbers nearly everywhere (also below new chapters)
+\ofoot[\pagemark]{\pagemark}	% page numbers nearly everywhere (also below new chapters)
 
 %Schriftfamilien für Überschriften auf Schriften mit Serifen!
 % \addtokomafont{chapter}{\normalfont \bfseries}{\sffamily}
@@ -136,30 +146,33 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 % \addtokomafont{descriptionlabel}{\normalfont \bfseries}{\sffamily}
 
 % Titelei: Befehle (Hinweis: author & title sind schon definiert)
-\newcommand*{\@birthplace}{\ClassError{iswipads/iswipads}{\string\birthplace\space missing}%
+\newcommand*{\@birthplace}{\ClassError{isw_smb_diss}{\string\birthplace\space missing}%
 	{You have to use \string\birthplace\space to set up the place of the author's birth.}}
 \newcommand*\birthplace[1]{\renewcommand\@birthplace{#1}}
 
-\newcommand*{\@examiner}{\ClassError{iswipads/iswipads}{\string\examiner\space missing}%
+\newcommand*{\@examiner}{\ClassError{isw_smb_diss}{\string\examiner\space missing}%
 	{You have to use \string\examiner\space to set up the your examiner,\MessageBreak e.g. `\string\examiner{Name of examiner}'.}}
 \newcommand*\examiner[1]{\renewcommand\@examiner{#1}}
 
-\newcommand*{\@coexaminer}{\ClassError{iswipads/iswipads}{\string\coexaminer\space missing}%
+\newcommand*{\@coexaminer}{\ClassError{isw_smb_diss}{\string\coexaminer\space missing}%
 	{You have to use \string\coexaminer\space to set up the your co-examiner,\MessageBreak e.g. `\string\coexaminer{Name of co-examiner}'.}}
 \newcommand*\coexaminer[1]{\renewcommand\@coexaminer{#1}}
 
-\newcommand*{\@dateoforalexamination}{\ClassError{iswipads/iswipads}{\string\dateoforalexamination\space missing}%
+\newcommand*{\@institute}{\ClassError{isw_smb_diss}{\string\institute\space missing}%
+	{You have to use \string\institute\space to set up the your Institute,\MessageBreak e.g. `\string\institute{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}'.}}
+\newcommand*\institute[1]{\renewcommand\@institute{#1}}
+
+\newcommand*{\@dateoforalexamination}{\ClassError{isw_smb_diss}{\string\dateoforalexamination\space missing}%
 	{You have to use \string\dateoforalexamination\space to set up the date of oral examination,\MessageBreak e.g. `\string\dateoforalexamination{TT.MM.YYYY}'.}}
 \newcommand*\dateoforalexamination[1]{\renewcommand\@dateoforalexamination{#1}}
 
-\newcommand*{\@yearofpublication}{\ClassError{iswipads/iswipads}{\string\yearofpublication\space missing}%
+\newcommand*{\@yearofpublication}{\ClassError{isw_smb_diss}{\string\yearofpublication\space missing}%
 	{You have to use \string\yearofpublication\space to set up the publication year of your thesis,\MessageBreak e.g. `\string\yearofpublication{YYYY}'.}}
 \newcommand*\yearofpublication[1]{\renewcommand\@yearofpublication{#1}}
 
 \renewcommand*{\maketitle}{%
   \begin{titlepage}
 	{
-	  %\fontsize{12pt}{15pt}\selectfont
     \centering
 		\begin{minipage}{\titlewidth\textwidth}
 			\centering
@@ -169,8 +182,8 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 		\begin{minipage}{\titlewidth\textwidth}
 			\centering
 			\introstart\ Konstruktions-, Produktions- und Fahrzeugtechnik\\
-			der  Universit\"at Stuttgart zur Erlangung\\
-			der W\"urde eines Doktor-Ingenieurs (Dr.-Ing.)\\
+			der  Universität Stuttgart zur Erlangung\\
+			der Würde eines Doktor-Ingenieurs (Dr.-Ing.)\\
 			\introstatus\ Abhandlung\par%
 		\end{minipage}
 		\vfill
@@ -185,13 +198,13 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 			\begin{tabbing}
 				Hauptberichter:\qquad\quad\qquad\qquad \=\@examiner \\
 				Mitberichter:\> \@coexaminer \\[\baselineskip]
-				Tag der m\"undlichen Pr\"ufung: \> \@dateoforalexamination \\
+				Tag der mündlichen Prüfung: \> \@dateoforalexamination \\
 			\end{tabbing}
 		\end{minipage}
 		\vskip 2\baselineskip
 		\begin{minipage}{0.8\textwidth}
 			\centering
-			Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen der Universit\"at Stuttgart\\
+			\@institute\space der Universität Stuttgart\\
 			\vskip \baselineskip
 			\@yearofpublication
 		\end{minipage}
@@ -207,7 +220,6 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \deffootnote{0em}{0em}{\thefootnotemark\hspace*{.5em}}
 
 % Initialize hyperref
-
 \hypersetup{%
 	%draft, % hyperref's draft mode, for printing see below
 	colorlinks=true, linktocpage=true, pdfstartpage=3,% pdfstartview=FitV,%

@@ -1,11 +1,8 @@
-# iswipads
+# isw_smb_diss
 
-LaTeX Style für Dissertationen am ISW.
+LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB).
 
-Basiert auf den Styles von Peter Zahn und Oliver Gerlach, der Style der Bibliographie ist übernommen von [Philipp Tempel](https://github.com/iswunistuttgart/latex-templates)
-
-
-- [iswipads](#iswipads)
+- [isw_smb_diss](#isw_smb_diss)
   - [Anleitung zum Aufsetzen meiner Dissertation](#anleitung-zum-aufsetzen-meiner-dissertation)
     - [Weg 1: Als git submodule (ohne Overleaf)](#weg-1-als-git-submodule-ohne-overleaf)
     - [Weg 2: Mit Overleaf](#weg-2-mit-overleaf)
@@ -35,12 +32,12 @@ Basiert auf den Styles von Peter Zahn und Oliver Gerlach, der Style der Bibliogr
     ```sh
     # git Kommandozeile
     # über https (meistens einfacher)
-    git submodule add https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/iswipads.git
+    git submodule add https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/isw_smb_diss.git
     # oder über ssh (SSH-Key muss eingerichtet sein)
-    git submodule add git@git.isw.uni-stuttgart.de:projekte/eigenentwicklungen/templates/iswipads.git
+    git submodule add git@git.isw.uni-stuttgart.de:projekte/eigenentwicklungen/templates/isw_smb_diss.git
     ```
 
-3. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` aus dem Submodul/Unterordner `iswipads` in den eigenen Ordner kopiert werden.
+3. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` aus dem Submodul/Unterordner `isw_smb_diss` in den eigenen Ordner kopiert werden.
 4. Spätere Updates der Klasse über
 
     ```
@@ -61,19 +58,18 @@ Basiert auf den Styles von Peter Zahn und Oliver Gerlach, der Style der Bibliogr
 
 **Howto:**
 
-1. Repository auschecken oder downloaden und folgende Dateien in den Ordner `iswipads/` im eigenen Dissertationsverzeichnis kopieren:
+1. Repository auschecken oder downloaden und folgende Dateien in den Ordner `isw_smb_diss/` im eigenen Dissertationsverzeichnis kopieren:
 
     ```
-    ipa-authoryear.cbx  iswipads.cls    ipa-authoryear.bbx  iswipadsbib.sty     iswipadsgloss.sty
+    isw_smb_diss.cls  isw_smb_gloss.sty
     ```
 2. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` in den eigenen Ordner kopiert werden.
 3. Spätere Updates müssen wie in Schritt 1. erfolgen
 
 ## Struktur
 
-- `iswipads.cls` ... Klasse, die das generelle Styling festlegt und das Deckblatt generiert
-- `iswipadsbib.sty` und `ipa_authoryear.{bbx,cbx}` ... Styling für die Bibliographie und Zitieren
-- `iswipadsgloss.sty` ... Styling für Glossar und Abkürzungsverzeichnis mit dem Paket `glossaries` (falls benötigt)
+- `isw_smb_diss.cls` ... Klasse, die das generelle Styling festlegt und das Deckblatt generiert
+- `isw_smb_gloss.sty` ... Styling für Glossar und Abkürzungsverzeichnis mit dem Paket `glossaries` (falls benötigt)
 - `diss_beispiel.tex` ... Beispielgerüst für die Diss. Eine Ordnerhierarchie nach oben kopieren
 - `settings_example/*.tex` ... Beispiele von Settings-Dateien für Command definitions und TikZ-Code
 - `.gitignore` ... Gitignore-Datei für LaTeX, kann gerne auch in den eigenen Diss-Ordner übernommen werden
@@ -83,12 +79,9 @@ Basiert auf den Styles von Peter Zahn und Oliver Gerlach, der Style der Bibliogr
 ```sh
 Diss/
     Diss_Name.tex # Zu Beginn kopiert aus diss_beispiel.tex
-    iswipads/ # Git submodule
-        iswipads.cls
-        iswipadsbib.sty
-        ipa_authoryear.bbx
-        ipa_authoryear.cbx
-        iswipadsgloss.sty
+    isw_smb_diss/ # Git submodule
+        isw_smb_diss.cls
+        isw_smb_gloss.sty
     
     # optional für aufgeräumte Struktur
     settings/ # Einstell-Files
@@ -103,6 +96,6 @@ Diss/
 
 ### Wie melde ich einen Fehler?
 
-- Als [Issue aus Gitlab](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/iswipads/-/issues/new)
-- Noch besser: direkt auf einem Branch beheben und ein [Merge request](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/iswipads/-/merge_requests/new) stellen
-- Größere Änderungen am besten vorher besprechen
+- Als [Issue aus Gitlab](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/isw_smb_diss/-/issues/new)
+- Noch besser: direkt auf einem Branch beheben und ein [Merge request](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/isw_smb_diss/-/merge_requests/new) stellen
+- Für Änderungen gibt es keine Merge-Garantie, daher am besten vorher besprechen
