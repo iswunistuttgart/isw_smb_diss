@@ -6,7 +6,7 @@
 
 \documentclass[%accepted % anderes Deckblatt, wenn akzeptiert
 english, ngerman,% Sprache, die letzte ist die Hauptsprache
-]{isw_smb_diss} % Pfad zur Klasse (relativ). Erwartet die Klase im Ordner mit Ordnernamen isw_smb_diss
+]{isw_smb_diss} % Pfad zur Klasse (relativ). Wenn die Klasse in einem Ordner liegt (e.B. Git submodule), dann \documentclass[...]{isw_smb_diss/isw_smb_diss}
 
 %% Empfohlene Pakete
 \usepackage{csquotes} % für bib und gloss
@@ -148,7 +148,7 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 
 % Literatur
 \setlength{\emergencystretch}{.5em}
-\printbibliography[title={Literatur},heading=bibintoc]
+\printbibliography[heading=bibintoc]
 
 
 % % Abkürzungs/Symbolverzeichnis, wenn nötig und oben definiert
