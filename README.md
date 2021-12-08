@@ -13,18 +13,13 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
 
 ## Anleitung zum Aufsetzen meiner Dissertation 
 
+| Methode                                                            | Vorteile                                                                                                                                          | Nachteile                                                                                                                                                                          |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Weg 1: Als Git submodule](#weg-1-als-git-submodule-ohne-overleaf) | - Modular eingebunden  <br /> -  Updates einfach über git                                                                                         | Geht nicht mit Ovelreaf (Unterstützt keine git submodules)                                                                                                                         |  |
+| [Weg 2: Nur die Dateien verwenden](#weg-2-mit-overleaf))           | - Lässt sich in Overleaf nutzen <br />- Das Diss-Verzeichnis kann trotzdem in Git eingecheckt werden, nur die Verbindung zur Klasse geht verloren | Updates in der Klasse müssen von Hand heruntergeladen werden (oder über die [Github API mit curl](https://stackoverflow.com/questions/46060010/download-github-release-with-curl)) |
+
+
 ### Weg 1: Als git submodule (ohne Overleaf)
-
-**Vorteil:**
-
-- Modular eingebunden
-- Updates einfach über git
-
-**Nachteil:**
-
-- Geht nicht mit Ovelreaf (Unterstützt keine git submodules)
-
-**Howto:**
 
 1. Anlegen eines Diss-Ordners als Git-Repository
 2. Einbinden dieses Repositories als Git-Submodul
@@ -32,9 +27,9 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
     ```sh
     # git Kommandozeile
     # über https (meistens einfacher)
-    git submodule add https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/isw_smb_diss.git
+    git submodule add https://github.com/iswunistuttgart/isw_smb_diss.git
     # oder über ssh (SSH-Key muss eingerichtet sein)
-    git submodule add git@git.isw.uni-stuttgart.de:projekte/eigenentwicklungen/templates/isw_smb_diss.git
+    git submodule add git@github.com:iswunistuttgart/isw_smb_diss.git
     ```
 
 3. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` aus dem Submodul/Unterordner `isw_smb_diss` in den eigenen Ordner kopiert werden.
@@ -46,17 +41,6 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
 
 
 ### Weg 2: Mit Overleaf
-
-**Vorteil:**
-
-- Lässt sich in Overleaf nutzen
-- Das Diss-Verzeichnis kann trotzdem in Git eingecheckt werden, nur die Verbindung zur Klasse geht verloren
-
-**Nachteil:**
-
-- Updates in der Klasse müssen von Hand heruntergeladen werden (oder über [Gitlab API, z.B. mit curl](https://stackoverflow.com/questions/44730632/gitlab-api-how-to-get-the-repository-project-files-and-metadata))
-
-**Howto:**
 
 1. Repository auschecken oder downloaden und folgende Dateien in den Ordner `isw_smb_diss/` im eigenen Dissertationsverzeichnis kopieren:
 
@@ -96,6 +80,6 @@ Diss/
 
 ### Wie melde ich einen Fehler?
 
-- Als [Issue aus Gitlab](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/isw_smb_diss/-/issues/new)
-- Noch besser: direkt auf einem Branch beheben und ein [Merge request](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/isw_smb_diss/-/merge_requests/new) stellen
+- Als [Issue aus GitHub](https://github.com/iswunistuttgart/isw_smb_diss/issues/new)
+- Noch besser: direkt auf einem Branch beheben und einen [pull request](https://github.com/iswunistuttgart/isw_smb_diss/compare) stellen
 - Für Änderungen gibt es keine Merge-Garantie, daher am besten vorher besprechen
