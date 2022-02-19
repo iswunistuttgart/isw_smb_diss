@@ -8,6 +8,8 @@
 english, ngerman,% Sprache, die letzte ist die Hauptsprache
 ]{isw_smb_diss} % Pfad zur Klasse (relativ). Wenn die Klasse in einem Ordner liegt (e.B. Git submodule), dann \documentclass[...]{isw_smb_diss/isw_smb_diss}
 
+% Richtlinien für die Gestaltung der Dissertation :% Richtlinien: http://dx.doi.org/10.18419/opus-10327 (S. 25)
+
 %% Empfohlene Pakete
 \usepackage{csquotes} % für bib und gloss
 
@@ -33,6 +35,12 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 	%exponent-mode = fixed, fixed-exponent = 0, %schält mit LaTeX3e die exponentendarstelung aus
 	}
 
+% The following line should help, if you experience problems with missing hyphenation of composed words with dash 
+% (LaTeX turns off hyphenation when a dash is present in a word)
+% Source: https://tex.stackexchange.com/questions/63232/why-can-words-with-hyphen-char-not-be-hyphenated/63234#63234
+% Alternatively, explicitely hyphenate with "= (https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_Silbentrennung)
+\defaulthyphenchar=127
+
 % Nur für Demonstrationszwecke von Fließtext in der Einleitung. Kann gerne entfernt werden.
 \usepackage{blindtext}
 
@@ -51,9 +59,10 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 \title{Titel der Diss\\gerne auch mit Zeilenumbruch\\zur besseren Formatierung}
 \author{Vorname Nachname,~M.Sc.}
 \birthplace{Geburtsort}
-\examiner{Univ.-Prof.~Dr.-Ing.~Dr.~h.c.~mult.~Alexander~Verl}
-%\examiner{Univ.-Prof.~Dr.-Ing.~Oliver~Riedel}
+\examiner{Univ.-Prof.~Dr.-Ing.~Haupt~Berichter}
 \coexaminer{Univ.-Prof.~Dr.-Ing.~Mit~Berichter}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik} % Fak. 7
+% \faculty{Energie-, Verfahrens- und Biotechnik} % Fak. 4
 \institute{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
 \dateoforalexamination{42. September 2222}
 \yearofpublication{2222}
@@ -63,7 +72,7 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 %%% Akronyme und Glossar:
 % Für Glossar (Formel, Begriffsverzeichnis, Abkürzungsverzeichnis)
 % Wird nur das Abkürzungsverzeichnis verwendet, ist das packet "acronym" einfacher.
-% \usepackage{isw_smb_glossisw_smb_gloss}
+% \usepackage{isw_smb_gloss}
 
 % Akronyme (benötigt \usepackage{isw_smb_gloss/isw_smb_gloss}, siehe settings_general.tex)
 % Benutzung im Text: \ac{kgt} bzw. Kurzform \acs{kgt}
