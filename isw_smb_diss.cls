@@ -22,6 +22,7 @@
 	\renewcommand{\introstart}{Von der Fakultät}
 	\renewcommand{\introstatus}{genehmigte}
 	\renewcommand{\documentsourceintro}{vorgelegt von}
+	\renewcommand{\oralexamination}{Tag der mündlichen Prüfung: \> \@dateoforalexamination \\}
 	\renewcommand{\documentfontsize}{10pt}
 	\renewcommand{\paperformat}{a5paper}
 	\renewcommand{\basemargin}{0.7cm}
