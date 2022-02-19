@@ -10,8 +10,11 @@
 \typeout{}
 
 \ProcessOptions\relax
-\newcommand{\documentfontsize}{10pt}
+\newcommand{\documentfontsize}{14pt}
 \newcommand{\titlewidth}{1.0}
+\newcommand{\paperformat}{a4paper}
+\newcommand{\basemargin}{1cm}
+\newcommand{\basehead}{45pt}
 \newcommand{\introstart}{Der Fakultät}
 \newcommand{\introstatus}{vorgelegte}
 \newcommand{\documentsourceintro}{von}
@@ -19,18 +22,26 @@
 	\renewcommand{\introstart}{Von der Fakultät}
 	\renewcommand{\introstatus}{genehmigte}
 	\renewcommand{\documentsourceintro}{vorgelegt von}
+	\renewcommand{\documentfontsize}{10pt}
+	\renewcommand{\paperformat}{a5paper}
+	\renewcommand{\basemargin}{0.7cm}
+	\newcommand{\basehead}{32pt}
 	}
+\newlength{\lenbasemargin}
+\setlength{\lenbasemargin}{\basemargin}
 %\DeclareOption{smalltext}{\renewcommand{\documentfontsize}{12pt}\renewcommand{\titlewidth}{0.9}}
 \ProcessOptions
 \LoadClass[fontsize=\documentfontsize,
 twoside,
-a5paper,
+\paperformat,
 headings=normal,
 headsepline,
 listof=totoc,% add a tocentry for lists like LOF and LOT
 ]{scrbook} % KOMA-Script scrreprt, DIN A5, 10pt with bibliography in TOC
-\usepackage[a5paper]{geometry}
-\geometry{tmargin=2.1cm,bmargin=2.1cm,lmargin=1.4cm,rmargin=1.4cm,headheight=0.7cm,headsep=0.7cm,footskip=0.7cm,head=32pt}
+\usepackage[\paperformat]{geometry}
+\geometry{tmargin=3\lenbasemargin,bmargin=3\lenbasemargin,lmargin=2\lenbasemargin,rmargin=2\lenbasemargin,headheight=\lenbasemargin,headsep=\lenbasemargin,footskip=\lenbasemargin,head=\basehead}
+%\geometry{tmargin=2.1cm,bmargin=2.1cm,lmargin=1.4cm,rmargin=1.4cm,headheight=0.7cm,headsep=0.7cm,footskip=0.7cm,head=32pt}
+%\geometry{tmargin=3cm,bmargin=3cm,lmargin=2cm,rmargin=2cm,headheight=1cm,headsep=1cm,footskip=1cm,head=45pt}
 
 \RequirePackage{ifthen}
 \RequirePackage{ifpdf}

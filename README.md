@@ -9,6 +9,7 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
   - [Struktur](#struktur)
     - [Spätere Ordnersturkur des Diss-Ordners](#spätere-ordnersturkur-des-diss-ordners)
   - [FAQ](#faq)
+    - [Unterscheidet das Template zwischen Einreichung und Veröffentlichung beim Verlag?](#unterscheidet-das-template-zwischen-einreichung-und-veröffentlichung-beim-verlag)
     - [Wie melde ich einen Fehler?](#wie-melde-ich-einen-fehler)
 
 ## Anleitung zum Aufsetzen meiner Dissertation 
@@ -77,6 +78,30 @@ Diss/
 
 
 ## FAQ
+
+### Unterscheidet das Template zwischen Einreichung und Veröffentlichung beim Verlag?
+
+Ja, nach den [Vorgaben der Uni](http://dx.doi.org/10.18419/opus-10327) soll das Manuskript in A4-Format eingereicht werden, das Format für den Druck ist aber "in der Regel DIN A5". Für die Umschaltung in das Druckformat muss die Klassenoption `accepted` übergeben werden, also
+
+```latex
+\documentclass[accepted, english, ngerman]{isw_smb_diss/isw_smb_diss}
+```
+
+Um die Komplikationen (und den Anpassungsbedarf) der Änderung im Papierformat möglichst gering zu halten, werden Schriftgröße und Seitenränder so angepasst, dass das Format möglichst gleich bleibt. 
+
+Um Probleme bei der Umstellung zu vermeiden, sollten in Abbildugnen und Tabellen [*relative Maßeinheiten*](https://www.overleaf.com/learn/latex/Lengths_in_LaTeX) verwendet werden, z.B:
+
+```latex
+%for tables
+\begin{tabular}{p{4em} p{5em} c c}
+% ...
+\end{tabular}
+
+% graphics
+\includegraphics[width=0.8\textwidth]{path/to/my_picture}
+
+% TikZ pictures: https://tex.stackexchange.com/questions/4338/correctly-scaling-a-tikzpicture
+```
 
 ### Wie melde ich einen Fehler?
 
