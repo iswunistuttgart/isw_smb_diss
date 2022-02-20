@@ -14,7 +14,10 @@
 \newcommand{\introstart}{Der Fakult\"at}
 \newcommand{\introstatus}{vorgelegte}
 \newcommand{\documentsourceintro}{von}
-\DeclareOption{accepted}{\renewcommand{\introstart}{Von der Fakult\"at}\renewcommand{\introstatus}{genehmigte}\renewcommand{\documentsourceintro}{Vorgelegt von}}
+\newcommand{\oralexamination}{\\}
+
+
+\DeclareOption{accepted}{\renewcommand{\introstart}{Von der Fakult\"at}\renewcommand{\introstatus}{genehmigte}\renewcommand{\documentsourceintro}{Vorgelegt von}\renewcommand{\oralexamination}{Tag der mündlichen Prüfung: \> \@dateoforalexamination \\}}
 %\DeclareOption{smalltext}{\renewcommand{\documentfontsize}{12pt}\renewcommand{\titlewidth}{0.9}}
 \ProcessOptions
 \LoadClass[fontsize=\documentfontsize,
@@ -204,7 +207,7 @@ isbn=false]{biblatex}
 			\begin{tabbing}
 				Hauptberichter:\qquad\quad\qquad\qquad \=\@examiner \\
 				Mitberichter:\> \@coexaminer \\[\baselineskip]
-				Tag der mündlichen Prüfung: \> \@dateoforalexamination \\
+				\oralexamination
 			\end{tabbing}
 		\end{minipage}
 		\vskip 2\baselineskip
