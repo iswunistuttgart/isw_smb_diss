@@ -225,7 +225,7 @@ isbn=false]{biblatex}
 			\begin{tabbing}
 				Hauptberichter:\qquad\quad\qquad\qquad \=\@examiner \\
 				Mitberichter:\> \@coexaminer \\[\baselineskip]
-				Tag der mündlichen Prüfung: \> \@dateoforalexamination \\
+				\oralexamination
 			\end{tabbing}
 		\end{minipage}
 		\vskip 2\baselineskip
