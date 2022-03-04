@@ -1,6 +1,7 @@
 % basiert auf der Vorlage von O. Gerlach (2015), erweitert von C. Hinze (2020/2021)
+% Richtlinien: http://dx.doi.org/10.18419/opus-10327
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isw_smb_diss}[2021/12/01 v. 1.4 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/isw_smb_diss]
+\ProvidesClass{isw_smb_diss}[2022/92/19 v. 1.4.1 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
 \typeout{}
 \typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class }
 \typeout{}
@@ -9,26 +10,39 @@
 \typeout{}
 
 \ProcessOptions\relax
-\newcommand{\documentfontsize}{10pt}
+\newcommand{\documentfontsize}{14pt}
 \newcommand{\titlewidth}{1.0}
-\newcommand{\introstart}{Der Fakult\"at}
+\newcommand{\paperformat}{a4paper}
+\newcommand{\basemargin}{1cm}
+\newcommand{\basehead}{45pt}
+\newcommand{\introstart}{Der Fakultät}
 \newcommand{\introstatus}{vorgelegte}
 \newcommand{\documentsourceintro}{von}
-\newcommand{\oralexamination}{\\}
-
-
-\DeclareOption{accepted}{\renewcommand{\introstart}{Von der Fakult\"at}\renewcommand{\introstatus}{genehmigte}\renewcommand{\documentsourceintro}{Vorgelegt von}\renewcommand{\oralexamination}{Tag der mündlichen Prüfung: \> \@dateoforalexamination \\}}
+\DeclareOption{accepted}{
+	\renewcommand{\introstart}{Von der Fakultät}
+	\renewcommand{\introstatus}{genehmigte}
+	\renewcommand{\documentsourceintro}{vorgelegt von}
+	\renewcommand{\oralexamination}{Tag der mündlichen Prüfung: \> \@dateoforalexamination \\}
+	\renewcommand{\documentfontsize}{10pt}
+	\renewcommand{\paperformat}{a5paper}
+	\renewcommand{\basemargin}{0.7cm}
+	\newcommand{\basehead}{32pt}
+	}
+\newlength{\lenbasemargin}
+\setlength{\lenbasemargin}{\basemargin}
 %\DeclareOption{smalltext}{\renewcommand{\documentfontsize}{12pt}\renewcommand{\titlewidth}{0.9}}
 \ProcessOptions
 \LoadClass[fontsize=\documentfontsize,
 twoside,
-a5paper,
+\paperformat,
 headings=normal,
 headsepline,
 listof=totoc,% add a tocentry for lists like LOF and LOT
-]{scrbook} % KOMA-Script scrreprt, DIN A5, 14pt with bibliography in TOC
-\usepackage[a5paper]{geometry}
-\geometry{tmargin=2.1cm,bmargin=2.1cm,lmargin=1.4cm,rmargin=1.4cm,headheight=0.7cm,headsep=0.7cm,footskip=0.7cm,head=32pt}
+]{scrbook} % KOMA-Script scrreprt, DIN A5, 10pt with bibliography in TOC
+\usepackage[\paperformat]{geometry}
+\geometry{tmargin=3\lenbasemargin,bmargin=3\lenbasemargin,lmargin=2\lenbasemargin,rmargin=2\lenbasemargin,headheight=\lenbasemargin,headsep=\lenbasemargin,footskip=\lenbasemargin,head=\basehead}
+%\geometry{tmargin=2.1cm,bmargin=2.1cm,lmargin=1.4cm,rmargin=1.4cm,headheight=0.7cm,headsep=0.7cm,footskip=0.7cm,head=32pt}
+%\geometry{tmargin=3cm,bmargin=3cm,lmargin=2cm,rmargin=2cm,headheight=1cm,headsep=1cm,footskip=1cm,head=45pt}
 
 \RequirePackage{ifthen}
 \RequirePackage{ifpdf}
@@ -154,6 +168,7 @@ isbn=false]{biblatex}
 % \addtokomafont{labelinglabel}{\normalfont \bfseries}{\sffamily}
 % \addtokomafont{descriptionlabel}{\normalfont \bfseries}{\sffamily}
 
+% 
 % Titelei: Befehle (Hinweis: author & title sind schon definiert)
 \newcommand*{\@birthplace}{\ClassError{isw_smb_diss}{\string\birthplace\space missing}%
 	{You have to use \string\birthplace\space to set up the place of the author's birth.}}
@@ -166,6 +181,10 @@ isbn=false]{biblatex}
 \newcommand*{\@coexaminer}{\ClassError{isw_smb_diss}{\string\coexaminer\space missing}%
 	{You have to use \string\coexaminer\space to set up the your co-examiner,\MessageBreak e.g. `\string\coexaminer{Name of co-examiner}'.}}
 \newcommand*\coexaminer[1]{\renewcommand\@coexaminer{#1}}
+
+\newcommand*{\@faculty}{\ClassError{isw_smb_diss}{\string\institute\space missing}%
+	{You have to use \string\faculty\space to set up the your Institute,\MessageBreak e.g. `\string\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}'.}}
+\newcommand*\faculty[1]{\renewcommand\@faculty{#1}}
 
 \newcommand*{\@institute}{\ClassError{isw_smb_diss}{\string\institute\space missing}%
 	{You have to use \string\institute\space to set up the your Institute,\MessageBreak e.g. `\string\institute{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}'.}}
@@ -190,7 +209,7 @@ isbn=false]{biblatex}
 		\vfill
 		\begin{minipage}{\titlewidth\textwidth}
 			\centering
-			\introstart\ Konstruktions-, Produktions- und Fahrzeugtechnik\\
+			\introstart\ \@faculty\\
 			der  Universität Stuttgart zur Erlangung\\
 			der Würde eines Doktor-Ingenieurs (Dr.-Ing.)\\
 			\introstatus\ Abhandlung\par%

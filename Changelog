@@ -1,0 +1,8 @@
+# 1.4.1 -- 2022-02-19
+
+- Fix capitalization error on title page
+- Add support for long words hyphenation
+
+# 1.4.0 - 2021-12-01
+
+- Initial release on GitHub
