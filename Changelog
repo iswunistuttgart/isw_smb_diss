@@ -1,3 +1,7 @@
+# 1.4.2 -- 2022-03-04
+
+- [Use proper document class name](https://github.com/iswunistuttgart/isw_smb_diss/pull/5) (Thanks [@philipptempel](https://github.com/philipptempel))
+
 # 1.4.1 -- 2022-02-19
 
 - Fix capitalization error on title page
