@@ -11,6 +11,7 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
   - [FAQ](#faq)
     - [Unterscheidet das Template zwischen Einreichung und Veröffentlichung beim Verlag?](#unterscheidet-das-template-zwischen-einreichung-und-veröffentlichung-beim-verlag)
     - [Wie melde ich einen Fehler?](#wie-melde-ich-einen-fehler)
+    - [Ich bekomme eine Warnung `You have requested document class 'isw_smb_diss/isw_smb_diss', but the document class provides 'isw_smb_diss'.`](#ich-bekomme-eine-warnung-you-have-requested-document-class-isw_smb_dissisw_smb_diss-but-the-document-class-provides-isw_smb_diss)
 
 ## Anleitung zum Aufsetzen meiner Dissertation 
 
@@ -108,3 +109,9 @@ Um Probleme bei der Umstellung zu vermeiden, sollten in Abbildugnen und Tabellen
 - Als [Issue aus GitHub](https://github.com/iswunistuttgart/isw_smb_diss/issues/new)
 - Noch besser: direkt auf einem Branch beheben und einen [pull request](https://github.com/iswunistuttgart/isw_smb_diss/compare) stellen
 - Für Änderungen gibt es keine Merge-Garantie, daher am besten vorher besprechen
+
+### Ich bekomme eine Warnung `You have requested document class 'isw_smb_diss/isw_smb_diss', but the document class provides 'isw_smb_diss'.`
+
+Siehe auch [PR:  Fix wrong ProvidesClass entry #5](https://github.com/iswunistuttgart/isw_smb_diss/pull/5)
+
+Entsteht, indem die Latex-Klasse aus einem Unterordner eingebunden wird (z.B. als [Git Submodule](#weg-1-als-git-submodule-ohne-overleaf)). Die Klasse sollte trotzdem funktionieren. Die Warnung kann behoben werden, indem dieses Repository [installiert wird](https://tex.stackexchange.com/questions/10498/installing-a-class), oder der Pfad der Klasse in die Umgebungsvariable [`TEXINPUTS`](https://tex.stackexchange.com/questions/153135/how-to-store-the-documents-style-file-in-a-subdirectory/153138#153138) aufgenommen wird. (Danach `\documentclass[...]]{isw_smb_diss/isw_smb_diss}` ändern zu `\documentclass[...]]{isw_smb_diss}`)
