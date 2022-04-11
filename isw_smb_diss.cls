@@ -1,4 +1,4 @@
-% basiert auf der Vorlage von O. Gerlach (2015), erweitert von C. Hinze (2020/2021)
+% basiert auf der Vorlage von O. Gerlach (2015), erweitert von C. Hinze (2020-2022)
 % Richtlinien: http://dx.doi.org/10.18419/opus-10327
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{isw_smb_diss}[2022/03/04 v. 1.4.2 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
@@ -18,6 +18,10 @@
 \newcommand{\introstart}{Der Fakultät}
 \newcommand{\introstatus}{vorgelegte}
 \newcommand{\documentsourceintro}{von}
+\newcommand{\oralexamination}{\\}
+\newcommand{\linkcolor}{uniSblue}
+
+
 \DeclareOption{accepted}{
 	\renewcommand{\introstart}{Von der Fakultät}
 	\renewcommand{\introstatus}{genehmigte}
@@ -26,7 +30,9 @@
 	\renewcommand{\documentfontsize}{10pt}
 	\renewcommand{\paperformat}{a5paper}
 	\renewcommand{\basemargin}{0.7cm}
-	\newcommand{\basehead}{32pt}
+	\renewcommand{\basehead}{32pt}
+	\renewcommand{\linkcolor}{black}
+	\typeout{Link color: \linkcolor}
 	}
 \newlength{\lenbasemargin}
 \setlength{\lenbasemargin}{\basemargin}
@@ -38,6 +44,7 @@ twoside,
 headings=normal,
 headsepline,
 listof=totoc,% add a tocentry for lists like LOF and LOT
+toc=chapterentrywithdots,
 ]{scrbook} % KOMA-Script scrreprt, DIN A5, 10pt with bibliography in TOC
 \usepackage[\paperformat]{geometry}
 \geometry{tmargin=3\lenbasemargin,bmargin=3\lenbasemargin,lmargin=2\lenbasemargin,rmargin=2\lenbasemargin,headheight=\lenbasemargin,headsep=\lenbasemargin,footskip=\lenbasemargin,head=\basehead}
@@ -152,11 +159,6 @@ isbn=false]{biblatex}
 \setlength{\@fpsep}{\floatsep}% default is 8\p@ \@plus 2fil
 \setlength{\@fpbot}{0pt plus 1fil}% default is 0\p@ \@plus 1fil
 
-\renewcommand*{\chapterpagestyle}{scrheadings}	% sepline and running title above chapters beginning from toc
-\clearpairofpagestyles	% clear header and footer, IIRC
-\ohead[\headmark]{\headmark}
-\ofoot[\pagemark]{\pagemark}	% page numbers nearly everywhere (also below new chapters)
-
 %Schriftfamilien für Überschriften auf Schriften mit Serifen!
 % \addtokomafont{chapter}{\normalfont \bfseries}{\sffamily}
 % \addtokomafont{chapterentry}{\normalfont \bfseries}{\sffamily}
@@ -257,6 +259,5 @@ isbn=false]{biblatex}
 	pdfpagemode=UseNone,%
 	plainpages=false, bookmarksnumbered, bookmarksopen=true,% bookmarksopenlevel=1,%
 	hypertexnames=true, pdfhighlight=/O,%
-	urlcolor=uniSblue, linkcolor=uniSblue, citecolor=uniSblue,% %pagecolor=uniSblue,%
-	%urlcolor=Black, linkcolor=Black, citecolor=Black, %pagecolor=Black,%
+	urlcolor=\linkcolor, linkcolor=\linkcolor, citecolor=\linkcolor,%pagecolor=\linkcolor,%
 }
