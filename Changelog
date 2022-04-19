@@ -1,3 +1,13 @@
+# 1.4.3 -- 2022-04-19
+
+- Feedback from first published dissertation with this template:
+  - improved glossaries style
+  - set link color to black for print (with option `accepted`)
+  - Fix headline appearing on first page of toc, lof, lot, ...
+  - Syntax error in basehead fixed
+- Fix undefined date of oral examination
+
+
 # 1.4.2 -- 2022-03-04
 
 - [Use proper document class name](https://github.com/iswunistuttgart/isw_smb_diss/pull/5) (Thanks [@philipptempel](https://github.com/philipptempel))

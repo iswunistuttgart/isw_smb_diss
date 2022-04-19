@@ -1,31 +1,31 @@
-\RequirePackage{csquotes}	% recommended when working with polyglossia
-\usepackage[nonumberlist,acronym,shortcuts,toc,nopostdot,nogroupskip]{glossaries}	 % Für Abkürzungsverzeichnis und Symbolverzeichnis
-%\usepackage{glossary-mcols}
+\usepackage{csquotes}													 % recommended when working with polyglossia
+\usepackage[nonumberlist,acronym,shortcuts,toc,nopostdot,nogroupskip,xindy]{glossaries}	 % Für Abkürzungsverzeichnis und Symbolverzeichnis
+
 %\setacronymstyle{short-long}
-\newglossary[slg]{symbolslist}{syi}{syg}{Symbolverzeichnis}
+
 \glsaddkey{unit}{\glsentrytext{\glslabel}}{\glsentryunit}{\GLsentryunit}{\glsunit}{\Glsunit}{\GLSunit}
 
 % adapted from http://tex.stackexchange.com/a/161604
 \newglossarystyle{symbunitlong}{%
-	\setlength\glsdescwidth{0.65\linewidth}
-  \renewenvironment{theglossary}%
-    {\begin{longtable}{p{0.05\linewidth}lcp{\glsdescwidth}}}%
+	\renewenvironment{theglossary}%
+    {\begin{longtable}[l]{llp{0.7\linewidth}p{\glspagelistwidth}}}%
     {\end{longtable}}%
   \renewcommand*{\glossaryheader}{}%
   \renewcommand*{\glsgroupheading}[1]{}%
   \renewcommand{\glossentry}[2]{%
-		\ifglsdescsuppressed{##1}%
-			%{\medskip\newline\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}} & & }
-			{\tabularnewline\multicolumn{4}{l}{\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}}}}
-			{ & \glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}} & \glsunit{##1} & \glossentrydesc{##1}}
-			\tabularnewline
+    \glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}} &
+    \glsentryunit{##1} &
+    \glossentrydesc{##1} &
+    ##2\tabularnewline
   }%
-	\renewcommand{\subglossentry}[3]{%
-		& \glssubentryitem{##2}\glstarget{##2}{\glossentryname{##2}} & \glsunit{##2} & \glossentrydesc{##2}
-		\tabularnewline
+  \renewcommand{\subglossentry}[3]{%
+     &
+     \glssubentryitem{##2}%
+     \glsentryunit{##2} &
+     \glstarget{##2}{\strut}\glossentrydesc{##2} & ##3\tabularnewline
   }%
-	\renewcommand*{\glsgroupskip}{%
-	\ifglsnogroupskip\else & &\tabularnewline\fi}%
+  \renewcommand*{\glsgroupskip}{%
+    \ifglsnogroupskip\else & & &\tabularnewline\fi}%
 }
 
 \newglossarystyle{symbunitlonga}{%
@@ -43,4 +43,3 @@
 }
 
 \makeglossaries
-

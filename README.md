@@ -8,6 +8,7 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
     - [Weg 2: Mit Overleaf](#weg-2-mit-overleaf)
   - [Struktur](#struktur)
     - [Spätere Ordnersturkur des Diss-Ordners](#spätere-ordnersturkur-des-diss-ordners)
+  - [Roadmap](#roadmap)
   - [FAQ](#faq)
     - [Unterscheidet das Template zwischen Einreichung und Veröffentlichung beim Verlag?](#unterscheidet-das-template-zwischen-einreichung-und-veröffentlichung-beim-verlag)
     - [Wie melde ich einen Fehler?](#wie-melde-ich-einen-fehler)
@@ -78,6 +79,11 @@ Diss/
 ```
 
 
+## Roadmap
+
+- [ ] Ausbau des Templates für englischsprachige Dissertationen (Titelblatt und Dokumentation anpassen)
+- [ ] Die Glossare könnten noch etwas Zuwendung vertragen
+
 ## FAQ
 
 ### Unterscheidet das Template zwischen Einreichung und Veröffentlichung beim Verlag?
@@ -88,9 +94,11 @@ Ja, nach den [Vorgaben der Uni](http://dx.doi.org/10.18419/opus-10327) soll das 
 \documentclass[accepted, english, ngerman]{isw_smb_diss/isw_smb_diss}
 ```
 
+Diese ändert auch die Link-Farben in schwarz um die Druckkosten zu reduzieren (weniger Farbseiten).
+
 Um die Komplikationen (und den Anpassungsbedarf) der Änderung im Papierformat möglichst gering zu halten, werden Schriftgröße und Seitenränder so angepasst, dass das Format möglichst gleich bleibt. 
 
-Um Probleme bei der Umstellung zu vermeiden, sollten in Abbildugnen und Tabellen [*relative Maßeinheiten*](https://www.overleaf.com/learn/latex/Lengths_in_LaTeX) verwendet werden, z.B:
+Um Probleme bei der Umstellung zu vermeiden, sollten in Abbildungen und Tabellen [*relative Maßeinheiten*](https://www.overleaf.com/learn/latex/Lengths_in_LaTeX) verwendet werden, z.B:
 
 ```latex
 %for tables

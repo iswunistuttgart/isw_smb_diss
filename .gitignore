@@ -40,6 +40,7 @@
 *.synctex.gz(busy)
 *.tdo
 *.toc
+*.xdy
 
 # dev-specific stuff
 *.bat

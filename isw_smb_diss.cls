@@ -1,7 +1,7 @@
 % basiert auf der Vorlage von O. Gerlach (2015), erweitert von C. Hinze (2020-2022)
 % Richtlinien: http://dx.doi.org/10.18419/opus-10327
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isw_smb_diss}[2022/03/04 v. 1.4.2 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
+\ProvidesClass{isw_smb_diss}[2022/03/04 v. 1.4.3 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
 \typeout{}
 \typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class }
 \typeout{}
@@ -25,14 +25,13 @@
 \DeclareOption{accepted}{
 	\renewcommand{\introstart}{Von der Fakultät}
 	\renewcommand{\introstatus}{genehmigte}
-	\renewcommand{\documentsourceintro}{vorgelegt von}
+	\renewcommand{\documentsourceintro}{Vorgelegt von}
 	\renewcommand{\oralexamination}{Tag der mündlichen Prüfung: \> \@dateoforalexamination \\}
 	\renewcommand{\documentfontsize}{10pt}
 	\renewcommand{\paperformat}{a5paper}
 	\renewcommand{\basemargin}{0.7cm}
 	\renewcommand{\basehead}{32pt}
 	\renewcommand{\linkcolor}{black}
-	\typeout{Link color: \linkcolor}
 	}
 \newlength{\lenbasemargin}
 \setlength{\lenbasemargin}{\basemargin}

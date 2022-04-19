@@ -32,7 +32,7 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 	table-omit-exponent=true, % keine exp-Darstellung in Tabellen
 	exponent-product=\cdot,
 	output-decimal-marker={,}, % , statt . als Dezimaltrenner
-	%exponent-mode = fixed, fixed-exponent = 0, %schält mit LaTeX3e die exponentendarstelung aus
+	%exponent-mode = fixed, fixed-exponent = 0, %schaltet mit LaTeX3e die exponentendarstelung aus
 	}
 
 % The following line should help, if you experience problems with missing hyphenation of composed words with dash 
@@ -64,7 +64,7 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik} % Fak. 7
 % \faculty{Energie-, Verfahrens- und Biotechnik} % Fak. 4
 \institute{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
-\dateoforalexamination{42. September 2222}
+%\dateoforalexamination{42. September 2222}
 \yearofpublication{2222}
 
 
@@ -72,7 +72,7 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 %%% Akronyme und Glossar:
 % Für Glossar (Formel, Begriffsverzeichnis, Abkürzungsverzeichnis)
 % Wird nur das Abkürzungsverzeichnis verwendet, ist das packet "acronym" einfacher.
-% \usepackage{isw_smb_gloss}
+%\usepackage{isw_smb_gloss}
 
 % Akronyme (benötigt \usepackage{isw_smb_gloss/isw_smb_gloss}, siehe settings_general.tex)
 % Benutzung im Text: \ac{kgt} bzw. Kurzform \acs{kgt}
@@ -81,22 +81,17 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 %\newacronym{AD}{AD}{Active Directory\protect\glsadd{glos:AD}}
 
 % Formelzeichen, auch hier wird \usepackage{isw_smb_gloss} benötigt
-
 % \newglossaryentry{symb:e}{
-% 	type=symbolslist,
-% 	parent=latinbigletters,
 % 	name={\ensuremath{e}},
 % 	sort=e,
 % 	unit={\si{m}},
 % 	description={Schleppfehler}}
 %\newglossaryentry{symb:tau_G}{
-%	type=symbolslist,
-%	parent=latinbigletters,
 %	name={\ensuremath{\tau_G}},
 %	sort=tauG,
 %	unit={\ensuremath{\unit{Nm}}},
 %	description={Drehmoment auf der Getriebeabtriebseite}}
-%
+
 
 \begin{document}
 
@@ -113,7 +108,7 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 
 
 % Beispiel für referenzieren eines Glossar-Eintrags
-%\gls{symb:e}~\gls{symb:F_0}
+%\gls{symb:e}~\gls{symb:tau_G}
 
 % Beispiel für referenzieren eines Akronyms
 %\ac{ISW}
@@ -152,7 +147,7 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 \section{Diskussion}
 \section{Ausblick}
 
-% TODO: nocite gibt alle Einträfer der Bibliographie aus. Dies dient nur zu Testzwecken und sollte entfernt werden
+% TODO: nocite gibt alle Einträge der Bibliographie aus. Dies dient nur zu Testzwecken und sollte entfernt werden
 \nocite{*}
 
 % Literatur
@@ -161,10 +156,10 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 
 
 % % Abkürzungs/Symbolverzeichnis, wenn nötig und oben definiert
-% \cleardoublepage
-% \printglossary[type=\acronymtype]
-% \cleardoublepage
-% \printglossary[type=symbolslist, style = symbunitlong, title=Symbolverzeichnis]
+%\cleardoublepage
+%\printglossary[type=\acronymtype]
+%\cleardoublepage
+%\printglossary[style = symbunitlong, title=Symbolverzeichnis]
 
 
 \cleardoublepage
