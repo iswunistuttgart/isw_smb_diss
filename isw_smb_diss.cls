@@ -1,7 +1,7 @@
 % basiert auf der Vorlage von O. Gerlach (2015), erweitert von C. Hinze (2020-2022)
 % Richtlinien: http://dx.doi.org/10.18419/opus-10327
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isw_smb_diss}[2022/03/04 v. 1.4.3 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
+\ProvidesClass{isw_smb_diss}[2022/06/13 v. 1.4.4 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
 \typeout{}
 \typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class }
 \typeout{}
@@ -21,6 +21,9 @@
 \newcommand{\oralexamination}{\\}
 \newcommand{\linkcolor}{uniSblue}
 
+\DeclareOption{smallfont}{
+	\renewcommand{\documentfontsize}{12pt}
+}
 
 \DeclareOption{accepted}{
 	\renewcommand{\introstart}{Von der Fakultät}
@@ -33,10 +36,11 @@
 	\renewcommand{\basehead}{32pt}
 	\renewcommand{\linkcolor}{black}
 	}
+
 \newlength{\lenbasemargin}
 \setlength{\lenbasemargin}{\basemargin}
 %\DeclareOption{smalltext}{\renewcommand{\documentfontsize}{12pt}\renewcommand{\titlewidth}{0.9}}
-\ProcessOptions
+\ProcessOptions\relax
 \LoadClass[fontsize=\documentfontsize,
 twoside,
 \paperformat,
@@ -126,7 +130,8 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 % Bibliography
 \RequirePackage{xpatch}
 
-\RequirePackage[style=ieee, %style=alphabetic
+\RequirePackage[style=numeric, %style=alphabetic
+sorting=none, % numbers are given based on citation order
 giveninits=true,
 uniquelist=false,
 backend=biber,
