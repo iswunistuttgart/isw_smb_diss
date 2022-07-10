@@ -1,7 +1,7 @@
 % basiert auf der Vorlage von O. Gerlach (2015), erweitert von C. Hinze (2020-2022)
 % Richtlinien: http://dx.doi.org/10.18419/opus-10327
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isw_smb_diss}[2022/06/13 v. 1.4.4 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
+\ProvidesClass{isw_smb_diss}[2022/07/10 v. 1.4.5 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
 \typeout{}
 \typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class }
 \typeout{}
@@ -131,7 +131,8 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \RequirePackage{xpatch}
 
 \RequirePackage[style=numeric, %style=alphabetic
-sorting=none, % numbers are given based on citation order
+sorting=none,
+maxcitenames=2,
 giveninits=true,
 uniquelist=false,
 backend=biber,
