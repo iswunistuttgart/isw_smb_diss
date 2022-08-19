@@ -15,6 +15,7 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 
 
 \usepackage{amsmath, amssymb, bm} % Mathe-Befehle
+\numberwithin{equation}{chapter} %ensure that equations enumeration starts at 1 for every chapter
 
 \usepackage{breakurl} %break links in bibliography
 
@@ -130,10 +131,15 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 \chapter{Einleitung}
 
 \Blindtext
+\section{Equations}
+This is how to write equations
+\begin{align}
+	\bm{A}\bm{x} = \bm{b}
+	\label{eq:Equation1}
+\end{align}
 
 \section{Forschungsfrage und Problembeschreibung}
 \section{Beitrag dieser Arbeit}
-
 
 \chapter{Stand der Forschung und Technik}
 \section{Zusammenfassende Bewertung des Stands der Technik}
