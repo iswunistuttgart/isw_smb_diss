@@ -41,16 +41,31 @@
 \setlength{\lenbasemargin}{\basemargin}
 %\DeclareOption{smalltext}{\renewcommand{\documentfontsize}{12pt}\renewcommand{\titlewidth}{0.9}}
 \ProcessOptions\relax
-\LoadClass[fontsize=\documentfontsize,
-twoside,
-\paperformat,
-headings=normal,
-headsepline,
-listof=totoc,% add a tocentry for lists like LOF and LOT
-toc=chapterentrywithdots,
+\LoadClass[%
+	fontsize=\documentfontsize,
+	twoside,
+	\paperformat,
+	headings=normal,
+	headsepline,
+	listof=totoc,% add a tocentry for lists like LOF and LOT
+	toc=chapterentrywithdots,
+	usegeometry,%
+	% DIV=current,%
 ]{scrbook} % KOMA-Script scrreprt, DIN A5, 10pt with bibliography in TOC
 \usepackage[\paperformat]{geometry}
-\geometry{tmargin=3\lenbasemargin,bmargin=3\lenbasemargin,lmargin=2\lenbasemargin,rmargin=2\lenbasemargin,headheight=\lenbasemargin,headsep=\lenbasemargin,footskip=\lenbasemargin,head=\basehead}
+\geometry{%
+	pass,%
+}
+\newgeometry{%
+	tmargin=3\lenbasemargin,%
+	bmargin=3\lenbasemargin,%
+	lmargin=2\lenbasemargin,%
+	rmargin=2\lenbasemargin,%
+	headheight=\lenbasemargin,%
+	headsep=\lenbasemargin,%
+	footskip=\lenbasemargin,%
+	head=\basehead,%
+}% 
 %\geometry{tmargin=2.1cm,bmargin=2.1cm,lmargin=1.4cm,rmargin=1.4cm,headheight=0.7cm,headsep=0.7cm,footskip=0.7cm,head=32pt}
 %\geometry{tmargin=3cm,bmargin=3cm,lmargin=2cm,rmargin=2cm,headheight=1cm,headsep=1cm,footskip=1cm,head=45pt}
 
