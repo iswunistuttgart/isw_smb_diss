@@ -3,7 +3,7 @@
 
 \usepackage{tikz, pgfplots}
 
-\usetikzlibrary{backgrounds, calc,fit, positioning, patterns, decorations.pathmorphing, decorations.markings, shapes, shapes.geometric, shapes.callouts, arrows.meta, shadings, trees, chains, 3d, shadows}
+\usetikzlibrary{backgrounds, calc, fit, positioning, patterns, decorations.pathmorphing, decorations.markings, shapes, shapes.geometric, shapes.callouts, arrows.meta, shadings, trees, chains, 3d, shadows}
 
 \tikzset{>={Latex[width=2mm,length=2mm]}, font=\footnotesize}
 \tikzset{math3d/.style= {x={(1cm, 0cm)}, y={(.353cm,.353cm)}, z={(0cm,1cm)}}}
@@ -19,17 +19,21 @@
 	every axis/.append style={font=\footnotesize}, 
 	%every node/.append style={font=\footnotesize}, 
 }
+% Switch to toggle tikz externalize. This caches tikz images so they are not compiled every time. Leads to speedup in compilation.
+% See https://tikz.dev/library-external, on Overleaf see also https://www.overleaf.com/learn/latex/Questions/I_have_a_lot_of_tikz%2C_matlab2tikz_or_pgfplots_figures%2C_so_I%27m_getting_a_compilation_timeout._Can_I_externalise_my_figures%3F
+\newif\ifexportfigures
+\exportfiguresfalse
+%\exportfigurestrue
 
-\newcommand{\inputtikz}[1]{%
-	\ifexportfigures
-	\tikzexternalenable
-	\tikzsetnextfilename{#1}%
-	\fi
-	\input{figures/#1.tex}%
-	\ifexportfigures
-	\tikzexternaldisable
-	\fi
-}
+\ifexportfigures
+\usetikzlibrary{external}
+%\tikzset{external/only named=true} %https://tex.stackexchange.com/questions/14566/tikzexternalize-only-or-not-for-flagged-graphics
+\tikzexternalize[prefix=figures/tikz/, % activate and define figures/tikz as cache folder (this folder must exist before compilation, add it by hand!)
+] 
+\tikzset{external/only named=true} % only externalize when \tikzsetnextfilename was set
+%	\tikzset{external/force remake}%uncomment to force remake of all figures
+\fi 
+
 
 \newcommand{\AxisRotator}[1][rotate=0]{% https://tex.stackexchange.com/a/36607
 	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%

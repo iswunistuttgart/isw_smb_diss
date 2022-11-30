@@ -161,35 +161,6 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 
 \RequirePackage[pdfusetitle]{hyperref}
 
-% Bibliography
-\RequirePackage{xpatch}
-
-%TODO: move bibliography outside of class, as different institutes prefer different styles:
-\RequirePackage[style=numeric, %style=alphabetic
-sorting=none,
-maxcitenames=2,
-maxbibnames=99,
-giveninits=true,
-uniquelist=false,
-backend=biber,
-natbib=true,
-bibwarn=true,
-sortcites=true, % sort citations when multiple are cited, e.g. \cite{A,B,C} -> [1,2,3] instead of [3,1,2]
-isbn=true]{biblatex}
-
-% print url only if no doi is present, credits to samcarter_is_at_topanswers.xyz on https://tex.stackexchange.com/a/424775
-\renewbibmacro*{doi+eprint+url}{%
-	\printfield{doi}%
-	\newunit\newblock%
-	\iftoggle{bbx:eprint}{%
-		\usebibmacro{eprint}%
-	}{}%
-	\newunit\newblock%
-	\iffieldundef{doi}{%
-		\usebibmacro{url+urldate}}%
-	{}%
-}
-
 % Colors (for links, ...)
 \RequirePackage[dvipsnames]{xcolor}
 \definecolor{uniSblue}{RGB}{0,65,145}
