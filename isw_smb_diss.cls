@@ -279,6 +279,7 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \hypersetup{%
 	%draft, % hyperref's draft mode, for printing see below
 	%hidelinks, % hides linkcolor -> all links become black
+	linktocpage=true,
 	colorlinks=true, linktocpage=true, pdfstartpage=3,% pdfstartview=FitV,%
 	% uncomment the following line if you want to have black links (e.g., for printing)
 	%colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
