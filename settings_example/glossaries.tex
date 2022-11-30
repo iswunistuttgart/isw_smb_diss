@@ -1,0 +1,76 @@
+
+\RequirePackage{shellesc}
+
+\usepackage[toc=true, % add glossaries to toc
+acronyms, % we use it for acronyms
+shortcuts=ac, % use acronyms with \ac{} shortcuts
+symbols, % use it for table of symbols
+nogroupskip,
+nomain, % there is no "main" glossary
+nonumberlist, %suppress page numbers where the acronym is used in list of acronyms
+automake % so we won't need to call glossaries by hand
+]{glossaries-extra}
+%\renewcommand*{\glstextformat}[1]{\textcolor{uniSgreen!50!black}{#1}}
+%\renewcommand*{\glstextformat}[1]{\textcolor{black}{#1}} % just color glossary links them black
+
+%\usepackage{glossary-longbooktabs} % long-booktabs styles: https://www.dickimaw-books.com/gallery/glossaries-styles/#longbooktabs
+
+
+% acronym style is: Long Forms (short)
+% define acronyms before \begin{document} with 
+%	\newacronym{ABSC}{ABSC}{Adaptive Backstepping Controller}
+%
+% and use them with 
+% - \ac{ABSC} ... LaTeX uses long form first with introduciton of short form, then short form only
+% - \acs{ABSC} ... explicitly use short form
+% - \acl{ABSC} ... explicitly use long form
+% - \ac{ABSC}["=Gerät] ... compose hyphenated form with suffix
+% - \glsresetall to reset all acronyms and introduce them again
+%
+% but also allows German composed words with \ac{EoL}["=Prüfung] => End-of-Line-Prüfung
+\setabbreviationstyle[acronym]{long-hyphen-short-hyphen} % requires glossaries-extra package, otherwise use style long-short
+
+% additionally needed to also replace spaces by hyphens in long form
+\glssetcategoryattribute{\acronymtype}{markwords}{true}
+
+% for more flexibility we define our own style here (based on longtable)
+% Define glossary entries (before \begin{document}) with: \glsxtrnewsymbol[description={Tischposition},symbol={\si{m}}]{xT}{\ensuremath{x_T}}
+% Refer to them in document with \gls{xT}
+\newglossarystyle{symbunitlong}{%
+	\renewenvironment{theglossary}%
+	{\begin{longtable}{@{}lcp{0.6\textwidth}@{}}}%
+		{\end{longtable}}%
+	\renewcommand*{\glossaryheader}{%
+		\toprule
+		\bfseries Symbol & \bfseries Einheit & \bfseries Beschreibung \tabularnewline \midrule\endhead
+		\bottomrule\endfoot}%
+	\renewcommand{\glossentry}[2]{%
+		\glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}} &
+		\glossentrysymbol{##1} &
+		\glossentrydesc{##1}\\%
+	}%
+	\ifglsnogroupskip
+	\renewcommand*{\glsgroupskip}{}%
+	\else
+	\renewcommand*{\glsgroupskip}{ & & & \tabularnewline}%
+	\fi
+}
+
+\newglossarystyle{alttreetwocols}{%
+	\glossarystyle{alttree}%
+	\BeforeBeginEnvironment{theglossary}{\begin{multicols}{2}}%
+	\AfterEndEnvironment{theglossary}{\end{multicols}}%
+	}
+
+\makeglossaries
+
+%automatically label glossaries:
+\renewcommand*{\glossarypreamble}{%
+	\label{glo:\currentglossary}%
+}
+
+% fix automake glossaries with lualatex: https://tex.stackexchange.com/a/468820
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\@gls@automake{\write18}{\DelayedShellEscape}{}{\fail}
+\makeatother

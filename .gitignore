@@ -33,6 +33,8 @@
 *.out
 *.run.xml
 *.slg
+*.slo
+*.sls
 *.syg
 *.syi
 *.snm

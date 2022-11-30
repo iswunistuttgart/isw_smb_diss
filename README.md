@@ -2,17 +2,20 @@
 
 LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB).
 
-- [isw_smb_diss](#isw_smb_diss)
+- [isw\_smb\_diss](#isw_smb_diss)
   - [Anleitung zum Aufsetzen meiner Dissertation](#anleitung-zum-aufsetzen-meiner-dissertation)
     - [Weg 1: Als git submodule (ohne Overleaf)](#weg-1-als-git-submodule-ohne-overleaf)
     - [Weg 2: Mit Overleaf](#weg-2-mit-overleaf)
   - [Struktur](#struktur)
     - [Spätere Ordnersturkur des Diss-Ordners](#spätere-ordnersturkur-des-diss-ordners)
+    - [Optionen zum Konfigurieren der Klasse `isw_smb>_diss.cls`](#optionen-zum-konfigurieren-der-klasse-isw_smb_disscls)
   - [Roadmap](#roadmap)
   - [FAQ](#faq)
     - [Unterscheidet das Template zwischen Einreichung und Veröffentlichung beim Verlag?](#unterscheidet-das-template-zwischen-einreichung-und-veröffentlichung-beim-verlag)
     - [Wie melde ich einen Fehler?](#wie-melde-ich-einen-fehler)
     - [Ich bekomme eine Warnung `You have requested document class 'isw_smb_diss/isw_smb_diss', but the document class provides 'isw_smb_diss'.`](#ich-bekomme-eine-warnung-you-have-requested-document-class-isw_smb_dissisw_smb_diss-but-the-document-class-provides-isw_smb_diss)
+    - [Nach Update auf Version \>1.5.0 kompiliert mein Dokument nicht mehr](#nach-update-auf-version-150-kompiliert-mein-dokument-nicht-mehr)
+
 
 ## Anleitung zum Aufsetzen meiner Dissertation 
 
@@ -78,11 +81,25 @@ Diss/
     bibliography/ # bib-Datei (git submodule)
 ```
 
+### Optionen zum Konfigurieren der Klasse `isw_smb>_diss.cls`
+
+1. `smallfont` ... kleinere Schrift: 12pt auf A4, 8pt auf A5
+2. `onside|twoside`  ... einseitiger/doppelseitiger Druck.  `oneside` ist für das Drucken des Manuskripts gedacht und nimmt an, dass alle Seiten rechte Seiten sind (Kopf und Seitenzahlen immer rechts). Die finale Veröffentlichung mit dem Verlag sollte mit `twoside` erfolgen.
+
+Beispiel für Einbinden der Klasse:
+
+```
+\documentclass[
+  english, ngerman, % Sprache, die letzte ist die Hauptsprache
+  %smallfont, % kleinere Schrift
+  twoside % oneside % ein-/doppelseitiger Druck
+]{isw_smb_diss}
+
+```
 
 ## Roadmap
 
 - [ ] Ausbau des Templates für englischsprachige Dissertationen (Titelblatt und Dokumentation anpassen)
-- [ ] Die Glossare könnten noch etwas Zuwendung vertragen
 
 ## FAQ
 
@@ -123,3 +140,37 @@ Um Probleme bei der Umstellung zu vermeiden, sollten in Abbildungen und Tabellen
 Siehe auch [PR:  Fix wrong ProvidesClass entry #5](https://github.com/iswunistuttgart/isw_smb_diss/pull/5)
 
 Entsteht, indem die Latex-Klasse aus einem Unterordner eingebunden wird (z.B. als [Git Submodule](#weg-1-als-git-submodule-ohne-overleaf)). Die Klasse sollte trotzdem funktionieren. Die Warnung kann behoben werden, indem dieses Repository [installiert wird](https://tex.stackexchange.com/questions/10498/installing-a-class), oder der Pfad der Klasse in die Umgebungsvariable [`TEXINPUTS`](https://tex.stackexchange.com/questions/153135/how-to-store-the-documents-style-file-in-a-subdirectory/153138#153138) aufgenommen wird. (Danach `\documentclass[...]]{isw_smb_diss/isw_smb_diss}` ändern zu `\documentclass[...]]{isw_smb_diss}`)
+
+### Nach Update auf Version >1.5.0 kompiliert mein Dokument nicht mehr
+
+Fehlermeldung z.B. `Undefined control sequence. \addbibresource` oder `Undefined control sequence. \printbibliography`.
+
+Zu Version 1.5.0 wurde der Style der Bibliographie von der Klasse getrennt. Dies ermöglicht, institutseigene Zitierstile zu verwenden, ohne die Klasse ändern zu müssen.
+
+Definieren Sie zum Beheben des Fehlers den Zitierstil in Ihrer Präambel (vor `\begin{document}`), z.B.:
+
+```tex
+\usepackage[style=numeric, % see https://www.overleaf.com/learn/latex/Biblatex_citation_styles for a list of predefined styles
+sorting=none,
+maxcitenames=2,
+maxbibnames=99,
+giveninits=true,
+uniquelist=false,
+backend=biber,
+bibwarn=true,
+sortcites=true, % sort citations when multiple are cited, e.g. \cite{A,B,C} -> [1,2,3] instead of [3,1,2]
+isbn=true]{biblatex}
+
+% Optional Hack: print url only if no doi is present, credits to samcarter_is_at_topanswers.xyz on https://tex.stackexchange.com/a/424775
+\renewbibmacro*{doi+eprint+url}{%
+	\printfield{doi}%
+	\newunit\newblock%
+	\iftoggle{bbx:eprint}{%
+		\usebibmacro{eprint}%
+	}{}%
+	\newunit\newblock%
+	\iffieldundef{doi}{%
+		\usebibmacro{url+urldate}}%
+	{}%
+}
+```

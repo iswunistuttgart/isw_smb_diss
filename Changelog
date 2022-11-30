@@ -1,3 +1,13 @@
+# 1.5.0 -- 2022-11-30
+
+- Moved bibliography definition to `diss_beispiel.tex` ([Bugfix, if you started with v<1.5](https://github.com/iswunistuttgart/isw_smb_diss/blob/master/README.md#nach-update-auf-version-150-kompiliert-mein-dokument-nicht-mehr))
+- Worked on title page (now has english title as required by faculty 7)
+- class now has a `smallfont` option for more space (12 pt in A4/manuscript)
+- class now has a `oneside` option for onesided print of the manuscript
+- Fixed figure/table numbers in appendix
+- Improved glossaries style to work with german hyphenation, better formatting
+  
+
 # 1.4.3 -- 2022-04-19
 
 - Feedback from first published dissertation with this template:

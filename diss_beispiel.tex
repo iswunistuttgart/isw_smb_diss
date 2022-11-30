@@ -4,14 +4,56 @@
 % !BIB program = biblatex
 %% Die Magic comments oben werden von manchen Editoren (besonders TexStudio) genutzt, um die Richtige Engine zum kompilieren auszuwählen, etc.
 
-\documentclass[%accepted % anderes Deckblatt, wenn akzeptiert
+\documentclass[%accepted, % anderes Deckblatt, wenn akzeptiert
 english, ngerman,% Sprache, die letzte ist die Hauptsprache
-]{isw_smb_diss} % Pfad zur Klasse (relativ). Wenn die Klasse in einem Ordner liegt (e.B. Git submodule), dann \documentclass[...]{isw_smb_diss/isw_smb_diss}
+%smallfont, % if you wish a smaller font. This is 12pt for the manuscript, 
+twoside, % one of {oneside, twoside} -> onesided or twosided layout. for twosided print choose twoside
+]{isw_smb_diss} % Pfad zur Klasse (relativ). Wenn die Klasse in einem Ordner liegt (z.B. Git submodule), dann \documentclass[...]{isw_smb_diss/isw_smb_diss}
 
 % Richtlinien für die Gestaltung der Dissertation :% Richtlinien: http://dx.doi.org/10.18419/opus-10327 (S. 25)
 
+% Einzelne Zeilen auf nächster/vorheriger Seite unterdrücken:
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
 %% Empfohlene Pakete
+
+\usepackage{shellesc} % shell escape alternative: more flexible than --shell-escape flag
+					  % für glossaries-extra, tikz external package
+
+% use this to debug where borders are hurt:
+%\usepackage{showframe}
+
 \usepackage{csquotes} % für bib und gloss
+\usepackage{xpatch}
+
+% Wenn Ihr Institut eigene Anforderungen an den Zitationsstil hat, hönnen Sie diesen hier konfigurieren:
+\usepackage[style=numeric, % see https://www.overleaf.com/learn/latex/Biblatex_citation_styles for a list of predefined styles
+sorting=none,
+maxcitenames=2,
+maxbibnames=99,
+giveninits=true,
+uniquelist=false,
+backend=biber,
+natbib=true,
+bibwarn=true,
+sortcites=true, % sort citations when multiple are cited, e.g. \cite{A,B,C} -> [1,2,3] instead of [3,1,2]
+isbn=true]{biblatex}
+
+% Hack: print url only if no doi is present, credits to samcarter_is_at_topanswers.xyz on https://tex.stackexchange.com/a/424775
+\renewbibmacro*{doi+eprint+url}{%
+	\printfield{doi}%
+	\newunit\newblock%
+	\iftoggle{bbx:eprint}{%
+		\usebibmacro{eprint}%
+	}{}%
+	\newunit\newblock%
+	\iffieldundef{doi}{%
+		\usebibmacro{url+urldate}}%
+	{}%
+}
+
 
 
 \usepackage{amsmath, amssymb, bm} % Mathe-Befehle
@@ -58,40 +100,38 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 
 
 \title{Titel der Diss\\gerne auch mit Zeilenumbruch\\zur besseren Formatierung}
+
+% English title: set proper title case: https://titlecaseconverter.com/
+\subtitle{English Thesis Title With Line Breaks\\for Better Formatting} % Nur, wenn die Arbeit auf Deutsch ist, sonst weglassen
+
 \author{Vorname Nachname,~M.Sc.}
 \birthplace{Geburtsort}
+
 \examiner{Univ.-Prof.~Dr.-Ing.~Haupt~Berichter}
 \coexaminer{Univ.-Prof.~Dr.-Ing.~Mit~Berichter}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik} % Fak. 7
 % \faculty{Energie-, Verfahrens- und Biotechnik} % Fak. 4
 \institute{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
-%\dateoforalexamination{42. September 2222}
-\yearofpublication{2222}
+\dateoforalexamination{1. Januar 2024}
+\yearofpublication{2024}
 
-
+% Manuelle Silbentrennung für Wörter, die babel nicht kennt. 
+% Mehr Informationen zu Silbentrennung in Deutsch mit LaTeX: https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_Silbentrennung
+\hyphenation{Dis-am-bi-gu-ie-rung, Sil-ben-trenn-ung}
 
 %%% Akronyme und Glossar:
 % Für Glossar (Formel, Begriffsverzeichnis, Abkürzungsverzeichnis)
 % Wird nur das Abkürzungsverzeichnis verwendet, ist das packet "acronym" einfacher.
-%\usepackage{isw_smb_gloss}
+%\input{settings_example/glossaries}
 
-% Akronyme (benötigt \usepackage{isw_smb_gloss/isw_smb_gloss}, siehe settings_general.tex)
+% Akronyme (benötigt \input{settings/glossaries})
 % Benutzung im Text: \ac{kgt} bzw. Kurzform \acs{kgt}
 %\newacronym{ISW}{ISW}{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
-%Eine Abkürzung mit Glossareintrag
-%\newacronym{AD}{AD}{Active Directory\protect\glsadd{glos:AD}}
+%\newacronym{FE}{FE}{Finite Elemente}
 
-% Formelzeichen, auch hier wird \usepackage{isw_smb_gloss} benötigt
-% \newglossaryentry{symb:e}{
-% 	name={\ensuremath{e}},
-% 	sort=e,
-% 	unit={\si{m}},
-% 	description={Schleppfehler}}
-%\newglossaryentry{symb:tau_G}{
-%	name={\ensuremath{\tau_G}},
-%	sort=tauG,
-%	unit={\ensuremath{\unit{Nm}}},
-%	description={Drehmoment auf der Getriebeabtriebseite}}
+% Formelzeichen, auch hier wird \input{settings/glossaries} benötigt, Verwendung im Text: \gls{Q}
+%\glsxtrnewsymbol[description={Kovarianz des Systemrauschens des Kalmanfilters}]{Q}{\ensuremath{\bm Q}}
+%\glsxtrnewsymbol[description={Kovarianz des Messrauschens des Kalmanfilters}]{R}{\ensuremath{R}}
 
 
 \begin{document}
@@ -109,11 +149,14 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 
 
 % Beispiel für referenzieren eines Glossar-Eintrags
-%\gls{symb:e}~\gls{symb:tau_G}
+%Matrizen \gls{Q} und \gls{R}
+% auch in Gleichungen: $\gls{Q}$
 
-% Beispiel für referenzieren eines Akronyms
-%\ac{ISW}
+% Beispiel fürs Referenzieren eines Akronyms
+%\ac{ISW}.
+%Automatische Bindestriche bei zusammengesetzten Akronymen: \ac{FE}[-Modelle]
 
+\cleardoublepage
 \addchap{Kurzfassung/Abstract}
 
 
@@ -123,6 +166,22 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
     \pdfbookmark[0]{Inhaltsverzeichnis}{toc}
 \fi
 \tableofcontents
+
+% % Abkürzungs/Symbolverzeichnis, wenn nötig und oben definiert
+%\cleardoublepage
+%reference with label \ref{glo:acronyms}
+%\addchap{Abkürzungsverzeichnis}
+%\glssetwidest{ABSMC} % Name der längsten Abkürzung zum Einrücken des Abkürzungsverzeichnisses
+%\printglossary[type=\acronymtype, style=alttree, title={Abkürzungsverzeichnis}]
+%\cleardoublepage
+%\printglossary[type=symbols,style={symbunitlong}, title={Symbolverzeichnis}]
+
+
+\cleardoublepage
+\listoffigures
+
+\cleardoublepage
+\listoftables
 
 \mainmatter % Hauptteil, let's go!
             % - Kapitel in .tex-Datei packen und per \input{...} einbinden
@@ -161,22 +220,15 @@ This is how to write equations
 \printbibliography[heading=bibintoc]
 
 
-% % Abkürzungs/Symbolverzeichnis, wenn nötig und oben definiert
-%\cleardoublepage
-%\printglossary[type=\acronymtype]
-%\cleardoublepage
-%\printglossary[style = symbunitlong, title=Symbolverzeichnis]
 
-
-\cleardoublepage
-\listoffigures
-
-\cleardoublepage
-\listoftables
 
 
 % Anhang, wenn benötigt:
 %\renewcommand{\thesection}{\Alph{section}}
+%\counterwithin{figure}{section}
+%\counterwithin{table}{section}
+%\renewcommand\thefigure{\thesection\arabic{figure}}
+%\renewcommand\thetable{\thesection\arabic{table}}
 %\appendix
 %\addchap{Anhang}
 
