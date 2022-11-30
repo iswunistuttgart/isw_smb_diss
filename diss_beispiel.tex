@@ -4,9 +4,11 @@
 % !BIB program = biblatex
 %% Die Magic comments oben werden von manchen Editoren (besonders TexStudio) genutzt, um die Richtige Engine zum kompilieren auszuwählen, etc.
 
-\documentclass[%accepted % anderes Deckblatt, wenn akzeptiert
+\documentclass[accepted, % anderes Deckblatt, wenn akzeptiert
 english, ngerman,% Sprache, die letzte ist die Hauptsprache
-]{isw_smb_diss} % Pfad zur Klasse (relativ). Wenn die Klasse in einem Ordner liegt (e.B. Git submodule), dann \documentclass[...]{isw_smb_diss/isw_smb_diss}
+%smallfont, % if you wish a smaller font. This is 12pt for the manuscript, 
+twoside, % one of {oneside, twoside} -> onesided or twosided layout. for twosided print choose twoside
+]{isw_smb_diss} % Pfad zur Klasse (relativ). Wenn die Klasse in einem Ordner liegt (z.B. Git submodule), dann \documentclass[...]{isw_smb_diss/isw_smb_diss}
 
 % Richtlinien für die Gestaltung der Dissertation :% Richtlinien: http://dx.doi.org/10.18419/opus-10327 (S. 25)
 
@@ -58,15 +60,20 @@ english, ngerman,% Sprache, die letzte ist die Hauptsprache
 
 
 \title{Titel der Diss\\gerne auch mit Zeilenumbruch\\zur besseren Formatierung}
+
+% English title: set proper title case: https://titlecaseconverter.com/
+\subtitle{English Thesis Title With Line Breaks\\for Better Formatting} % Nur, wenn die Arbeit auf Deutsch ist, sonst weglassen
+
 \author{Vorname Nachname,~M.Sc.}
 \birthplace{Geburtsort}
+
 \examiner{Univ.-Prof.~Dr.-Ing.~Haupt~Berichter}
 \coexaminer{Univ.-Prof.~Dr.-Ing.~Mit~Berichter}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik} % Fak. 7
 % \faculty{Energie-, Verfahrens- und Biotechnik} % Fak. 4
 \institute{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
-%\dateoforalexamination{42. September 2222}
-\yearofpublication{2222}
+\dateoforalexamination{1. Januar 2024}
+\yearofpublication{2024}
 
 
 

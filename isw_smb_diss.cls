@@ -12,13 +12,14 @@
 \ProcessOptions\relax
 \newcommand{\documentfontsize}{14pt}
 \newcommand{\titlewidth}{1.0}
-\newcommand{\paperformat}{a4paper}
+\newcommand{\paperformatScr}{a4}
+\newcommand{\paperformatGeom}{a4paper}
 \newcommand{\basemargin}{1cm}
 \newcommand{\basehead}{45pt}
 \newcommand{\introstart}{Der Fakultät}
 \newcommand{\introstatus}{vorgelegte}
 \newcommand{\documentsourceintro}{von}
-\newcommand{\oralexamination}{\\}
+\newcommand{\oralexamination}{Tag der mündlichen Prüfung: \>\\}
 \newcommand{\linkcolor}{uniSblue}
 
 \DeclareOption{smallfont}{
@@ -31,28 +32,37 @@
 	\renewcommand{\documentsourceintro}{Vorgelegt von}
 	\renewcommand{\oralexamination}{Tag der mündlichen Prüfung: \> \@dateoforalexamination \\}
 	\renewcommand{\documentfontsize}{10pt}
-	\renewcommand{\paperformat}{a5paper}
+	\renewcommand{\paperformatScr}{a5}
+	\renewcommand{\paperformatGeom}{a5paper}
 	\renewcommand{\basemargin}{0.7cm}
 	\renewcommand{\basehead}{32pt}
 	\renewcommand{\linkcolor}{black}
+	
+	\DeclareOption{smallfont}{
+		\renewcommand{\documentfontsize}{8pt}% 8.5 would be closer, but is not supported. Scale a little smaller to avoid overflowing floating environments.
 	}
+	}
+
 
 \newlength{\lenbasemargin}
 \setlength{\lenbasemargin}{\basemargin}
 %\DeclareOption{smalltext}{\renewcommand{\documentfontsize}{12pt}\renewcommand{\titlewidth}{0.9}}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 \ProcessOptions\relax
+\PassOptionsToPackage{paper=\paperformatScr,%
+					  usegeometry,%
+				  	}{typearea}
 \LoadClass[%
 	fontsize=\documentfontsize,
-	twoside,
-	\paperformat,
 	headings=normal,
 	headsepline,
 	listof=totoc,% add a tocentry for lists like LOF and LOT
 	toc=chapterentrywithdots,
-	usegeometry,%
+	numbers=noenddot, % remove dot at end of caption and heading numbers
 	% DIV=current,%
 ]{scrbook} % KOMA-Script scrreprt, DIN A5, 10pt with bibliography in TOC
-\usepackage[\paperformat]{geometry}
+\usepackage[\paperformatGeom]{geometry}
 \geometry{%
 	pass,%
 }
@@ -66,8 +76,6 @@
 	footskip=\lenbasemargin,%
 	head=\basehead,%
 }% 
-%\geometry{tmargin=2.1cm,bmargin=2.1cm,lmargin=1.4cm,rmargin=1.4cm,headheight=0.7cm,headsep=0.7cm,footskip=0.7cm,head=32pt}
-%\geometry{tmargin=3cm,bmargin=3cm,lmargin=2cm,rmargin=2cm,headheight=1cm,headsep=1cm,footskip=1cm,head=45pt}
 
 \RequirePackage{ifthen}
 \RequirePackage{ifpdf}
@@ -140,20 +148,47 @@ headsepline=0.20pt,%
 %footsepline=0.20pt,%
 draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \pagestyle{scrheadings}
+
+% make marks (e.g. page numbering) appearing on outer page (right) for onsesided print
+\if@twoside\else
+\ihead*[]{}
+\chead*[]{}
+\ohead*[]{\headmark}
+\ifoot*[]{}
+\cfoot*[]{}
+\ofoot*[\pagemark]{\pagemark}
+\fi
+
 \RequirePackage[pdfusetitle]{hyperref}
 
 % Bibliography
 \RequirePackage{xpatch}
 
+%TODO: move bibliography outside of class, as different institutes prefer different styles:
 \RequirePackage[style=numeric, %style=alphabetic
 sorting=none,
 maxcitenames=2,
+maxbibnames=99,
 giveninits=true,
 uniquelist=false,
 backend=biber,
 natbib=true,
 bibwarn=true,
-isbn=false]{biblatex}
+sortcites=true, % sort citations when multiple are cited, e.g. \cite{A,B,C} -> [1,2,3] instead of [3,1,2]
+isbn=true]{biblatex}
+
+% print url only if no doi is present, credits to samcarter_is_at_topanswers.xyz on https://tex.stackexchange.com/a/424775
+\renewbibmacro*{doi+eprint+url}{%
+	\printfield{doi}%
+	\newunit\newblock%
+	\iftoggle{bbx:eprint}{%
+		\usebibmacro{eprint}%
+	}{}%
+	\newunit\newblock%
+	\iffieldundef{doi}{%
+		\usebibmacro{url+urldate}}%
+	{}%
+}
 
 % Colors (for links, ...)
 \RequirePackage[dvipsnames]{xcolor}
@@ -169,6 +204,7 @@ isbn=false]{biblatex}
 \RequirePackage{titletoc}
 \contentsmargin{2.5em}
 
+%TODO: move to main document to be visible
 % Verhindern von Schusterjungen und Hurenkindern über Penalty
 % \widowpenalty=10000
 % \clubpenalty=10000 
@@ -227,13 +263,15 @@ isbn=false]{biblatex}
 		\begin{minipage}{\titlewidth\textwidth}
 			\centering
 			{\LARGE\bfseries\sffamily\strut\ignorespaces\@title\par}
+			\vspace*{1ex}
+			{\large\sffamily\strut\ignorespaces\@subtitle\par}
 		\end{minipage}
 		\vfill
 		\begin{minipage}{\titlewidth\textwidth}
 			\centering
 			\introstart\ \@faculty\\
-			der  Universität Stuttgart zur Erlangung\\
-			der Würde eines Doktor-Ingenieurs (Dr.-Ing.)\\
+			der  Universität Stuttgart\\ 
+			zur Erlangung der Würde eines Doktor-Ingenieurs (Dr.-Ing.) 
 			\introstatus\ Abhandlung\par%
 		\end{minipage}
 		\vfill
@@ -272,7 +310,7 @@ isbn=false]{biblatex}
 % Initialize hyperref
 \hypersetup{%
 	%draft, % hyperref's draft mode, for printing see below
-	colorlinks=true, linktocpage=true, pdfstartpage=3,% pdfstartview=FitV,%
+	hidelinks, colorlinks=true, linktocpage=true, pdfstartpage=3,% pdfstartview=FitV,%
 	% uncomment the following line if you want to have black links (e.g., for printing)
 	%colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
 	breaklinks=true, pageanchor=true,%
