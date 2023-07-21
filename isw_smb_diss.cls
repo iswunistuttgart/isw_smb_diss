@@ -1,9 +1,9 @@
-% basiert auf der Vorlage von O. Gerlach (2015), erweitert von C. Hinze (2020-2022)
-% Richtlinien: http://dx.doi.org/10.18419/opus-10327
+% basiert auf den Vorlagen von O. Gerlach (2015) und Philipp Tempel (2018) erweitert von C. Hinze (2020-2023)
+% Richtlinien zur Formatierung der Dissertation: http://dx.doi.org/10.18419/opus-10327
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isw_smb_diss}[2022/11/30 v. 1.5.0 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
+\ProvidesClass{isw_smb_diss}[2022/11/30 v. 1.5.1 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
 \typeout{}
-\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class }
+\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class v1.5.1}
 \typeout{}
 \typeout{Institute for Control Engineering of Machine Tools and Manufacturing}
 \typeout{Units, ISW, Seidenstrasse 36, D-70174 Stuttgart, Germany.}
@@ -273,7 +273,7 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 %\fi
 
 % get footnotes right
-\deffootnote{0em}{0em}{\thefootnotemark\hspace*{.5em}}
+\deffootnote{1em}{1em}{\makebox[1em][l]{\textsuperscript{\thefootnotemark}}}
 
 % Initialize hyperref
 \hypersetup{%
