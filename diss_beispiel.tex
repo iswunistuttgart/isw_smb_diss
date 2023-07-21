@@ -1,13 +1,14 @@
 % !TeX document-id = {2e27ddd9-8725-4684-b0b8-a4328d10ae60}
-% !TeX program = txs:///lualatex/[--shell-escape]
+% !TeX program = txs:///lualatex
 % !TEX spellcheck = de-DE
-% !BIB program = biblatex
+% !BIB program = txs:///biblatex
 %% Die Magic comments oben werden von manchen Editoren (besonders TexStudio) genutzt, um die Richtige Engine zum kompilieren auszuwählen, etc.
 
 \documentclass[%accepted, % anderes Deckblatt, wenn akzeptiert
 english, ngerman,% Sprache, die letzte ist die Hauptsprache
 %smallfont, % if you wish a smaller font. This is 12pt for the manuscript, 
 twoside, % one of {oneside, twoside} -> onesided or twosided layout. for twosided print choose twoside
+toc=bib,
 ]{isw_smb_diss} % Pfad zur Klasse (relativ). Wenn die Klasse in einem Ordner liegt (z.B. Git submodule), dann \documentclass[...]{isw_smb_diss/isw_smb_diss}
 
 % Richtlinien für die Gestaltung der Dissertation :% Richtlinien: http://dx.doi.org/10.18419/opus-10327 (S. 25)
@@ -55,7 +56,6 @@ isbn=true]{biblatex}
 }
 
 
-
 \usepackage{amsmath, amssymb, bm} % Mathe-Befehle
 \numberwithin{equation}{chapter} %ensure that equations enumeration starts at 1 for every chapter
 
@@ -69,15 +69,15 @@ isbn=true]{biblatex}
 
 % si-units: auto-rounding numbers, set same format for numbers globally, add and correclty typeset units for numbers
 \usepackage{siunitx}
-\sisetup{round-mode = places, 
-	round-precision = 3, % Runden auf Nachkommastellen
+\sisetup{%round-mode = places, 
+	%round-precision = 3, % Runden auf Nachkommastellen
+	range-phrase=~--~, % --, % \qtyrange{von}{bis}{unit} --> "von -- bis unit"
 	table-number-alignment = center, 
-	table-omit-exponent=true, % keine exp-Darstellung in Tabellen
+	table-omit-exponent=false, % keine exp-Darstellung in Tabellen
 	exponent-product=\cdot,
 	output-decimal-marker={,}, % , statt . als Dezimaltrenner
-	%exponent-mode = fixed, fixed-exponent = 0, %schaltet mit LaTeX3e die exponentendarstelung aus
-	}
-
+	%exponent-mode = fixed, fixed-exponent = 0, %schält mit LaTeX3e die exponentendarstelung aus
+}
 % The following line should help, if you experience problems with missing hyphenation of composed words with dash 
 % (LaTeX turns off hyphenation when a dash is present in a word)
 % Source: https://tex.stackexchange.com/questions/63232/why-can-words-with-hyphen-char-not-be-hyphenated/63234#63234
@@ -86,6 +86,16 @@ isbn=true]{biblatex}
 
 % Nur für Demonstrationszwecke von Fließtext in der Einleitung. Kann gerne entfernt werden.
 \usepackage{blindtext}
+
+% harvey balls: e.g \harveyBallFull
+% \usepackage{harveyballs}
+
+%% mark changes after your Oral presentation for review (http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/changes/changes.english.pdf):
+%% You can even list all changes so they can easily be checked with "\listofchanges"
+%\usepackage[%final % keyword "final" is to hide changes highlighting
+%				]{changes}
+%\definechangesauthor[name=Prof. Haupt Berichter, color=Plum]{MyProf}
+%\definechangesauthor[name=Prof. Mit berichter, color=OliveGreen]{OtherProf}
 
 % Optionale Einstellungen von hze
 %\input{isw_smb_diss/settings_example/definitions} % Eigene Kommandos , die ein bisschen Tippen ersparen
@@ -133,6 +143,8 @@ isbn=true]{biblatex}
 %\glsxtrnewsymbol[description={Kovarianz des Systemrauschens des Kalmanfilters}]{Q}{\ensuremath{\bm Q}}
 %\glsxtrnewsymbol[description={Kovarianz des Messrauschens des Kalmanfilters}]{R}{\ensuremath{R}}
 
+%  Seitenränder einzeichnen zum Prüfen des Textflusses
+%\usepackage{showframe}
 
 \begin{document}
 
@@ -142,17 +154,17 @@ isbn=true]{biblatex}
 
 \addchap{Vorwort}
 % Formel-Beispiel
-\(a_x + b_y \sum_i^N dx + \int\) 
+\(a_x + b_y \sum_i^N dx + \int\) \footnote{Das ist eine Formel.}
 
 % Beispiel SI-Unit-Paket
 \SI{3.14159265e1}{kg.m/s^2} \cite{colu92}
 
 
-% Beispiel für referenzieren eines Glossar-Eintrags
+%Beispiel für referenzieren eines Glossar-Eintrags
 %Matrizen \gls{Q} und \gls{R}
-% auch in Gleichungen: $\gls{Q}$
-
-% Beispiel fürs Referenzieren eines Akronyms
+%auch in Gleichungen: $\gls{Q}$
+%
+%Beispiel fürs Referenzieren eines Akronyms:
 %\ac{ISW}.
 %Automatische Bindestriche bei zusammengesetzten Akronymen: \ac{FE}[-Modelle]
 
@@ -171,8 +183,9 @@ isbn=true]{biblatex}
 %\cleardoublepage
 %reference with label \ref{glo:acronyms}
 %\addchap{Abkürzungsverzeichnis}
-%\glssetwidest{ABSMC} % Name der längsten Abkürzung zum Einrücken des Abkürzungsverzeichnisses
+%\glssetwidest{ISW~} % Name der längsten Abkürzung zum Einrücken des Abkürzungsverzeichnisses
 %\printglossary[type=\acronymtype, style=alttree, title={Abkürzungsverzeichnis}]
+%
 %\cleardoublepage
 %\printglossary[type=symbols,style={symbunitlong}, title={Symbolverzeichnis}]
 
@@ -217,20 +230,31 @@ This is how to write equations
 
 % Literatur
 \setlength{\emergencystretch}{.5em}
-\printbibliography[heading=bibintoc]
+\printbibliography[title={Literatur}]
 
 
 
 
 
 % Anhang, wenn benötigt:
-%\renewcommand{\thesection}{\Alph{section}}
-%\counterwithin{figure}{section}
-%\counterwithin{table}{section}
-%\renewcommand\thefigure{\thesection\arabic{figure}}
-%\renewcommand\thetable{\thesection\arabic{table}}
-%\appendix
-%\addchap{Anhang}
+%% das folgende beispiel verwendet Gliederungsebenen \section und darunter für den Anhang, und listet im Inhaltsverteichnis ein virtuelles Kapitel "Anhang". 
+%% Ist dies nicht erwünscht, kann anstelle der nachfolgenden Definitionen ein eigenes Format festgelegt werden ()
+\cleardoublepage
+\appendix
+\renewcommand{\thesection}{\Alph{section}} % Anhang wird über Buschstaben numeriert
+\counterwithin{figure}{section} % Abbildungs- und Tabellennummern beginnen mit dem Buchstaben des Anhangs (sind so klarer zuzuordnen)
+\counterwithin{table}{section}
+\renewcommand\thefigure{\thesection\arabic{figure}}
+\renewcommand\thetable{\thesection\arabic{table}}
 
+\automark[subsection]{section} %Fix für die Kopfzeile: höchste Gliederungsebene ist jetzt section
+
+\makeatletter
+\renewcommand{\@seccntformat}[1]{Anhang \csname the#1\endcsname\quad} % Sections beginnen in den Überschriften mit "Anhang", z.B. "Anhang A.1" (aber nicht in der Kopfzeile oder dem Inhaltsverzeichnis)
+\makeatother
+
+\addcontentsline{toc}{chapter}{Anhang}
+\section{Ein Anhang}
+\subsection{Unteranhang 1}
 
 \end{document}

@@ -1,3 +1,15 @@
+# 1.6 -- 2023-07-21
+
+Feedback from publishing my dissertation:
+
+- [class] Fix footnotes appearing outside of type area
+- [class] English title is added on title page  as required by faculty now (https://www.f07.uni-stuttgart.de/forschung/promotion-und-habilitation/promotion/dokumente/Titelblatt-Dissertation-1Einreichung_2Drucklegung.pdf)
+- [example] Work on apppendix format
+- [example] Fix running head of bibliography only appearing on even pages (solution is to add the bibliography to toc with class option "toc=bib," and not to call "heading=bibintoc" in \printbibliography)
+- [example] Some cleanup
+- [example] Provide example for glossary settings
+
+
 # 1.5.0 -- 2022-11-30
 
 - Moved bibliography definition to `diss_beispiel.tex` ([Bugfix, if you started with v<1.5](https://github.com/iswunistuttgart/isw_smb_diss/blob/master/README.md#nach-update-auf-version-150-kompiliert-mein-dokument-nicht-mehr))

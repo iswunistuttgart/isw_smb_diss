@@ -17,6 +17,7 @@
 *.bbl
 *.bcf
 *.blg
+*.dvi
 *.fdb_latexmk
 *.fls
 *.glo
@@ -30,11 +31,10 @@
 *.log
 *.lol
 *.lot
+*.nav
 *.out
 *.run.xml
 *.slg
-*.slo
-*.sls
 *.syg
 *.syi
 *.snm
@@ -43,6 +43,8 @@
 *.tdo
 *.toc
 *.xdy
+*.sls
+*.slo
 
 # dev-specific stuff
 *.bat
@@ -56,3 +58,4 @@ desktop.ini
 *.bcf
 *.bib.bak
 *.bib.sav
+*_contourtmp[0-9].*
