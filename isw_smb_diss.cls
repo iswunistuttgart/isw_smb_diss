@@ -1,9 +1,9 @@
 % basiert auf den Vorlagen von O. Gerlach (2015) und Philipp Tempel (2018) erweitert von C. Hinze (2020-2023)
 % Richtlinien zur Formatierung der Dissertation: http://dx.doi.org/10.18419/opus-10327
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isw_smb_diss}[2022/11/30 v. 1.6 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
+\ProvidesClass{isw_smb_diss}[2023/07/28 v. 1.6.1 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
 \typeout{}
-\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class v1.6}
+\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class v1.6.1}
 \typeout{}
 \typeout{Institute for Control Engineering of Machine Tools and Manufacturing}
 \typeout{Units, ISW, Seidenstrasse 36, D-70174 Stuttgart, Germany.}
@@ -272,8 +272,13 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 %\ifpdf
 %\fi
 
+% style fixes for the publisher (Fraunhofer Verlag)
 % get footnotes right
 \deffootnote{1em}{1em}{\makebox[1em][l]{\textsuperscript{\thefootnotemark}}}
+
+% remove listof.... indetation 
+\setuptoc{lof}{noindent} % remove indentation from figures in lof
+\setuptoc{lot}{noindent} % remove indentation from tables in lot
 
 % Initialize hyperref
 \hypersetup{%
