@@ -8,11 +8,15 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
     - [Weg 2: Mit Overleaf](#weg-2-mit-overleaf)
   - [Struktur](#struktur)
     - [Spätere Ordnersturkur des Diss-Ordners](#spätere-ordnersturkur-des-diss-ordners)
-    - [Optionen zum Konfigurieren der Klasse `isw_smb>_diss.cls`](#optionen-zum-konfigurieren-der-klasse-isw_smb_disscls)
+    - [Optionen zum Konfigurieren der Klasse `isw_smb_diss.cls`](#optionen-zum-konfigurieren-der-klasse-isw_smb_disscls)
   - [Roadmap](#roadmap)
   - [FAQ](#faq)
     - [Unterscheidet das Template zwischen Einreichung und Veröffentlichung beim Verlag?](#unterscheidet-das-template-zwischen-einreichung-und-veröffentlichung-beim-verlag)
     - [Wie melde ich einen Fehler?](#wie-melde-ich-einen-fehler)
+    - [Vertikales Spacing auf der Seite ist ungleichmäßig](#vertikales-spacing-auf-der-seite-ist-ungleichmäßig)
+    - [Eine Überschrift taucht nicht in der Kopfzeile auf](#eine-überschrift-taucht-nicht-in-der-kopfzeile-auf)
+    - [Einträge im Literaturverzeichnis brechen auf die nächste Seite um](#einträge-im-literaturverzeichnis-brechen-auf-die-nächste-seite-um)
+    - [Überschriften (Kapitel, Abschnitt, ...) sollen gemeinsamen Tabulator bekommen](#überschriften-kapitel-abschnitt--sollen-gemeinsamen-tabulator-bekommen)
     - [Ich bekomme eine Warnung `You have requested document class 'isw_smb_diss/isw_smb_diss', but the document class provides 'isw_smb_diss'.`](#ich-bekomme-eine-warnung-you-have-requested-document-class-isw_smb_dissisw_smb_diss-but-the-document-class-provides-isw_smb_diss)
     - [Nach Update auf Version \>1.5.0 kompiliert mein Dokument nicht mehr](#nach-update-auf-version-150-kompiliert-mein-dokument-nicht-mehr)
 
@@ -74,17 +78,19 @@ Diss/
         isw_smb_gloss.sty
     
     # optional für aufgeräumte Struktur
-    settings/ # Einstell-Files
+    settings/ # Einstellungen
     kapitel/ # Hier der eigentliche Inhalt
     img/ # Fotos
     figures/ # Grafiken
-    bibliography/ # bib-Datei (git submodule)
+    bibliography/ # bib-Datei (z.B. als git submodule)
 ```
 
-### Optionen zum Konfigurieren der Klasse `isw_smb>_diss.cls`
+### Optionen zum Konfigurieren der Klasse `isw_smb_diss.cls`
 
 1. `smallfont` ... kleinere Schrift: 12pt auf A4, 8pt auf A5
 2. `onside|twoside`  ... einseitiger/doppelseitiger Druck.  `oneside` ist für das Drucken des Manuskripts gedacht und nimmt an, dass alle Seiten rechte Seiten sind (Kopf und Seitenzahlen immer rechts). Die finale Veröffentlichung mit dem Verlag sollte mit `twoside` erfolgen.
+3. `BCOR=XYmm` ... Bindungskorrektur. Der Textblock wird nach außen gerückt, um die Lesbarkeit bei Klebebindung zu verbessern. Methoden zur Ermittlung des Wertes finden Sie [hier](https://tex.stackexchange.com/a/38700) Tipp: Messen Sie in der Bibliothek eine Dissertation des Verlags mit einer ähnlichen Seitenanzahl. Für ca. 200 Seiten waren 6mm okay.
+4. `accepted` ... für die finale Druckversion (siehe auch [in den FAQs](https://github.com/iswunistuttgart/isw_smb_diss/blob/master/README.md#unterscheidet-das-template-zwischen-einreichung-und-ver%C3%B6ffentlichung-beim-verlag)). Das Format wird auf Din-A5 gestellt, die Schriftgröße entsprechend skaliert. Das Deckblatt wird entsprechend der Prüfungsordnung angepasst.
 
 Beispiel für Einbinden der Klasse:
 
@@ -92,7 +98,8 @@ Beispiel für Einbinden der Klasse:
 \documentclass[
   english, ngerman, % Sprache, die letzte ist die Hauptsprache
   %smallfont, % kleinere Schrift
-  twoside % oneside % ein-/doppelseitiger Druck
+  twoside, % oneside % ein-/doppelseitiger Druck
+  BCOR=6mm,
 ]{isw_smb_diss}
 
 ```
@@ -134,6 +141,32 @@ Um Probleme bei der Umstellung zu vermeiden, sollten in Abbildungen und Tabellen
 - Als [Issue aus GitHub](https://github.com/iswunistuttgart/isw_smb_diss/issues/new)
 - Noch besser: direkt auf einem Branch beheben und einen [pull request](https://github.com/iswunistuttgart/isw_smb_diss/compare) stellen
 - Für Änderungen gibt es keine Merge-Garantie, daher am besten vorher besprechen
+
+### Vertikales Spacing auf der Seite ist ungleichmäßig
+
+Dieses "Problem" entsteht vermutlich beim Umsteigen aufs geforderte A5-Format. 
+LaTeX versucht den Satzspiegel unten bündig zu setzen, indem der Inhalt minimal gestreckt wird.
+Bei A5 ist weniger Seitenlänge, auf die das Strecken des Inhalts verteilt werden kann.
+Einzelne Vorkommen können durch manuelles Umbrechen mit dem Befehl `\newpage` behoben werden.
+Global kann durch Aufrufen des Befehls `\raggedbottom` das Strecken des Inhalts unterbunden werden (siehe Beispieldokument), dadurch ist der untere Satzspiegel dann unterschiedlich hoch.
+
+### Eine Überschrift taucht nicht in der Kopfzeile auf
+
+1. Zu Beginn in den unnummerierten Kapiteln: Es wurde vermutlich `\chapter*{...}` für die Kapitelüberschrift verwendet. Umstellen auf `\addchap{...}` sollte helfen.
+2. Ein Kapitel geht über mehrere Seiten, bevor `\section` eingeführt wird. Auf ungeraden Seiten bleibt der Header leer: **TODO**
+3. In der Bibliogaphie: Behoben in der Vorlage durch Einbinden über  `\printbibliography[title={Literatur}]`
+
+### Einträge im Literaturverzeichnis brechen auf die nächste Seite um
+
+Behoben durch 
+`\patchcmd{\bibsetup}{\interlinepenalty=5000}{\interlinepenalty=10000}{}{}`
+vor `\printbibliography`
+
+### Überschriften (Kapitel, Abschnitt, ...) sollen gemeinsamen Tabulator bekommen
+
+Der Verlag möchte das gerne, scheint aus dem Schreiben mit Word zu kommen.
+Eine Lösung bietet [dieser Stackexchange-Link](https://tex.stackexchange.com/a/382969). 
+Bringt aber viel Whitespace und ist deswegen nicht im Template.
 
 ### Ich bekomme eine Warnung `You have requested document class 'isw_smb_diss/isw_smb_diss', but the document class provides 'isw_smb_diss'.`
 

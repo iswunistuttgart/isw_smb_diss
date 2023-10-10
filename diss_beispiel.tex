@@ -3,12 +3,12 @@
 % !TEX spellcheck = de-DE
 % !BIB program = txs:///biblatex
 %% Die Magic comments oben werden von manchen Editoren (besonders TexStudio) genutzt, um die Richtige Engine zum kompilieren auszuwählen, etc.
-
 \documentclass[%accepted, % anderes Deckblatt, wenn akzeptiert
 english, ngerman,% Sprache, die letzte ist die Hauptsprache
 %smallfont, % if you wish a smaller font. This is 12pt for the manuscript, 
 twoside, % one of {oneside, twoside} -> onesided or twosided layout. for twosided print choose twoside
 toc=bib,
+BCOR=6mm, % binding correction, 6 mm for 200 pages, 80 g/m² Paper (half of thickness of book content)
 ]{isw_smb_diss} % Pfad zur Klasse (relativ). Wenn die Klasse in einem Ordner liegt (z.B. Git submodule), dann \documentclass[...]{isw_smb_diss/isw_smb_diss}
 
 % Richtlinien für die Gestaltung der Dissertation :% Richtlinien: http://dx.doi.org/10.18419/opus-10327 (S. 25)
@@ -98,7 +98,7 @@ isbn=true]{biblatex}
 %\definechangesauthor[name=Prof. Mit berichter, color=OliveGreen]{OtherProf}
 
 % Optionale Einstellungen von hze
-%\input{isw_smb_diss/settings_example/definitions} % Eigene Kommandos , die ein bisschen Tippen ersparen
+%\input{isw_smb_diss/settings_example/definitions} % Eigene Kommandos, die ein bisschen Tippen ersparen
 %\input{isw_smb_diss/settings_example/tikz} % Generelle Einstellungen für TikZ
 %\input{isw_smb_diss/settings_example/tikz_blocks} % Blockdiagramme, Regler, Tiefpassfilter, etc. mit TikZ 
 
@@ -196,6 +196,9 @@ isbn=true]{biblatex}
 \cleardoublepage
 \listoftables
 
+ % Verlagswunsch: Inhalt wird nicht gestreckt, um unten bündigen Satzspiegel zu erreichen. Nachteil: variierende Höhe des Satzspiegels. Erhält man durch Auskommentieren der untenstehenden Option:
+ % \raggedbottom
+
 \mainmatter % Hauptteil, let's go!
             % - Kapitel in .tex-Datei packen und per \input{...} einbinden
             % - Ein Satz pro Zeile erleichtert die Versionierung mit Git!
@@ -230,6 +233,8 @@ This is how to write equations
 
 % Literatur
 \setlength{\emergencystretch}{.5em}
+%% Force page breaks in bibliography before spliting single entries over multiple pages
+%\patchcmd{\bibsetup}{\interlinepenalty=5000}{\interlinepenalty=10000}{}{}
 \printbibliography[title={Literatur}]
 
 

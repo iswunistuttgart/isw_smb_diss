@@ -1,9 +1,9 @@
 % basiert auf den Vorlagen von O. Gerlach (2015) und Philipp Tempel (2018) erweitert von C. Hinze (2020-2023)
 % Richtlinien zur Formatierung der Dissertation: http://dx.doi.org/10.18419/opus-10327
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isw_smb_diss}[2023/07/28 v. 1.6.1 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
+\ProvidesClass{isw_smb_diss}[2023/10/10 v. 1.7 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
 \typeout{}
-\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class v1.6.1}
+\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class v1.7}
 \typeout{}
 \typeout{Institute for Control Engineering of Machine Tools and Manufacturing}
 \typeout{Units, ISW, Seidenstrasse 36, D-70174 Stuttgart, Germany.}
@@ -14,8 +14,6 @@
 \newcommand{\titlewidth}{1.0}
 \newcommand{\paperformatScr}{a4}
 \newcommand{\paperformatGeom}{a4paper}
-\newcommand{\basemargin}{1cm}
-\newcommand{\basehead}{45pt}
 \newcommand{\introstart}{Der Fakultät}
 \newcommand{\introstatus}{vorgelegte}
 \newcommand{\documentsourceintro}{von}
@@ -34,8 +32,6 @@
 	\renewcommand{\documentfontsize}{10pt}
 	\renewcommand{\paperformatScr}{a5}
 	\renewcommand{\paperformatGeom}{a5paper}
-	\renewcommand{\basemargin}{0.7cm}
-	\renewcommand{\basehead}{32pt}
 	\renewcommand{\linkcolor}{black}
 	
 	\DeclareOption{smallfont}{
@@ -44,14 +40,10 @@
 	}
 
 
-\newlength{\lenbasemargin}
-\setlength{\lenbasemargin}{\basemargin}
-%\DeclareOption{smalltext}{\renewcommand{\documentfontsize}{12pt}\renewcommand{\titlewidth}{0.9}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 \ProcessOptions\relax
 \PassOptionsToPackage{paper=\paperformatScr,%
-					  usegeometry,%
 				  	}{typearea}
 \LoadClass[%
 	fontsize=\documentfontsize,
@@ -60,19 +52,7 @@
 	listof=totoc,% add a tocentry for lists like LOF and LOT
 	toc=chapterentrywithdots,
 	numbers=noenddot, % remove dot at end of caption and heading numbers
-	% DIV=current,%
 ]{scrbook} % KOMA-Script scrreprt, DIN A5, 10pt with bibliography in TOC
-\usepackage[\paperformatGeom]{geometry}
-\newgeometry{%
-	tmargin=3\lenbasemargin,%
-	bmargin=3\lenbasemargin,%
-	lmargin=2\lenbasemargin,%
-	rmargin=2\lenbasemargin,%
-	headheight=\lenbasemargin,%
-	headsep=\lenbasemargin,%
-	footskip=\lenbasemargin,%
-	head=\basehead,%
-}% 
 
 \RequirePackage{ifthen}
 \RequirePackage{ifpdf}
@@ -141,8 +121,6 @@
 \RequirePackage[onehalfspacing]{setspace} 
 \RequirePackage[automark,%
 headsepline=0.20pt,%
-%headtopline=0.00pt,%
-%footsepline=0.20pt,%
 draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \pagestyle{scrheadings}
 
@@ -172,11 +150,6 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \RequirePackage{titletoc}
 \contentsmargin{2.5em}
 
-%TODO: move to main document to be visible
-% Verhindern von Schusterjungen und Hurenkindern über Penalty
-% \widowpenalty=10000
-% \clubpenalty=10000 
-% \displaywidowpenalty=10000
 
 % Floats auf extra Float-Page oben platzieren
 \setlength{\@fptop}{0pt}% default is 0\p@ \@plus 1fil

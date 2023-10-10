@@ -1,3 +1,12 @@
+# 1.7 -- 2023-10-10
+
+Feedback from pubishing of colleagues:
+
+- [readme] Provide some help for publishing process in the [Readme's FAQ section](https://github.com/iswunistuttgart/isw_smb_diss/blob/master/README.md#faq)
+- [class] Go back from manaual setting page geometry, use komascript's native one instead
+- [example] Add option for ragged bottom
+- [example] Add option to force avoid bibliography entry splitting on two pages
+
 # 1.6.1 -- 2023-07-28
 
 Further feedback from publisher:
