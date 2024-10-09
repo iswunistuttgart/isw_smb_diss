@@ -1,3 +1,11 @@
+# 1.8 -- 2024-10-09
+
+Futher feedback from publishing:
+
+- [class] Fix headline: Was empty on one side of the book when no section defined in chapter (default komascript style). Publisher requested to have chapter on both page headings then
+- [class] Fix literature entries should not break between pages in final mode (with class option `accepted`)
+- [example] Fix TexStuio magic comments to build automatically with biber 
+
 # 1.7 -- 2023-10-10
 
 Feedback from pubishing of colleagues:

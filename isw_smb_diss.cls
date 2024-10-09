@@ -1,9 +1,9 @@
-% basiert auf den Vorlagen von O. Gerlach (2015) und Philipp Tempel (2018) erweitert von C. Hinze (2020-2023)
+% basiert auf den Vorlagen von O. Gerlach (2015) und Philipp Tempel (2018) erweitert von C. Hinze (2020-2024)
 % Richtlinien zur Formatierung der Dissertation: http://dx.doi.org/10.18419/opus-10327
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isw_smb_diss}[2023/10/10 v. 1.7 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
+\ProvidesClass{isw_smb_diss}[2023/10/10 v. 1.8 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
 \typeout{}
-\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class v1.7}
+\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class v1.8}
 \typeout{}
 \typeout{Institute for Control Engineering of Machine Tools and Manufacturing}
 \typeout{Units, ISW, Seidenstrasse 36, D-70174 Stuttgart, Germany.}
