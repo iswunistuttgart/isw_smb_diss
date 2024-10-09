@@ -37,6 +37,10 @@
 	\DeclareOption{smallfont}{
 		\renewcommand{\documentfontsize}{8pt}% 8.5 would be closer, but is not supported. Scale a little smaller to avoid overflowing floating environments.
 	}
+	
+	\AtBeginDocument{%
+	\patchcmd{\bibsetup}{\interlinepenalty=5000}{\interlinepenalty=10000}{}{}%
+	}%
 	}
 
 
