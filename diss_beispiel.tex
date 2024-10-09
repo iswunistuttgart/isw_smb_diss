@@ -252,7 +252,8 @@ This is how to write equations
 \renewcommand\thefigure{\thesection\arabic{figure}}
 \renewcommand\thetable{\thesection\arabic{table}}
 
-\automark[subsection]{section} %Fix für die Kopfzeile: höchste Gliederungsebene ist jetzt section
+\automark[section]{section} %Fix für die Kopfzeile: höchste Gliederungsebene ist jetzt section
+\automark*[subsection]{subsection}
 
 \makeatletter
 \renewcommand{\@seccntformat}[1]{Anhang \csname the#1\endcsname\quad} % Sections beginnen in den Überschriften mit "Anhang", z.B. "Anhang A.1" (aber nicht in der Kopfzeile oder dem Inhaltsverzeichnis)

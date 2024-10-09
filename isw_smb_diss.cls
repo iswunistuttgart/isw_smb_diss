@@ -126,6 +126,8 @@
 \RequirePackage[automark,%
 headsepline=0.20pt,%
 draft=false,]{scrlayer-scrpage}	 % header & footer layout
+\automark[chapter]{chapter}
+\automark*[section]{section} % only show section in running header, if one is defined, otherwise use chapter title.
 \pagestyle{scrheadings}
 
 % make marks (e.g. page numbering) appearing on outer page (right) for onsesided print
