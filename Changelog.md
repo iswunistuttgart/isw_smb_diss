@@ -1,3 +1,13 @@
+# 1.9 -- 2024-11-08
+- [class] add class option print (currently turns links black for printing first version)
+- [class] As requested by the publisher, all section headings have the same indentation now
+- [example] Use \raggebottom for pages to avoid future headache (publisher wants this explicitly)
+- [class,example] Move appendix redefinitions to single command `\startSMBAppendix`, defined in cls file
+- [class,example] Fix v1.8 behavior of headlines. Should be working properly now
+- [class] Add some explaining comments, have all comments in English
+- [example] Use English language for comments (preparations for internationalization)
+- [cleanup] Deleted TexStudio Macros as too specific
+
 # 1.8 -- 2024-10-09
 
 Futher feedback from publishing:

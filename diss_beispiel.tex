@@ -2,34 +2,37 @@
 % !TeX program = txs:///lualatex
 % !TEX spellcheck = de-DE
 % !BIB program = txs:///biber
-%% Die Magic comments oben werden von manchen Editoren (besonders TexStudio) genutzt, um die Richtige Engine zum kompilieren auszuwählen, etc.
-\documentclass[%accepted, % anderes Deckblatt, wenn akzeptiert
-english, ngerman,% Sprache, die letzte ist die Hauptsprache
+%% magic comments above automatically switch to correct compiler in TexStudio
+
+\documentclass[
+%accepted, % uncomment this after your oral exam for the final print (changes title page)
+%print,% use this flag for printing (turns links black)
+english, ngerman,% Language: last one is the main language used in the document
 %smallfont, % if you wish a smaller font. This is 12pt for the manuscript, 
 twoside, % one of {oneside, twoside} -> onesided or twosided layout. for twosided print choose twoside
 toc=bib,
 BCOR=6mm, % binding correction, 6 mm for 200 pages, 80 g/m² Paper (half of thickness of book content)
-]{isw_smb_diss} % Pfad zur Klasse (relativ). Wenn die Klasse in einem Ordner liegt (z.B. Git submodule), dann \documentclass[...]{isw_smb_diss/isw_smb_diss}
+]{isw_smb_diss} % Relative path to class. If class is in subfolder (e.g. as git submodule) then \documentclass[...]{isw_smb_diss/isw_smb_diss}
 
-% Richtlinien für die Gestaltung der Dissertation :% Richtlinien: http://dx.doi.org/10.18419/opus-10327 (S. 25)
+% Rules for the design of your dissertation: http://dx.doi.org/10.18419/opus-10327 (S. 25)
 
-% Einzelne Zeilen auf nächster/vorheriger Seite unterdrücken:
+% Suppress single lines on previous/next page:
 \clubpenalty=10000
 \widowpenalty=10000
 \displaywidowpenalty=10000
 
-%% Empfohlene Pakete
+%% ======= Recommended packages (not necessarily needed) ======= 
 
 \usepackage{shellesc} % shell escape alternative: more flexible than --shell-escape flag
-					  % für glossaries-extra, tikz external package
+					  % for glossaries-extra, tikz external package
 
 % use this to debug where borders are hurt:
 %\usepackage{showframe}
 
-\usepackage{csquotes} % für bib und gloss
+\usepackage{csquotes} % for bibliography and glossaries
 \usepackage{xpatch}
 
-% Wenn Ihr Institut eigene Anforderungen an den Zitationsstil hat, hönnen Sie diesen hier konfigurieren:
+% Citation style. If your institute has specific requirements, configure here:
 \usepackage[style=numeric, % see https://www.overleaf.com/learn/latex/Biblatex_citation_styles for a list of predefined styles
 sorting=none,
 maxcitenames=2,
@@ -56,12 +59,12 @@ isbn=true]{biblatex}
 }
 
 
-\usepackage{amsmath, amssymb, bm} % Mathe-Befehle
+\usepackage{amsmath, amssymb, bm} % math commands
 \numberwithin{equation}{chapter} %ensure that equations enumeration starts at 1 for every chapter
 
 \usepackage{breakurl} %break links in bibliography
 
-\RequirePackage{graphicx}
+\RequirePackage{graphicx} % images
 
 
 % Nice looking tables (https://nhigham.com/2019/11/19/better-latex-tables-with-booktabs/latex subfig)
@@ -70,13 +73,13 @@ isbn=true]{biblatex}
 % si-units: auto-rounding numbers, set same format for numbers globally, add and correclty typeset units for numbers
 \usepackage{siunitx}
 \sisetup{%round-mode = places, 
-	%round-precision = 3, % Runden auf Nachkommastellen
-	range-phrase=~--~, % --, % \qtyrange{von}{bis}{unit} --> "von -- bis unit"
+	%round-precision = 3, % 
+	range-phrase=~--~, % --, % \qtyrange{from}{to}{unit}
 	table-number-alignment = center, 
-	table-omit-exponent=false, % keine exp-Darstellung in Tabellen
+	table-omit-exponent=false, % turn of exp representation in tables
 	exponent-product=\cdot,
-	output-decimal-marker={,}, % , statt . als Dezimaltrenner
-	%exponent-mode = fixed, fixed-exponent = 0, %schält mit LaTeX3e die exponentendarstelung aus
+	output-decimal-marker={,}, % "," instead of "." as decimal separator (for German theses)
+	%exponent-mode = fixed, fixed-exponent = 0, % turn of exponent mode with Latex3e
 }
 % The following line should help, if you experience problems with missing hyphenation of composed words with dash 
 % (LaTeX turns off hyphenation when a dash is present in a word)
@@ -84,7 +87,7 @@ isbn=true]{biblatex}
 % Alternatively, explicitely hyphenate with "= (https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_Silbentrennung)
 \defaulthyphenchar=127
 
-% Nur für Demonstrationszwecke von Fließtext in der Einleitung. Kann gerne entfernt werden.
+% Just for demonstration use
 \usepackage{blindtext}
 
 % harvey balls: e.g \harveyBallFull
@@ -97,15 +100,17 @@ isbn=true]{biblatex}
 %\definechangesauthor[name=Prof. Haupt Berichter, color=Plum]{MyProf}
 %\definechangesauthor[name=Prof. Mit berichter, color=OliveGreen]{OtherProf}
 
-% Optionale Einstellungen von hze
-%\input{isw_smb_diss/settings_example/definitions} % Eigene Kommandos, die ein bisschen Tippen ersparen
-%\input{isw_smb_diss/settings_example/tikz} % Generelle Einstellungen für TikZ
-%\input{isw_smb_diss/settings_example/tikz_blocks} % Blockdiagramme, Regler, Tiefpassfilter, etc. mit TikZ 
+% Other settings you may find useful
+%\input{isw_smb_diss/settings_example/definitions} % commands
+%\input{isw_smb_diss/settings_example/tikz} % TikZ settings
+%\input{isw_smb_diss/settings_example/tikz_blocks} % block diagrams using tikz 
 
-% TODO: hier eigene bibliographie bereitstellen: 
+%% ======= End of recommended packages ======= 
+
+% TODO: add your own bibliography here:
 \addbibresource{bibliography.bib}
 
-% standardmäßig wird in img/ nach Bildern gesucht, \includegraphics{img/...} => \includegraphics{...}
+% search for images in folder img/, i.e. instead of  \includegraphics{img/...}, just use \includegraphics{...}
 \graphicspath{{img/}}
 
 
@@ -125,32 +130,31 @@ isbn=true]{biblatex}
 \dateoforalexamination{1. Januar 2024}
 \yearofpublication{2024}
 
-% Manuelle Silbentrennung für Wörter, die babel nicht kennt. 
-% Mehr Informationen zu Silbentrennung in Deutsch mit LaTeX: https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_Silbentrennung
+% Manual hyphenation. 
+% More info for German hyphenation in LaTeX: https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_Silbentrennung
 \hyphenation{Dis-am-bi-gu-ie-rung, Sil-ben-trenn-ung}
 
-%%% Akronyme und Glossar:
-% Für Glossar (Formel, Begriffsverzeichnis, Abkürzungsverzeichnis)
-% Wird nur das Abkürzungsverzeichnis verwendet, ist das packet "acronym" einfacher.
+%%% Acronyms and glossary:
+% Glossary (Used symbols, acronyms, ...)
 %\input{settings_example/glossaries}
 
-% Akronyme (benötigt \input{settings/glossaries})
-% Benutzung im Text: \ac{kgt} bzw. Kurzform \acs{kgt}
+% Define acronyms (needs \input{settings/glossaries})
+% Use in text: \ac{kgt} or short \acs{kgt}
 %\newacronym{ISW}{ISW}{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
 %\newacronym{FE}{FE}{Finite Elemente}
 
-% Formelzeichen, auch hier wird \input{settings/glossaries} benötigt, Verwendung im Text: \gls{Q}
+% Glossary entries, also needs \input{settings/glossaries}, use in text as \gls{Q}
 %\glsxtrnewsymbol[description={Kovarianz des Systemrauschens des Kalmanfilters}]{Q}{\ensuremath{\bm Q}}
 %\glsxtrnewsymbol[description={Kovarianz des Messrauschens des Kalmanfilters}]{R}{\ensuremath{R}}
 
-%  Seitenränder einzeichnen zum Prüfen des Textflusses
+%  Show page borders (useful for final checks)
 %\usepackage{showframe}
 
 \begin{document}
 
 \frontmatter
 \maketitle
-\onehalfspacing % 1,5 facher Zeilenabstand
+\onehalfspacing % line spacing: 1,5
 
 \addchap{Vorwort}
 % Formel-Beispiel
@@ -179,11 +183,11 @@ isbn=true]{biblatex}
 \fi
 \tableofcontents
 
-% % Abkürzungs/Symbolverzeichnis, wenn nötig und oben definiert
+% % List of acronyms/symbols
 %\cleardoublepage
 %reference with label \ref{glo:acronyms}
 %\addchap{Abkürzungsverzeichnis}
-%\glssetwidest{ISW~} % Name der längsten Abkürzung zum Einrücken des Abkürzungsverzeichnisses
+%\glssetwidest{ISW~} % longest acronym to properly indent list of acronyms
 %\printglossary[type=\acronymtype, style=alttree, title={Abkürzungsverzeichnis}]
 %
 %\cleardoublepage
@@ -196,22 +200,16 @@ isbn=true]{biblatex}
 \cleardoublepage
 \listoftables
 
- % Verlagswunsch: Inhalt wird nicht gestreckt, um unten bündigen Satzspiegel zu erreichen. Nachteil: variierende Höhe des Satzspiegels. Erhält man durch Auskommentieren der untenstehenden Option:
- % \raggedbottom
+\raggedbottom % prefer having whitespace on bottom of pages (instead of stretching content to have common bottom line)
+			  % This is required by the publisher
 
-\mainmatter % Hauptteil, let's go!
-            % - Kapitel in .tex-Datei packen und per \input{...} einbinden
-            % - Ein Satz pro Zeile erleichtert die Versionierung mit Git!
+\mainmatter % Main contents. Tips:
+            % - Have separate .tex files per chapter, include them using \input{...}
+            % - When using versioning with git, try to start each sentence in a new line (this makes diffs cleaner)
 
 \chapter{Einleitung}
 
 \Blindtext
-\section{Equations}
-This is how to write equations
-\begin{align}
-	\bm{A}\bm{x} = \bm{b}
-	\label{eq:Equation1}
-\end{align}
 
 \section{Forschungsfrage und Problembeschreibung}
 \section{Beitrag dieser Arbeit}
@@ -228,12 +226,12 @@ This is how to write equations
 \section{Diskussion}
 \section{Ausblick}
 
-% TODO: nocite gibt alle Einträge der Bibliographie aus. Dies dient nur zu Testzwecken und sollte entfernt werden
+% TODO: nocite prints the whole bib file to the bibliography. This is for testing and should be commented out in your thesis:
 \nocite{*}
 
-% Literatur
+% Bibliography
 \setlength{\emergencystretch}{.5em}
-%% Force page breaks in bibliography before spliting single entries over multiple pages
+%% Force page breaks in bibliography before splitting single entries over multiple pages
 %\patchcmd{\bibsetup}{\interlinepenalty=5000}{\interlinepenalty=10000}{}{}
 \printbibliography[title={Literatur}]
 
@@ -241,23 +239,9 @@ This is how to write equations
 
 
 
-% Anhang, wenn benötigt:
-%% das folgende beispiel verwendet Gliederungsebenen \section und darunter für den Anhang, und listet im Inhaltsverteichnis ein virtuelles Kapitel "Anhang". 
-%% Ist dies nicht erwünscht, kann anstelle der nachfolgenden Definitionen ein eigenes Format festgelegt werden ()
-\cleardoublepage
-\appendix
-\renewcommand{\thesection}{\Alph{section}} % Anhang wird über Buschstaben numeriert
-\counterwithin{figure}{section} % Abbildungs- und Tabellennummern beginnen mit dem Buchstaben des Anhangs (sind so klarer zuzuordnen)
-\counterwithin{table}{section}
-\renewcommand\thefigure{\thesection\arabic{figure}}
-\renewcommand\thetable{\thesection\arabic{table}}
-
-\automark[section]{section} %Fix für die Kopfzeile: höchste Gliederungsebene ist jetzt section
-\automark*[subsection]{subsection}
-
-\makeatletter
-\renewcommand{\@seccntformat}[1]{Anhang \csname the#1\endcsname\quad} % Sections beginnen in den Überschriften mit "Anhang", z.B. "Anhang A.1" (aber nicht in der Kopfzeile oder dem Inhaltsverzeichnis)
-\makeatother
+% Appendix, if needed:
+%% This uses \section and below to have everything grouped in the virtual chapter "Anhang" in the table of contents. 
+\startSMBAppendix
 
 \addcontentsline{toc}{chapter}{Anhang}
 \section{Ein Anhang}

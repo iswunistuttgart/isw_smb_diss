@@ -13,6 +13,8 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
   - [FAQ](#faq)
     - [Unterscheidet das Template zwischen Einreichung und Veröffentlichung beim Verlag?](#unterscheidet-das-template-zwischen-einreichung-und-veröffentlichung-beim-verlag)
     - [Wie melde ich einen Fehler?](#wie-melde-ich-einen-fehler)
+    - [Wie kann ich Links schwarz färben für den Druck des Manuskripts (günstiger im Druck)?](#wie-kann-ich-links-schwarz-färben-für-den-druck-des-manuskripts-günstiger-im-druck)
+    - [Kann ich herausfinden, welche (und wieviele) Seiten Farbseiten sind?](#kann-ich-herausfinden-welche-und-wieviele-seiten-farbseiten-sind)
     - [Vertikales Spacing auf der Seite ist ungleichmäßig](#vertikales-spacing-auf-der-seite-ist-ungleichmäßig)
     - [Eine Überschrift taucht nicht in der Kopfzeile auf](#eine-überschrift-taucht-nicht-in-der-kopfzeile-auf)
     - [Einträge im Literaturverzeichnis brechen auf die nächste Seite um](#einträge-im-literaturverzeichnis-brechen-auf-die-nächste-seite-um)
@@ -91,15 +93,17 @@ Diss/
 2. `onside|twoside`  ... einseitiger/doppelseitiger Druck.  `oneside` ist für das Drucken des Manuskripts gedacht und nimmt an, dass alle Seiten rechte Seiten sind (Kopf und Seitenzahlen immer rechts). Die finale Veröffentlichung mit dem Verlag sollte mit `twoside` erfolgen.
 3. `BCOR=XYmm` ... Bindungskorrektur. Der Textblock wird nach außen gerückt, um die Lesbarkeit bei Klebebindung zu verbessern. Methoden zur Ermittlung des Wertes finden Sie [hier](https://tex.stackexchange.com/a/38700) Tipp: Messen Sie in der Bibliothek eine Dissertation des Verlags mit einer ähnlichen Seitenanzahl. Für ca. 200 Seiten waren 6mm okay.
 4. `accepted` ... für die finale Druckversion (siehe auch [in den FAQs](https://github.com/iswunistuttgart/isw_smb_diss/blob/master/README.md#unterscheidet-das-template-zwischen-einreichung-und-ver%C3%B6ffentlichung-beim-verlag)). Das Format wird auf Din-A5 gestellt, die Schriftgröße entsprechend skaliert. Das Deckblatt wird entsprechend der Prüfungsordnung angepasst.
+5. `print` ... schwarz einfärben von Links für den Druck des Manuskripts (weniger Farbseiten)
 
 Beispiel für Einbinden der Klasse:
 
-```
+```tex
 \documentclass[
   english, ngerman, % Sprache, die letzte ist die Hauptsprache
   %smallfont, % kleinere Schrift
+  %print, % Links schwarz für den Druck
   twoside, % oneside % ein-/doppelseitiger Druck
-  BCOR=6mm,
+  BCOR=6mm, % binde-korrektur: 0 für Ringbindung, Hälfte der Dicke des Buchs bei Klebebindung
 ]{isw_smb_diss}
 
 ```
@@ -142,13 +146,17 @@ Um Probleme bei der Umstellung zu vermeiden, sollten in Abbildungen und Tabellen
 - Noch besser: direkt auf einem Branch beheben und einen [pull request](https://github.com/iswunistuttgart/isw_smb_diss/compare) stellen
 - Für Änderungen gibt es keine Merge-Garantie, daher am besten vorher besprechen
 
+### Wie kann ich Links schwarz färben für den Druck des Manuskripts (günstiger im Druck)?
+
+In v1.9 wurde die Klassenoption `print` eingeführt. Diese einfach einkommentieren und neu kompilieren.
+
+### Kann ich herausfinden, welche (und wieviele) Seiten Farbseiten sind?
+
+Ja, über [Ghostscript](https://www.ghostscript.com/) siehe `list_color_pages.sh` (benötigt bash (Linux oder WSL auf Windows))
+
 ### Vertikales Spacing auf der Seite ist ungleichmäßig
 
-Dieses "Problem" entsteht vermutlich beim Umsteigen aufs geforderte A5-Format. 
-LaTeX versucht den Satzspiegel unten bündig zu setzen, indem der Inhalt minimal gestreckt wird.
-Bei A5 ist weniger Seitenlänge, auf die das Strecken des Inhalts verteilt werden kann.
-Einzelne Vorkommen können durch manuelles Umbrechen mit dem Befehl `\newpage` behoben werden.
-Global kann durch Aufrufen des Befehls `\raggedbottom` das Strecken des Inhalts unterbunden werden (siehe Beispieldokument), dadurch ist der untere Satzspiegel dann unterschiedlich hoch.
+Behoben durch `\raggedbottom` im Template (>=v1.9).
 
 ### Eine Überschrift taucht nicht in der Kopfzeile auf
 
@@ -164,9 +172,9 @@ vor `\printbibliography`
 
 ### Überschriften (Kapitel, Abschnitt, ...) sollen gemeinsamen Tabulator bekommen
 
-Der Verlag möchte das gerne, scheint aus dem Schreiben mit Word zu kommen.
-Eine Lösung bietet [dieser Stackexchange-Link](https://tex.stackexchange.com/a/382969). 
-Bringt aber viel Whitespace und ist deswegen nicht im Template.
+Behoben in v1.9 durch die Stackoverflow-Lösung
+
+~~Der Verlag möchte das gerne, scheint aus dem Schreiben mit Word zu kommen. Eine Lösung bietet [dieser Stackexchange-Link](https://tex.stackexchange.com/a/382969). Bringt aber viel Whitespace und ist deswegen nicht im Template.~~
 
 ### Ich bekomme eine Warnung `You have requested document class 'isw_smb_diss/isw_smb_diss', but the document class provides 'isw_smb_diss'.`
 
