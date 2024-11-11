@@ -152,7 +152,7 @@ In v1.9 wurde die Klassenoption `print` eingeführt. Diese einfach einkommentier
 
 ### Kann ich herausfinden, welche (und wieviele) Seiten Farbseiten sind?
 
-Ja, über [Ghostscript](https://www.ghostscript.com/) siehe `list_color_pages.sh` (benötigt bash (Linux oder WSL auf Windows))
+Ja, über [Ghostscript](https://www.ghostscript.com/) siehe [`list_color_pages.sh`](https://github.com/iswunistuttgart/isw_smb_diss/blob/master/list_color_pages.sh) (benötigt bash (Linux oder WSL auf Windows))
 
 ### Vertikales Spacing auf der Seite ist ungleichmäßig
 
