@@ -17,7 +17,7 @@
 \newcommand{\introstart}{Der Fakultät}
 \newcommand{\introstatus}{vorgelegte}
 \newcommand{\documentsourceintro}{von}
-\newcommand{\oralexamination}{Tag der mündlichen Prüfung: \>\\}
+\newcommand{\oralexamination}{\\}
 \newcommand{\linkcolor}{uniSblue}
 
 \DeclareOption{smallfont}{
