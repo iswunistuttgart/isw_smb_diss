@@ -69,8 +69,3 @@ automake % so we won't need to call glossaries by hand
 	\label{glo:\currentglossary}%
 }
 
-% fix automake glossaries with lualatex: https://tex.stackexchange.com/a/468820
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\@gls@automake{\write18}{\DelayedShellEscape}{}{\fail}
-\makeatother
