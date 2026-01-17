@@ -89,11 +89,12 @@ Diss/
 
 ### Optionen zum Konfigurieren der Klasse `isw_smb_diss.cls`
 
-1. `smallfont` ... kleinere Schrift: 12pt auf A4, 8pt auf A5
+1. `smallfont` ... kleinere Schrift: 12pt auf A4, (entspricht ~8.5pt bei A5-Druck)
 2. `onside|twoside`  ... einseitiger/doppelseitiger Druck.  `oneside` ist für das Drucken des Manuskripts gedacht und nimmt an, dass alle Seiten rechte Seiten sind (Kopf und Seitenzahlen immer rechts). Die finale Veröffentlichung mit dem Verlag sollte mit `twoside` erfolgen.
 3. `BCOR=XYmm` ... Bindungskorrektur. Der Textblock wird nach außen gerückt, um die Lesbarkeit bei Klebebindung zu verbessern. Methoden zur Ermittlung des Wertes finden Sie [hier](https://tex.stackexchange.com/a/38700) Tipp: Messen Sie in der Bibliothek eine Dissertation des Verlags mit einer ähnlichen Seitenanzahl. Für ca. 200 Seiten waren 6mm okay.
-4. `accepted` ... für die finale Druckversion (siehe auch [in den FAQs](https://github.com/iswunistuttgart/isw_smb_diss/blob/master/README.md#unterscheidet-das-template-zwischen-einreichung-und-ver%C3%B6ffentlichung-beim-verlag)). Das Format wird auf Din-A5 gestellt, die Schriftgröße entsprechend skaliert. Das Deckblatt wird entsprechend der Prüfungsordnung angepasst.
+4. `accepted` ... für die finale Druckversion (siehe auch [in den FAQs](https://github.com/iswunistuttgart/isw_smb_diss/blob/master/README.md#unterscheidet-das-template-zwischen-einreichung-und-ver%C3%B6ffentlichung-beim-verlag)). Das Deckblatt wird entsprechend der Prüfungsordnung für den finalen Druck angepasst. Um beim Druck nicht alle Verlinkungen in Uni-Stuttgart-Blau zu haben (teuer, viele Farbseiten), siehe außerdem nachfolgende Option
 5. `print` ... schwarz einfärben von Links für den Druck des Manuskripts (weniger Farbseiten)
+6. `a5paper` ... Das Format wird auf DIN-A5 gestellt, die Schriftgröße entsprechend skaliert (nicht empfohlen, führt wahrscheinlich zu Anpassungsbedarf durch Layoutumstellung).
 
 Beispiel für Einbinden der Klasse:
 
@@ -116,29 +117,17 @@ Beispiel für Einbinden der Klasse:
 
 ### Unterscheidet das Template zwischen Einreichung und Veröffentlichung beim Verlag?
 
-Ja, nach den [Vorgaben der Uni](http://dx.doi.org/10.18419/opus-10327) soll das Manuskript in A4-Format eingereicht werden, das Format für den Druck ist aber "in der Regel DIN A5". Für die Umschaltung in das Druckformat muss die Klassenoption `accepted` übergeben werden, also
+Ja, nach den [Vorgaben der Uni](http://dx.doi.org/10.18419/opus-10327) soll das Manuskript in A4-Format eingereicht werden, das Format für den Druck ist aber "in der Regel DIN A5". Für die Umschaltung in das Druckformat (anderes Deckblatt, siehe Prüfungsprdnung) muss die Klassenoption `accepted` übergeben werden, also
 
 ```latex
-\documentclass[accepted, english, ngerman]{isw_smb_diss/isw_smb_diss}
+\documentclass[accepted, print, english, ngerman]{isw_smb_diss/isw_smb_diss}
 ```
 
-Diese ändert auch die Link-Farben in schwarz um die Druckkosten zu reduzieren (weniger Farbseiten).
+Die zusätzliche Option ändert die Link-Farben in schwarz um die Druckkosten zu reduzieren (weniger Farbseiten).
 
-Um die Komplikationen (und den Anpassungsbedarf) der Änderung im Papierformat möglichst gering zu halten, werden Schriftgröße und Seitenränder so angepasst, dass das Format möglichst gleich bleibt. 
+Um die Komplikationen (und den Anpassungsbedarf) der Änderung im Papierformat möglichst gering zu halten, wird das Format auch bei `accepted` in A4 gelassen. Der Verlag sollte für die finale Dissertation dementsprechend die Inhalte auf A5 skalieren.
 
-Um Probleme bei der Umstellung zu vermeiden, sollten in Abbildungen und Tabellen [*relative Maßeinheiten*](https://www.overleaf.com/learn/latex/Lengths_in_LaTeX) verwendet werden, z.B:
-
-```latex
-%for tables
-\begin{tabular}{p{4em} p{5em} c c}
-% ...
-\end{tabular}
-
-% graphics
-\includegraphics[width=0.8\textwidth]{path/to/my_picture}
-
-% TikZ pictures: https://tex.stackexchange.com/questions/4338/correctly-scaling-a-tikzpicture
-```
+Wird tatsächlich A5-Format gefordert, kann die Umstellung mit der Klassenoption `a5paper` erfolgen.
 
 ### Wie melde ich einen Fehler?
 

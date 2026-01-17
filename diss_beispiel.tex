@@ -1,4 +1,3 @@
-% !TeX document-id = {2e27ddd9-8725-4684-b0b8-a4328d10ae60}
 % !TeX program = txs:///lualatex
 % !TEX spellcheck = de-DE
 % !BIB program = txs:///biber
@@ -10,8 +9,9 @@
 english, ngerman,% Language: last one is the main language used in the document
 %smallfont, % if you wish a smaller font. This is 12pt for the manuscript, 
 twoside, % one of {oneside, twoside} -> onesided or twosided layout. for twosided print choose twoside
-toc=bib,
+toc=bib, % have  bibliography listed in table of contents
 BCOR=6mm, % binding correction, 6 mm for 200 pages, 80 g/m² Paper (half of thickness of book content)
+%a5paper, %  change paper format to true DIN-A5 (default is DIN-A4). This might lead to layout issues after conversion, prefer offloading scaling to A5 to printer
 ]{isw_smb_diss} % Relative path to class. If class is in subfolder (e.g. as git submodule) then \documentclass[...]{isw_smb_diss/isw_smb_diss}
 
 % Rules for the design of your dissertation: http://dx.doi.org/10.18419/opus-10327 (S. 25)
@@ -127,8 +127,8 @@ isbn=true]{biblatex}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik} % Fak. 7
 % \faculty{Energie-, Verfahrens- und Biotechnik} % Fak. 4
 \institute{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
-\dateoforalexamination{1. Januar 2024}
-\yearofpublication{2024}
+\dateoforalexamination{1. Januar 2027}
+\yearofpublication{2027}
 
 % Manual hyphenation. 
 % More info for German hyphenation in LaTeX: https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_Silbentrennung
