@@ -1,4 +1,14 @@
+# 1.10 -- 2026-01-17
+
+- [class] to minimize layout issues after adding the `accepted` class option, definition of `accepted` was changed to just change the title page. 
+          To print all links in black use option `print` from now on. 
+          Paper format will stay in A4 and the publisher should just scale the A4 pages to A5 paper for the final print of your dissertation.
+          For true DIN-A5 format there is an additional class option `a5paper` now. Be warned that the change might lead to layout issues
+- [glossaries] [MR #15](https://github.com/iswunistuttgart/isw_smb_diss/pull/15 ) by [@wolfmar](https://github.com/wolfmar) removes a temporary workaround for `automake`option of package `glossaries-extra`, which is not needed anymore as of latex versions 2025+ 
+- [readme] adapted to changed class
+
 # 1.9 -- 2024-11-08
+
 - [class] add class option print (currently turns links black for printing first version)
 - [class] As requested by the publisher, all section headings have the same indentation now
 - [example] Use \raggebottom for pages to avoid future headache (publisher wants this explicitly)
@@ -14,14 +24,14 @@ Futher feedback from publishing:
 
 - [class] Fix headline: Was empty on one side of the book when no section defined in chapter (default komascript style). Publisher requested to have chapter on both page headings then
 - [class] Fix literature entries should not break between pages in final mode (with class option `accepted`)
-- [example] Fix TexStuio magic comments to build automatically with biber 
+- [example] Fix TexStudio magic comments to build automatically with biber 
 
 # 1.7 -- 2023-10-10
 
 Feedback from pubishing of colleagues:
 
 - [readme] Provide some help for publishing process in the [Readme's FAQ section](https://github.com/iswunistuttgart/isw_smb_diss/blob/master/README.md#faq)
-- [class] Go back from manaual setting page geometry, use komascript's native one instead
+- [class] Go back from manual setting page geometry, use komascript's native one instead
 - [example] Add option for ragged bottom
 - [example] Add option to force avoid bibliography entry splitting on two pages
 
@@ -37,7 +47,7 @@ Feedback from publishing my dissertation:
 
 - [class] Fix footnotes appearing outside of type area
 - [class] English title is added on title page  as required by faculty now (https://www.f07.uni-stuttgart.de/forschung/promotion-und-habilitation/promotion/dokumente/Titelblatt-Dissertation-1Einreichung_2Drucklegung.pdf)
-- [example] Work on apppendix format
+- [example] Work on appendix format
 - [example] Fix running head of bibliography only appearing on even pages (solution is to add the bibliography to toc with class option "toc=bib," and not to call "heading=bibintoc" in \printbibliography)
 - [example] Some cleanup
 - [example] Provide example for glossary settings

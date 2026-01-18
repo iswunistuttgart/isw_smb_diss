@@ -1,9 +1,9 @@
 % basiert auf den Vorlagen von O. Gerlach (2015) und Philipp Tempel (2018) erweitert von C. Hinze (2020-2024)
 % Richtlinien zur Formatierung der Dissertation: http://dx.doi.org/10.18419/opus-10327
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isw_smb_diss}[2024/11/08 v. 1.9 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
+\ProvidesClass{isw_smb_diss}[2026/01/17 v. 1.10 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
 \typeout{}
-\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class v1.9}
+\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class v1.10}
 \typeout{}
 \typeout{Institute for Control Engineering of Machine Tools and Manufacturing}
 \typeout{Units, ISW, Seidenstrasse 36, D-70174 Stuttgart, Germany.}
@@ -29,14 +29,6 @@
 	\renewcommand{\introstatus}{genehmigte}
 	\renewcommand{\documentsourceintro}{Vorgelegt von}
 	\renewcommand{\oralexamination}{Tag der mündlichen Prüfung: \> \@dateoforalexamination \\}
-	\renewcommand{\documentfontsize}{10pt}
-	\renewcommand{\paperformatScr}{a5}
-	\renewcommand{\paperformatGeom}{a5paper}
-	\renewcommand{\linkcolor}{black}
-	
-	\DeclareOption{smallfont}{
-		\renewcommand{\documentfontsize}{8pt}% 8.5 would be closer, but is not supported. Scale a little smaller to avoid overflowing floating environments.
-	}
 	
 	% This avoids page breaks within bibliography entries
 	\AtBeginDocument{%
@@ -46,6 +38,15 @@
 
 \DeclareOption{print}{
 	\renewcommand{\linkcolor}{black}
+}
+
+\DeclareOption{a5paper}{
+	\renewcommand{\documentfontsize}{10pt}
+	\renewcommand{\paperformatScr}{a5}
+	\renewcommand{\paperformatGeom}{a5paper}	
+	\DeclareOption{smallfont}{
+		\renewcommand{\documentfontsize}{8pt}% 8.5 would be closer, but is not supported. Scale a little smaller to avoid overflowing floating environments.
+	}
 }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
