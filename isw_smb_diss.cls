@@ -276,6 +276,8 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \automark[section]{section} %Fix the headline: chapter -> section, section -> subsection
 \automark*[subsection]{}
 
+\numberwithin{equation}{section} %Ensure that equations enumeration starts at 1
+
 \makeatletter
 \renewcommand{\@seccntformat}[1]{Anhang \csname the##1\endcsname\quad} % Sections start with "Anhang", e.g. "Anhang A.1" (but not in table of contents)
 \makeatother
