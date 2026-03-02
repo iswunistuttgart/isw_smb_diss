@@ -14,7 +14,7 @@
 \newcommand{\titlewidth}{1.0}
 \newcommand{\paperformatScr}{a4}
 \newcommand{\paperformatGeom}{a4paper}
-\newcommand{\introstart}{Der Fakultät}
+\newcommand{\introstart}{Von der Fakultät}
 \newcommand{\introstatus}{vorgelegte}
 \newcommand{\documentsourceintro}{von}
 \newcommand{\oralexamination}{Tag der mündlichen Prüfung: \>\\}
