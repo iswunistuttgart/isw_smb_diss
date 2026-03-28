@@ -44,7 +44,7 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
     git submodule add git@github.com:iswunistuttgart/isw_smb_diss.git
     ```
 
-3. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` aus dem Submodul/Unterordner `isw_smb_diss` in den eigenen Ordner kopiert werden.
+3. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` (deutsch) / `diss_example_en.tex` (englisch) aus dem Submodul/Unterordner `isw_smb_diss` in den eigenen Ordner kopiert werden.
 4. Spätere Updates der Klasse über
 
     ```
@@ -59,7 +59,7 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
     ```
     isw_smb_diss.cls  isw_smb_gloss.sty
     ```
-2. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` in den eigenen Ordner kopiert werden.
+2. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` (deutsch) / `diss_example_en.tex` (englisch) in den eigenen Ordner kopiert werden.
 3. Spätere Updates müssen wie in Schritt 1. erfolgen
 
 ## Struktur
@@ -67,6 +67,7 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
 - `isw_smb_diss.cls` ... Klasse, die das generelle Styling festlegt und das Deckblatt generiert
 - `isw_smb_gloss.sty` ... Styling für Glossar und Abkürzungsverzeichnis mit dem Paket `glossaries` (falls benötigt)
 - `diss_beispiel.tex` ... Beispielgerüst für die Diss. Eine Ordnerhierarchie nach oben kopieren
+- `diss_example_en.tex` ... Englisches Beispiel für die Dissertation
 - `settings_example/*.tex` ... Beispiele von Settings-Dateien für Command definitions und TikZ-Code
 - `.gitignore` ... Gitignore-Datei für LaTeX, kann gerne auch in den eigenen Diss-Ordner übernommen werden
 
@@ -74,7 +75,7 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
 
 ```sh
 Diss/
-    Diss_Name.tex # Zu Beginn kopiert aus diss_beispiel.tex
+    Diss_Name.tex # Zu Beginn kopiert aus diss_beispiel.tex/diss_example_en.tex
     isw_smb_diss/ # Git submodule
         isw_smb_diss.cls
         isw_smb_gloss.sty

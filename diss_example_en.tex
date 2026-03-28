@@ -1,0 +1,249 @@
+% !TeX program = txs:///lualatex
+% !BIB program = txs:///biber
+% !TEX spellcheck = en-GB
+%% magic comments above automatically switch to correct compiler in TexStudio
+
+\documentclass[
+%accepted, % uncomment this after your oral exam for the final print (changes title page)
+%print,% use this flag for printing (turns links black)
+ngerman, english,% Language: last one is the main language used in the document
+%smallfont, % if you wish a smaller font. This is 12pt for the manuscript, 
+twoside, % one of {oneside, twoside} -> onesided or twosided layout. for twosided print choose twoside
+toc=bib, % have  bibliography listed in table of contents
+BCOR=6mm, % binding correction, 6 mm for 200 pages, 80 g/m² Paper (half of thickness of book content)
+%a5paper, %  change paper format to true DIN-A5 (default is DIN-A4). This might lead to layout issues after conversion, prefer offloading scaling to A5 to printer
+ingenieurin, % ingenieur, % for title page ... der Würde einer/eines Doktor-Ingenieurin/Ingenieurs
+]{isw_smb_diss} % Relative path to class. If class is in subfolder (e.g. as git submodule) then \documentclass[...]{isw_smb_diss/isw_smb_diss}
+
+% Rules for the design of your dissertation: http://dx.doi.org/10.18419/opus-10327 (S. 25)
+
+% Suppress single lines on previous/next page:
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+%% ======= Recommended packages (not necessarily needed) ======= 
+
+\usepackage{shellesc} % shell escape alternative: more flexible than --shell-escape flag
+					  % for glossaries-extra, tikz external package
+
+% use this to debug where borders are hurt:
+%\usepackage{showframe}
+
+\usepackage{csquotes} % for bibliography and glossaries
+\usepackage{xpatch}
+
+% Citation style. If your institute has specific requirements, configure here:
+\usepackage[style=numeric, % see https://www.overleaf.com/learn/latex/Biblatex_citation_styles for a list of predefined styles
+sorting=none,
+maxcitenames=2,
+maxbibnames=99,
+giveninits=true,
+uniquelist=false,
+backend=biber,
+natbib=true,
+bibwarn=true,
+sortcites=true, % sort citations when multiple are cited, e.g. \cite{A,B,C} -> [1,2,3] instead of [3,1,2]
+isbn=true]{biblatex}
+
+% Hack: print url only if no doi is present, credits to samcarter_is_at_topanswers.xyz on https://tex.stackexchange.com/a/424775
+\renewbibmacro*{doi+eprint+url}{%
+	\printfield{doi}%
+	\newunit\newblock%
+	\iftoggle{bbx:eprint}{%
+		\usebibmacro{eprint}%
+	}{}%
+	\newunit\newblock%
+	\iffieldundef{doi}{%
+		\usebibmacro{url+urldate}}%
+	{}%
+}
+
+
+\usepackage{amsmath, amssymb, bm} % math commands
+\numberwithin{equation}{chapter} %ensure that equations enumeration starts at 1 for every chapter
+
+\usepackage{xurl} %break links in bibliography
+
+\RequirePackage{graphicx} % images
+
+
+% Nice looking tables (https://nhigham.com/2019/11/19/better-latex-tables-with-booktabs/latex subfig)
+\usepackage{booktabs}
+
+% si-units: auto-rounding numbers, set same format for numbers globally, add and correclty typeset units for numbers
+\usepackage{siunitx}
+\sisetup{%round-mode = places, 
+	%round-precision = 3, % 
+	range-phrase=~--~, % --, % \qtyrange{from}{to}{unit}
+	table-number-alignment = center, 
+	table-omit-exponent=false, % turn of exp representation in tables
+	exponent-product=\cdot,
+	output-decimal-marker={,}, % "," instead of "." as decimal separator (for German theses)
+	%exponent-mode = fixed, fixed-exponent = 0, % turn of exponent mode with Latex3e
+}
+% The following line should help, if you experience problems with missing hyphenation of composed words with dash 
+% (LaTeX turns off hyphenation when a dash is present in a word)
+% Source: https://tex.stackexchange.com/questions/63232/why-can-words-with-hyphen-char-not-be-hyphenated/63234#63234
+% Alternatively, explicitely hyphenate with "= (https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_Silbentrennung)
+\defaulthyphenchar=127
+
+% Just for demonstration use
+\usepackage{blindtext}
+
+% harvey balls: e.g \harveyBallFull
+% \usepackage{harveyballs}
+
+%% mark changes after your Oral presentation for review (http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/changes/changes.english.pdf):
+%% You can even list all changes so they can easily be checked with "\listofchanges"
+%\usepackage[%final % keyword "final" is to hide changes highlighting
+%				]{changes}
+%\definechangesauthor[name=Prof. Haupt Berichter, color=Plum]{MyProf}
+%\definechangesauthor[name=Prof. Mit berichter, color=OliveGreen]{OtherProf}
+
+% Other settings you may find useful
+%\input{isw_smb_diss/settings_example/definitions} % commands
+%\input{isw_smb_diss/settings_example/tikz} % TikZ settings
+%\input{isw_smb_diss/settings_example/tikz_blocks} % block diagrams using tikz 
+
+%% ======= End of recommended packages ======= 
+
+% TODO: add your own bibliography here:
+\addbibresource{bibliography.bib}
+
+% search for images in folder img/, i.e. instead of  \includegraphics{img/...}, just use \includegraphics{...}
+\graphicspath{{img/}}
+
+
+\title{Title of the Thesis\\with line breaks\\for better formatting} % set proper title case: https://titlecaseconverter.com/
+% \subtitle not needed for english title, see https://www.f07.uni-stuttgart.de/forschung/promotion-und-habilitation/promotion/dokumente/Titelblatt-Dissertation-1Einreichung_2Drucklegung.pdf (S. 25)
+
+\author{Jane Doe,~M.Sc.}
+\birthplace{Birthplace}
+
+\examiner{Univ.-Prof.~Dr.-Ing.~Main~Examiner}
+\coexaminer{Univ.-Prof.~Dr.-Ing.~Co~Examiner}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik} % Fak. 7
+% \faculty{Energie-, Verfahrens- und Biotechnik} % Fak. 4
+\institute{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+\dateoforalexamination{1. Januar 2027}
+\yearofpublication{2027}
+
+
+%%% Acronyms and glossary:
+% Glossary (Used symbols, acronyms, ...)
+%\input{settings_example/glossaries}
+
+% Define acronyms (needs \input{settings/glossaries})
+% Use in text: \ac{kgt} or short \acs{kgt}
+%\newacronym{ISW}{ISW}{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+%\newacronym{FE}{FE}{Finite Elements}
+
+% Glossary entries, also needs \input{settings/glossaries}, use in text as \gls{Q}
+%\glsxtrnewsymbol[description={Covariance of the system noise of the Kalman filter}]{Q}{\ensuremath{\bm Q}}
+%\glsxtrnewsymbol[description={Covariance of the measurement noise of the Kalman filter}]{R}{\ensuremath{R}}
+
+%  Show page borders (useful for final checks)
+%\usepackage{showframe}
+
+\begin{document}
+
+\frontmatter
+% title page according to https://www.f07.uni-stuttgart.de/forschung/promotion-und-habilitation/promotion/dokumente/Titelblatt-Dissertation-1Einreichung_2Drucklegung.pdf
+\maketitle
+\onehalfspacing % line spacing: 1,5
+
+\addchap{Preface}
+% Formula example
+\(a_x + b_y \sum_i^N dx + \int\) \footnote{This is a formula.}
+
+% Example SI unit package
+\SI{3.14159265e1}{kg.m/s^2} \cite{colu92}
+
+
+%Example for referencing a glossary entry
+%Matrices \gls{Q} and \gls{R}
+%also in equations: $\gls{Q}$
+%
+%Example for referencing an acronym:
+%\ac{ISW}.
+
+\cleardoublepage
+% two versions required: Kurzfassung in German and Abstract in English, see 
+%"Richtlinien für die äußere Form der Veröffentlichung von Dissertationen" 
+% in https://elib.uni-stuttgart.de/items/6ff82d8a-b81e-4e55-99ac-345cbdc91e13
+\addchap{Kurzfassung}
+\addchap{Abstract} 
+
+
+\cleardoublepage
+\ifpdf
+    \phantomsection
+    \pdfbookmark[0]{\contentsname}{toc}
+\fi
+\tableofcontents
+
+% % List of acronyms/symbols
+%\cleardoublepage
+%reference with label \ref{glo:acronyms}
+%\addchap{Acronyms}
+%\glssetwidest{ISW~} % longest acronym to properly indent list of acronyms
+%\printglossary[type=\acronymtype, style=alttree, title={Acronyms}]
+%
+%\cleardoublepage
+%\printglossary[type=symbols,style={symbunitlong}, title={List of Symbols}]
+
+
+\cleardoublepage
+\listoffigures
+
+\cleardoublepage
+\listoftables
+
+\raggedbottom % prefer having whitespace on bottom of pages (instead of stretching content to have common bottom line)
+			  % This is required by the publisher
+
+\mainmatter % Main contents. Tips:
+            % - Have separate .tex files per chapter, include them using \input{...}
+            % - When using versioning with git, try to start each sentence in a new line (this makes diffs cleaner)
+
+\chapter{Introduction}
+
+\Blindtext
+
+\section{Problem statement and Research Question}
+\section{Contribution}
+
+\chapter{Related Work}
+\section{Summary and Discussion}
+
+\chapter{Goals and Methodology}
+
+% Own chapters: further problem analysis, solution, validation
+
+\chapter{Conclusion}
+\section{Discussion}
+\section{Outlook}
+
+% TODO: nocite prints the whole bib file to the bibliography. This is for testing and should be commented out in your thesis:
+\nocite{*}
+
+% Bibliography
+\setlength{\emergencystretch}{.5em}
+%% Force page breaks in bibliography before splitting single entries over multiple pages
+%\patchcmd{\bibsetup}{\interlinepenalty=5000}{\interlinepenalty=10000}{}{}
+\printbibliography
+
+
+
+
+
+% Appendix, if needed:
+%% This uses \section and below to have everything grouped in the virtual chapter "Anhang" in the table of contents. 
+\startSMBAppendix
+
+\addcontentsline{toc}{chapter}{\appendixname}
+\section{An appendix section}
+\subsection{Subsection in appendix}
+
+\end{document}
