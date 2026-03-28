@@ -95,6 +95,7 @@ Diss/
 4. `accepted` ... für die finale Druckversion (siehe auch [in den FAQs](https://github.com/iswunistuttgart/isw_smb_diss/blob/master/README.md#unterscheidet-das-template-zwischen-einreichung-und-ver%C3%B6ffentlichung-beim-verlag)). Das Deckblatt wird entsprechend der Prüfungsordnung für den finalen Druck angepasst. Um beim Druck nicht alle Verlinkungen in Uni-Stuttgart-Blau zu haben (teuer, viele Farbseiten), siehe außerdem nachfolgende Option
 5. `print` ... schwarz einfärben von Links für den Druck des Manuskripts (weniger Farbseiten)
 6. `a5paper` ... Das Format wird auf DIN-A5 gestellt, die Schriftgröße entsprechend skaliert (nicht empfohlen, führt wahrscheinlich zu Anpassungsbedarf durch Layoutumstellung).
+7. `ingenieurin|ingenieur`... ändert den Text auf dem Deckblatt: "zur Erlangung der Würde einer Doktor-Ingenieurin/eines Doktor-Ingenieurs"
 
 Beispiel für Einbinden der Klasse:
 
@@ -105,6 +106,7 @@ Beispiel für Einbinden der Klasse:
   %print, % Links schwarz für den Druck
   twoside, % oneside % ein-/doppelseitiger Druck
   BCOR=6mm, % binde-korrektur: 0 für Ringbindung, Hälfte der Dicke des Buchs bei Klebebindung
+  ingenieurin, % "zur Erlangung der Würde einer Doktor-Ingenieurin", switch to "ingenieur" for the male form
 ]{isw_smb_diss}
 
 ```

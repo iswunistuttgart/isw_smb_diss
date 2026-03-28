@@ -50,6 +50,15 @@
 }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+
+\newcommand{\ofADrEng}{eines Doktor-Ingenieurs}
+\DeclareOption{ingenieur}{
+	\renewcommand{\ofADrEng}{eines Doktor-Ingenieurs}
+}
+\DeclareOption{ingenieurin}{
+	\renewcommand{\ofADrEng}{einer Doktor-Ingenieurin}
+}
+
 \ProcessOptions\relax
 \PassOptionsToPackage{paper=\paperformatScr,%
 				  	}{typearea} % set papersize

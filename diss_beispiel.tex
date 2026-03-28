@@ -12,6 +12,7 @@ twoside, % one of {oneside, twoside} -> onesided or twosided layout. for twoside
 toc=bib, % have  bibliography listed in table of contents
 BCOR=6mm, % binding correction, 6 mm for 200 pages, 80 g/m² Paper (half of thickness of book content)
 %a5paper, %  change paper format to true DIN-A5 (default is DIN-A4). This might lead to layout issues after conversion, prefer offloading scaling to A5 to printer
+ingenieurin, % ingenieur, % for title page ... der Würde einer/eines Doktor-Ingenieurin/Ingenieurs
 ]{isw_smb_diss} % Relative path to class. If class is in subfolder (e.g. as git submodule) then \documentclass[...]{isw_smb_diss/isw_smb_diss}
 
 % Rules for the design of your dissertation: http://dx.doi.org/10.18419/opus-10327 (S. 25)
@@ -153,6 +154,7 @@ isbn=true]{biblatex}
 \begin{document}
 
 \frontmatter
+% title page according to https://www.f07.uni-stuttgart.de/forschung/promotion-und-habilitation/promotion/dokumente/Titelblatt-Dissertation-1Einreichung_2Drucklegung.pdf
 \maketitle
 \onehalfspacing % line spacing: 1,5
 
