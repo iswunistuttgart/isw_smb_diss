@@ -227,6 +227,7 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 	{You have to use \string\yearofpublication\space to set up the publication year of your thesis,\MessageBreak e.g. `\string\yearofpublication{YYYY}'.}}
 \newcommand*\yearofpublication[1]{\renewcommand\@yearofpublication{#1}}
 
+% title page according to https://www.f07.uni-stuttgart.de/forschung/promotion-und-habilitation/promotion/dokumente/Titelblatt-Dissertation-1Einreichung_2Drucklegung.pdf
 \renewcommand*{\maketitle}{%
   \begin{titlepage}
 	{
@@ -242,7 +243,7 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 			\centering
 			\introstart\ \@faculty\\
 			der  Universität Stuttgart\\ 
-			zur Erlangung der Würde eines Doktor-Ingenieurs (Dr.-Ing.) 
+			zur Erlangung der Würde \ofADrEng\ (Dr.-Ing.) 
 			\introstatus\ Abhandlung\par%
 		\end{minipage}
 		\vfill
@@ -288,7 +289,7 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \numberwithin{equation}{section} %Ensure that equations enumeration starts at 1
 
 \makeatletter
-\renewcommand{\@seccntformat}[1]{Anhang \csname the##1\endcsname\quad} % Sections start with "Anhang", e.g. "Anhang A.1" (but not in table of contents)
+\renewcommand{\@seccntformat}[1]{\appendixname~\csname the##1\endcsname\quad} % Sections start with "Anhang", e.g. "Anhang A.1" (but not in table of contents)
 \makeatother
 }
 

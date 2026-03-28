@@ -175,13 +175,17 @@ isbn=true]{biblatex}
 %Automatische Bindestriche bei zusammengesetzten Akronymen: \ac{FE}[-Modelle]
 
 \cleardoublepage
-\addchap{Kurzfassung/Abstract}
+% two versions required: Kurzfassung in German and Abstract in English, see 
+%"Richtlinien für die äußere Form der Veröffentlichung von Dissertationen" 
+% in https://elib.uni-stuttgart.de/items/6ff82d8a-b81e-4e55-99ac-345cbdc91e13
+\addchap{Kurzfassung}
+\addchap{Abstract} 
 
 
 \cleardoublepage
 \ifpdf
     \phantomsection
-    \pdfbookmark[0]{Inhaltsverzeichnis}{toc}
+    \pdfbookmark[0]{\contentsname}{toc}
 \fi
 \tableofcontents
 
@@ -235,7 +239,7 @@ isbn=true]{biblatex}
 \setlength{\emergencystretch}{.5em}
 %% Force page breaks in bibliography before splitting single entries over multiple pages
 %\patchcmd{\bibsetup}{\interlinepenalty=5000}{\interlinepenalty=10000}{}{}
-\printbibliography[title={Literatur}]
+\printbibliography
 
 
 
@@ -245,7 +249,7 @@ isbn=true]{biblatex}
 %% This uses \section and below to have everything grouped in the virtual chapter "Anhang" in the table of contents. 
 \startSMBAppendix
 
-\addcontentsline{toc}{chapter}{Anhang}
+\addcontentsline{toc}{chapter}{\appendixname}
 \section{Ein Anhang}
 \subsection{Unteranhang 1}
 
