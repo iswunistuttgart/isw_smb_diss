@@ -1,12 +1,12 @@
 % !TeX program = txs:///lualatex
-% !TEX spellcheck = de-DE
 % !BIB program = txs:///biber
+% !TEX spellcheck = en-GB
 %% magic comments above automatically switch to correct compiler in TexStudio
 
 \documentclass[
 %accepted, % uncomment this after your oral exam for the final print (changes title page)
 %print,% use this flag for printing (turns links black)
-english, ngerman,% Language: last one is the main language used in the document
+ngerman, english,% Language: last one is the main language used in the document
 %smallfont, % if you wish a smaller font. This is 12pt for the manuscript, 
 twoside, % one of {oneside, twoside} -> onesided or twosided layout. for twosided print choose twoside
 toc=bib, % have  bibliography listed in table of contents
@@ -115,25 +115,20 @@ isbn=true]{biblatex}
 \graphicspath{{img/}}
 
 
-\title{Titel der Diss\\gerne auch mit Zeilenumbruch\\zur besseren Formatierung}
+\title{Title of the Thesis\\with line breaks\\for better formatting} % set proper title case: https://titlecaseconverter.com/
+% \subtitle not needed for english title, see https://www.f07.uni-stuttgart.de/forschung/promotion-und-habilitation/promotion/dokumente/Titelblatt-Dissertation-1Einreichung_2Drucklegung.pdf (S. 25)
 
-% English title: set proper title case: https://titlecaseconverter.com/
-\subtitle{English Thesis Title With Line Breaks\\for Better Formatting} % Nur, wenn die Arbeit auf Deutsch ist, sonst weglassen
+\author{Jane Doe,~M.Sc.}
+\birthplace{Birthplace}
 
-\author{Vorname Nachname,~M.Sc.}
-\birthplace{Geburtsort}
-
-\examiner{Univ.-Prof.~Dr.-Ing.~Haupt~Berichter}
-\coexaminer{Univ.-Prof.~Dr.-Ing.~Mit~Berichter}
+\examiner{Univ.-Prof.~Dr.-Ing.~Main~Examiner}
+\coexaminer{Univ.-Prof.~Dr.-Ing.~Co~Examiner}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik} % Fak. 7
 % \faculty{Energie-, Verfahrens- und Biotechnik} % Fak. 4
 \institute{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
 \dateoforalexamination{1. Januar 2027}
 \yearofpublication{2027}
 
-% Manual hyphenation. 
-% More info for German hyphenation in LaTeX: https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_Silbentrennung
-\hyphenation{Dis-am-bi-gu-ie-rung, Sil-ben-trenn-ung}
 
 %%% Acronyms and glossary:
 % Glossary (Used symbols, acronyms, ...)
@@ -141,12 +136,12 @@ isbn=true]{biblatex}
 
 % Define acronyms (needs \input{settings/glossaries})
 % Use in text: \ac{kgt} or short \acs{kgt}
-%\newacronym{ISW}{ISW}{Institut für Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
-%\newacronym{FE}{FE}{Finite Elemente}
+%\newacronym{ISW}{ISW}{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+%\newacronym{FE}{FE}{Finite Elements}
 
 % Glossary entries, also needs \input{settings/glossaries}, use in text as \gls{Q}
-%\glsxtrnewsymbol[description={Kovarianz des Systemrauschens des Kalmanfilters}]{Q}{\ensuremath{\bm Q}}
-%\glsxtrnewsymbol[description={Kovarianz des Messrauschens des Kalmanfilters}]{R}{\ensuremath{R}}
+%\glsxtrnewsymbol[description={Covariance of the system noise of the Kalman filter}]{Q}{\ensuremath{\bm Q}}
+%\glsxtrnewsymbol[description={Covariance of the measurement noise of the Kalman filter}]{R}{\ensuremath{R}}
 
 %  Show page borders (useful for final checks)
 %\usepackage{showframe}
@@ -158,21 +153,20 @@ isbn=true]{biblatex}
 \maketitle
 \onehalfspacing % line spacing: 1,5
 
-\addchap{Vorwort}
-% Formel-Beispiel
-\(a_x + b_y \sum_i^N dx + \int\) \footnote{Das ist eine Formel.}
+\addchap{Preface}
+% Formula example
+\(a_x + b_y \sum_i^N dx + \int\) \footnote{This is a formula.}
 
-% Beispiel SI-Unit-Paket
+% Example SI unit package
 \SI{3.14159265e1}{kg.m/s^2} \cite{colu92}
 
 
-%Beispiel für referenzieren eines Glossar-Eintrags
-%Matrizen \gls{Q} und \gls{R}
-%auch in Gleichungen: $\gls{Q}$
+%Example for referencing a glossary entry
+%Matrices \gls{Q} and \gls{R}
+%also in equations: $\gls{Q}$
 %
-%Beispiel fürs Referenzieren eines Akronyms:
+%Example for referencing an acronym:
 %\ac{ISW}.
-%Automatische Bindestriche bei zusammengesetzten Akronymen: \ac{FE}[-Modelle]
 
 \cleardoublepage
 % two versions required: Kurzfassung in German and Abstract in English, see 
@@ -192,12 +186,12 @@ isbn=true]{biblatex}
 % % List of acronyms/symbols
 %\cleardoublepage
 %reference with label \ref{glo:acronyms}
-%\addchap{Abkürzungsverzeichnis}
+%\addchap{Acronyms}
 %\glssetwidest{ISW~} % longest acronym to properly indent list of acronyms
-%\printglossary[type=\acronymtype, style=alttree, title={Abkürzungsverzeichnis}]
+%\printglossary[type=\acronymtype, style=alttree, title={Acronyms}]
 %
 %\cleardoublepage
-%\printglossary[type=symbols,style={symbunitlong}, title={Symbolverzeichnis}]
+%\printglossary[type=symbols,style={symbunitlong}, title={List of Symbols}]
 
 
 \cleardoublepage
@@ -213,24 +207,23 @@ isbn=true]{biblatex}
             % - Have separate .tex files per chapter, include them using \input{...}
             % - When using versioning with git, try to start each sentence in a new line (this makes diffs cleaner)
 
-\chapter{Einleitung}
+\chapter{Introduction}
 
 \Blindtext
 
-\section{Forschungsfrage und Problembeschreibung}
-\section{Beitrag dieser Arbeit}
+\section{Problem statement and Research Question}
+\section{Contribution}
 
-\chapter{Stand der Forschung und Technik}
-\section{Zusammenfassende Bewertung des Stands der Technik}
+\chapter{Related Work}
+\section{Summary and Discussion}
 
-\chapter{Ziel der Arbeit und Vorgehensweise}
+\chapter{Goals and Methodology}
 
-% Eigene Kapitel: weitere Problemanalyse, Lösung, Validierung
+% Own chapters: further problem analysis, solution, validation
 
-
-\chapter{Zusammenfassung}
-\section{Diskussion}
-\section{Ausblick}
+\chapter{Conclusion}
+\section{Discussion}
+\section{Outlook}
 
 % TODO: nocite prints the whole bib file to the bibliography. This is for testing and should be commented out in your thesis:
 \nocite{*}
@@ -250,7 +243,7 @@ isbn=true]{biblatex}
 \startSMBAppendix
 
 \addcontentsline{toc}{chapter}{\appendixname}
-\section{Ein Anhang}
-\subsection{Unteranhang 1}
+\section{An appendix section}
+\subsection{Subsection in appendix}
 
 \end{document}

@@ -1,9 +1,9 @@
 % basiert auf den Vorlagen von O. Gerlach (2015) und Philipp Tempel (2018) erweitert von C. Hinze (2020-2024)
 % Richtlinien zur Formatierung der Dissertation: http://dx.doi.org/10.18419/opus-10327
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isw_smb_diss}[2026/01/17 v. 1.10 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
+\ProvidesClass{isw_smb_diss}[2026/03/27 v. 1.11 Stuttgarter-Maschinenbau-Reihe für Dissertationen: https://github.com/iswunistuttgart/isw_smb_diss]
 \typeout{}
-\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class v1.10}
+\typeout{Stuttgarter Maschinenbau Dissertation LaTeX template class v1.11}
 \typeout{}
 \typeout{Institute for Control Engineering of Machine Tools and Manufacturing}
 \typeout{Units, ISW, Seidenstrasse 36, D-70174 Stuttgart, Germany.}
@@ -50,6 +50,15 @@
 }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+
+\newcommand{\ofADrEng}{eines Doktor-Ingenieurs}
+\DeclareOption{ingenieur}{
+	\renewcommand{\ofADrEng}{eines Doktor-Ingenieurs}
+}
+\DeclareOption{ingenieurin}{
+	\renewcommand{\ofADrEng}{einer Doktor-Ingenieurin}
+}
+
 \ProcessOptions\relax
 \PassOptionsToPackage{paper=\paperformatScr,%
 				  	}{typearea} % set papersize
@@ -218,6 +227,7 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 	{You have to use \string\yearofpublication\space to set up the publication year of your thesis,\MessageBreak e.g. `\string\yearofpublication{YYYY}'.}}
 \newcommand*\yearofpublication[1]{\renewcommand\@yearofpublication{#1}}
 
+% title page according to https://www.f07.uni-stuttgart.de/forschung/promotion-und-habilitation/promotion/dokumente/Titelblatt-Dissertation-1Einreichung_2Drucklegung.pdf
 \renewcommand*{\maketitle}{%
   \begin{titlepage}
 	{
@@ -233,7 +243,7 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 			\centering
 			\introstart\ \@faculty\\
 			der  Universität Stuttgart\\ 
-			zur Erlangung der Würde eines Doktor-Ingenieurs (Dr.-Ing.) 
+			zur Erlangung der Würde \ofADrEng\ (Dr.-Ing.) 
 			\introstatus\ Abhandlung\par%
 		\end{minipage}
 		\vfill
@@ -279,7 +289,7 @@ draft=false,]{scrlayer-scrpage}	 % header & footer layout
 \numberwithin{equation}{section} %Ensure that equations enumeration starts at 1
 
 \makeatletter
-\renewcommand{\@seccntformat}[1]{Anhang \csname the##1\endcsname\quad} % Sections start with "Anhang", e.g. "Anhang A.1" (but not in table of contents)
+\renewcommand{\@seccntformat}[1]{\appendixname~\csname the##1\endcsname\quad} % Sections start with "Anhang", e.g. "Anhang A.1" (but not in table of contents)
 \makeatother
 }
 
