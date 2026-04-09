@@ -44,7 +44,7 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
     git submodule add git@github.com:iswunistuttgart/isw_smb_diss.git
     ```
 
-3. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` aus dem Submodul/Unterordner `isw_smb_diss` in den eigenen Ordner kopiert werden.
+3. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` (deutsch) / `diss_example_en.tex` (englisch) aus dem Submodul/Unterordner `isw_smb_diss` in den eigenen Ordner kopiert werden.
 4. Spätere Updates der Klasse über
 
     ```
@@ -59,7 +59,7 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
     ```
     isw_smb_diss.cls  isw_smb_gloss.sty
     ```
-2. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` in den eigenen Ordner kopiert werden.
+2. Als Gerüst zur Strukturierung der Diss kann `diss_beispiel.tex` (deutsch) / `diss_example_en.tex` (englisch) in den eigenen Ordner kopiert werden.
 3. Spätere Updates müssen wie in Schritt 1. erfolgen
 
 ## Struktur
@@ -67,6 +67,7 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
 - `isw_smb_diss.cls` ... Klasse, die das generelle Styling festlegt und das Deckblatt generiert
 - `isw_smb_gloss.sty` ... Styling für Glossar und Abkürzungsverzeichnis mit dem Paket `glossaries` (falls benötigt)
 - `diss_beispiel.tex` ... Beispielgerüst für die Diss. Eine Ordnerhierarchie nach oben kopieren
+- `diss_example_en.tex` ... Englisches Beispiel für die Dissertation
 - `settings_example/*.tex` ... Beispiele von Settings-Dateien für Command definitions und TikZ-Code
 - `.gitignore` ... Gitignore-Datei für LaTeX, kann gerne auch in den eigenen Diss-Ordner übernommen werden
 
@@ -74,7 +75,7 @@ LaTeX Style für Dissertationen der Schriftenreihe Stuttgarter Maschinenbau (SMB
 
 ```sh
 Diss/
-    Diss_Name.tex # Zu Beginn kopiert aus diss_beispiel.tex
+    Diss_Name.tex # Zu Beginn kopiert aus diss_beispiel.tex/diss_example_en.tex
     isw_smb_diss/ # Git submodule
         isw_smb_diss.cls
         isw_smb_gloss.sty
@@ -95,6 +96,7 @@ Diss/
 4. `accepted` ... für die finale Druckversion (siehe auch [in den FAQs](https://github.com/iswunistuttgart/isw_smb_diss/blob/master/README.md#unterscheidet-das-template-zwischen-einreichung-und-ver%C3%B6ffentlichung-beim-verlag)). Das Deckblatt wird entsprechend der Prüfungsordnung für den finalen Druck angepasst. Um beim Druck nicht alle Verlinkungen in Uni-Stuttgart-Blau zu haben (teuer, viele Farbseiten), siehe außerdem nachfolgende Option
 5. `print` ... schwarz einfärben von Links für den Druck des Manuskripts (weniger Farbseiten)
 6. `a5paper` ... Das Format wird auf DIN-A5 gestellt, die Schriftgröße entsprechend skaliert (nicht empfohlen, führt wahrscheinlich zu Anpassungsbedarf durch Layoutumstellung).
+7. `ingenieurin|ingenieur`... ändert den Text auf dem Deckblatt: "zur Erlangung der Würde einer Doktor-Ingenieurin/eines Doktor-Ingenieurs"
 
 Beispiel für Einbinden der Klasse:
 
@@ -105,6 +107,7 @@ Beispiel für Einbinden der Klasse:
   %print, % Links schwarz für den Druck
   twoside, % oneside % ein-/doppelseitiger Druck
   BCOR=6mm, % binde-korrektur: 0 für Ringbindung, Hälfte der Dicke des Buchs bei Klebebindung
+  ingenieurin, % "zur Erlangung der Würde einer Doktor-Ingenieurin", switch to "ingenieur" for the male form
 ]{isw_smb_diss}
 
 ```

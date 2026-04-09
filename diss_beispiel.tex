@@ -12,6 +12,7 @@ twoside, % one of {oneside, twoside} -> onesided or twosided layout. for twoside
 toc=bib, % have  bibliography listed in table of contents
 BCOR=6mm, % binding correction, 6 mm for 200 pages, 80 g/m² Paper (half of thickness of book content)
 %a5paper, %  change paper format to true DIN-A5 (default is DIN-A4). This might lead to layout issues after conversion, prefer offloading scaling to A5 to printer
+ingenieurin, % ingenieur, % for title page ... der Würde einer/eines Doktor-Ingenieurin/Ingenieurs
 ]{isw_smb_diss} % Relative path to class. If class is in subfolder (e.g. as git submodule) then \documentclass[...]{isw_smb_diss/isw_smb_diss}
 
 % Rules for the design of your dissertation: http://dx.doi.org/10.18419/opus-10327 (S. 25)
@@ -62,7 +63,7 @@ isbn=true]{biblatex}
 \usepackage{amsmath, amssymb, bm} % math commands
 \numberwithin{equation}{chapter} %ensure that equations enumeration starts at 1 for every chapter
 
-\usepackage{breakurl} %break links in bibliography
+\usepackage{xurl} %break links in bibliography
 
 \RequirePackage{graphicx} % images
 
@@ -153,6 +154,7 @@ isbn=true]{biblatex}
 \begin{document}
 
 \frontmatter
+% title page according to https://www.f07.uni-stuttgart.de/forschung/promotion-und-habilitation/promotion/dokumente/Titelblatt-Dissertation-1Einreichung_2Drucklegung.pdf
 \maketitle
 \onehalfspacing % line spacing: 1,5
 
@@ -173,13 +175,17 @@ isbn=true]{biblatex}
 %Automatische Bindestriche bei zusammengesetzten Akronymen: \ac{FE}[-Modelle]
 
 \cleardoublepage
-\addchap{Kurzfassung/Abstract}
+% two versions required: Kurzfassung in German and Abstract in English, see 
+%"Richtlinien für die äußere Form der Veröffentlichung von Dissertationen" 
+% in https://elib.uni-stuttgart.de/items/6ff82d8a-b81e-4e55-99ac-345cbdc91e13
+\addchap{Kurzfassung}
+\addchap{Abstract} 
 
 
 \cleardoublepage
 \ifpdf
     \phantomsection
-    \pdfbookmark[0]{Inhaltsverzeichnis}{toc}
+    \pdfbookmark[0]{\contentsname}{toc}
 \fi
 \tableofcontents
 
@@ -233,7 +239,7 @@ isbn=true]{biblatex}
 \setlength{\emergencystretch}{.5em}
 %% Force page breaks in bibliography before splitting single entries over multiple pages
 %\patchcmd{\bibsetup}{\interlinepenalty=5000}{\interlinepenalty=10000}{}{}
-\printbibliography[title={Literatur}]
+\printbibliography
 
 
 
@@ -243,7 +249,7 @@ isbn=true]{biblatex}
 %% This uses \section and below to have everything grouped in the virtual chapter "Anhang" in the table of contents. 
 \startSMBAppendix
 
-\addcontentsline{toc}{chapter}{Anhang}
+\addcontentsline{toc}{chapter}{\appendixname}
 \section{Ein Anhang}
 \subsection{Unteranhang 1}
 

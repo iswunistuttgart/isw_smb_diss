@@ -1,3 +1,10 @@
+# 1.11 -- 2026-03-28
+
+- [class] new class option `ingenieurin`|`ingenieur` to allow selecting geneder for the title page
+- [example] switch from package `breakurl`to `xurl` to properly break URLs (see #20) 
+- [example] add English diss example file `diss_example_en.tex` to help with writing in english (see #14) 
+- [readme] Updated to new changes 
+
 # 1.10 -- 2026-01-17
 
 - [class] to minimize layout issues after adding the `accepted` class option, definition of `accepted` was changed to just change the title page. 
